@@ -1,0 +1,4 @@
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.dll
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.pdb
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.dll
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.pdb
