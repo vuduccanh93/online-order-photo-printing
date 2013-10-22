@@ -50,6 +50,60 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\css\bootstrap.css" />
+    <Content Include="Client\css\modern-business.css" />
+    <Content Include="Client\font-awesome\css\font-awesome-ie7.css" />
+    <Content Include="Client\font-awesome\css\font-awesome-ie7.min.css" />
+    <Content Include="Client\font-awesome\css\font-awesome.css" />
+    <Content Include="Client\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Client\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="Client\img\icon-fail.png" />
+    <Content Include="Client\img\icon-ok.png" />
+    <Content Include="Client\upload\HTMLPage1.htm" />
+    <Content Include="Client\upload\jquery-1.9.1.min.js" />
+    <Content Include="Client\upload\jquery.fileupload-ui.js" />
+    <Content Include="Client\upload\jquery.steps.css" />
+    <Content Include="Client\upload\jquery.steps.js" />
+    <Content Include="Client\upload\jquery.steps.min.js" />
+    <Content Include="Client\upload\main.css" />
+    <Content Include="Client\upload\modernizr-2.6.2.min.js" />
+    <Content Include="Client\upload\normalize.css" />
+    <Content Include="Client\upload\stepcss.css" />
+    <Content Include="Client\upload\stepjs.js" />
+    <Content Include="Client\webs\Index.aspx" />
+    <Content Include="Client\js\jquery.form-validator.min.js" />
+    <Content Include="Client\js\modern-business.js" />
+    <Content Include="Client\user-controls\footer.ascx" />
+    <Content Include="Client\user-controls\header.ascx" />
+    <Content Include="Client\webs\404.aspx" />
+    <Content Include="Client\webs\About.aspx" />
+    <Content Include="Client\webs\Contact.aspx" />
+    <Content Include="Client\webs\Faq.aspx" />
+    <Content Include="Client\webs\Pricing.aspx" />
+    <Content Include="Client\webs\Services.aspx" />
+    <Content Include="Client\upload\application.js" />
+    <Content Include="Client\upload\index.html" />
+    <Content Include="Client\upload\jquery-ui.css" />
+    <Content Include="Client\upload\jquery-ui.min.js" />
+    <Content Include="Client\upload\jquery.fileupload-ui.css" />
+    <Content Include="Client\upload\jquery.fileupload.js" />
+    <Content Include="Client\upload\jquery.iframe-transport.js" />
+    <Content Include="Client\upload\jquery.min.js" />
+    <Content Include="Client\upload\jquery.tmpl.min.js" />
+    <Content Include="Client\upload\pbar-ani.gif" />
+    <Content Include="Client\upload\style.css" />
+    <Content Include="Client\img\bg.JPG" />
+    <Content Include="Client\img\pbar-ani.gif" />
+    <Content Include="Client\img\portfolio-1.jpg" />
+    <Content Include="Client\img\portfolio-2.jpg" />
+    <Content Include="Client\img\portfolio-3.jpg" />
+    <Content Include="Client\img\portfolio-4.jpg" />
+    <Content Include="Client\img\section-two.jpg" />
+    <Content Include="Client\js\bootstrap.js" />
+    <Content Include="Client\js\jquery.iframe-transport.js" />
+    <Content Include="Client\js\jquery.js" />
+    <Content Include="Client\js\jquery.steps.min.js" />
+    <Content Include="Client\upload\upload.ascx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -60,6 +114,76 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\webs\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\webs\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\upload\upload.ascx.cs">
+      <DependentUpon>upload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\upload\upload.ascx.designer.cs">
+      <DependentUpon>upload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\user-controls\footer.ascx.cs">
+      <DependentUpon>footer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\user-controls\footer.ascx.designer.cs">
+      <DependentUpon>footer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\user-controls\header.ascx.cs">
+      <DependentUpon>header.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\user-controls\header.ascx.designer.cs">
+      <DependentUpon>header.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\webs\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\webs\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\webs\About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\webs\About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\webs\Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\webs\Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\webs\Faq.aspx.cs">
+      <DependentUpon>Faq.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\webs\Faq.aspx.designer.cs">
+      <DependentUpon>Faq.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\webs\Pricing.aspx.cs">
+      <DependentUpon>Pricing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\webs\Pricing.aspx.designer.cs">
+      <DependentUpon>Pricing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\webs\Services.aspx.cs">
+      <DependentUpon>Services.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Client\webs\Services.aspx.designer.cs">
+      <DependentUpon>Services.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -67,7 +191,31 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
-    <Folder Include="Client\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Client\upload\Handler.ashx" />
+    <None Include="Client\font-awesome\font\fontawesome-webfont.eot" />
+    <None Include="Client\font-awesome\font\fontawesome-webfont.ttf" />
+    <None Include="Client\font-awesome\font\fontawesome-webfont.woff" />
+    <None Include="Client\font-awesome\font\FontAwesome.otf" />
+    <None Include="Client\font-awesome\less\bootstrap.less" />
+    <None Include="Client\font-awesome\less\core.less" />
+    <None Include="Client\font-awesome\less\extras.less" />
+    <None Include="Client\font-awesome\less\font-awesome-ie7.less" />
+    <None Include="Client\font-awesome\less\font-awesome.less" />
+    <None Include="Client\font-awesome\less\icons.less" />
+    <None Include="Client\font-awesome\less\mixins.less" />
+    <None Include="Client\font-awesome\less\path.less" />
+    <None Include="Client\font-awesome\less\variables.less" />
+    <None Include="Client\font-awesome\scss\font-awesome-ie7.scss" />
+    <None Include="Client\font-awesome\scss\font-awesome.scss" />
+    <None Include="Client\font-awesome\scss\_bootstrap.scss" />
+    <None Include="Client\font-awesome\scss\_core.scss" />
+    <None Include="Client\font-awesome\scss\_extras.scss" />
+    <None Include="Client\font-awesome\scss\_icons.scss" />
+    <None Include="Client\font-awesome\scss\_mixins.scss" />
+    <None Include="Client\font-awesome\scss\_path.scss" />
+    <None Include="Client\font-awesome\scss\_variables.scss" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
