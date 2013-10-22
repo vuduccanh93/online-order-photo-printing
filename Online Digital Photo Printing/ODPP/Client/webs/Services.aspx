@@ -25,7 +25,7 @@
 </head>
 <body>
     <uc1:header ID="header1" runat="server" />
-    <form action="../upload/Handler.ashx" method="POST" enctype="multipart/form-data">
+   <%-- <form action="../upload/Handler.ashx" method="POST" enctype="multipart/form-data">--%>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -121,12 +121,12 @@
                             eros, sed rutrum mauris.</p>
                     </div>
                 </div>--%>
-                <form id="form-3" action="#">
+                <form id="form-3" action="../upload/Handler.ashx" method="POST" enctype="multipart/form-data">
                 <h3>
                     Account</h3>
                 <fieldset>
                     <legend>Account Information</legend>
-                    <label for="userName-2">
+                    <%--<label for="userName-2">
                         User name *</label>
                     <input id="userName-2" name="userName" type="text" class="required">
                     <label for="password-2">
@@ -136,7 +136,8 @@
                         Confirm Password *</label>
                     <input id="confirm-2" name="confirm" type="text" class="required">
                     <p>
-                        (*) Mandatory</p>
+                        (*) Mandatory</p>--%>
+                        <uc3:upload id="upload" runat="server"/>
                 </fieldset>
                 <h3>
                     Profile</h3>
@@ -302,6 +303,6 @@
     <!-- /.container -->
     <uc2:footer ID="footer1" runat="server" />
     <!-- /.container -->
-    </form>
+ <%--   </form>--%>
 </body>
 </html>
