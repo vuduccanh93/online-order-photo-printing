@@ -1,2 +1,13 @@
-﻿body {
+﻿body 
+{
+    margin:0;
+    padding:0;
 }
+#web-page
+{
+    display:block;
+    overflow:hidden;
+    clear:left;
+    width:100%;
+   
+    }
