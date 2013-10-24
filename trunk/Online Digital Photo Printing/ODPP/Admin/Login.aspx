@@ -8,8 +8,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    
+    <div id="web-page">
+        <div id="main">
+            <div id="main-left">
+            </div><%--end main left--%>
+            <div id="main-right"></div> <%--end main right--%>
+        </div>
     </div>
     </form>
 </body>
