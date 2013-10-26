@@ -2,3 +2,6 @@ E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.
 E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Business\bin\Debug\ODPP.Business.pdb
 E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Business\obj\Debug\ODPP.Business.dll
 E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Business\obj\Debug\ODPP.Business.pdb
+E:\project Sem III\online-order-photo-printing\Online Digital Photo Printing\ODPP.Business\obj\Debug\ODPP.Business.csprojResolveAssemblyReference.cache
+E:\project Sem III\online-order-photo-printing\Online Digital Photo Printing\ODPP.Business\obj\Debug\ODPP.Business.dll
+E:\project Sem III\online-order-photo-printing\Online Digital Photo Printing\ODPP.Business\obj\Debug\ODPP.Business.pdb
