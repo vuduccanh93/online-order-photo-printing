@@ -50,6 +50,21 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\adm-controls\adm-bottom.ascx" />
+    <Content Include="Admin\adm-controls\adm-left.ascx" />
+    <Content Include="Admin\adm-controls\adm-right.ascx" />
+    <Content Include="Admin\adm-controls\adm-top.ascx" />
+    <Content Include="Admin\css\adm-style.css" />
+    <Content Include="Admin\css\bootstrap-theme.css" />
+    <Content Include="Admin\css\bootstrap-theme.min.css" />
+    <Content Include="Admin\css\bootstrap.css" />
+    <Content Include="Admin\css\bootstrap.min.css" />
+    <Content Include="Admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Admin\js\bootstrap.js" />
+    <Content Include="Admin\js\bootstrap.min.js" />
+    <Content Include="Admin\Login.aspx" />
+    <Content Include="bin\ODPP.dll" />
+    <Content Include="bin\ODPP.pdb" />
     <Content Include="Client\css\bootstrap.css" />
     <Content Include="Client\css\modern-business.css" />
     <Content Include="Client\font-awesome\css\font-awesome-ie7.css" />
@@ -105,6 +120,9 @@
     <Content Include="Client\js\jquery.steps.min.js" />
     <Content Include="Client\upload\upload.ascx" />
     <Content Include="Global.asax" />
+    <Content Include="obj\Debug\ODPP.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\ODPP.dll" />
+    <Content Include="obj\Debug\ODPP.pdb" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -114,6 +132,48 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\adm-controls\adm-bottom.ascx.cs">
+      <DependentUpon>adm-bottom.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\adm-controls\adm-bottom.ascx.designer.cs">
+      <DependentUpon>adm-bottom.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\adm-controls\adm-left.ascx.cs">
+      <DependentUpon>adm-left.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\adm-controls\adm-left.ascx.designer.cs">
+      <DependentUpon>adm-left.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\adm-controls\adm-right.ascx.cs">
+      <DependentUpon>adm-right.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\adm-controls\adm-right.ascx.designer.cs">
+      <DependentUpon>adm-right.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\adm-controls\adm-top.ascx.cs">
+      <DependentUpon>adm-top.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\adm-controls\adm-top.ascx.designer.cs">
+      <DependentUpon>adm-top.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Client\webs\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -190,10 +250,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Admin\" />
+    <Folder Include="Admin\img\" />
+    <Folder Include="Admin\webs\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\upload\Handler.ashx" />
+    <Content Include="Admin\Admin.Master" />
+    <None Include="Admin\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Admin\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Admin\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Client\font-awesome\font\fontawesome-webfont.eot" />
     <None Include="Client\font-awesome\font\fontawesome-webfont.ttf" />
     <None Include="Client\font-awesome\font\fontawesome-webfont.woff" />
@@ -216,6 +282,8 @@
     <None Include="Client\font-awesome\scss\_mixins.scss" />
     <None Include="Client\font-awesome\scss\_path.scss" />
     <None Include="Client\font-awesome\scss\_variables.scss" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\ODPP.csprojResolveAssemblyReference.cache" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
