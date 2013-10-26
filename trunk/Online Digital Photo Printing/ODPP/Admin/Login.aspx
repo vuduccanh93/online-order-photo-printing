@@ -4,16 +4,21 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title> Online Digital Photo Printing</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <title>Online Digital Photo Printing</title>
+    <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <link href="css/adm-style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div id="web-page">
-        <div id="main">
-            <div id="main-left">dsd</div> <%--end main-left--%>
-            <div id="main-right"> </div> <%--end main-right--%>
-        </div><%--end main--%>
+        <div id="main" class="alert alert-info">
+            <div id="main-left">
+                sdf
+            </div><%--end main-left--%>
+            <div id="main-right">
+            ASD
+            </div> <%--end main-right--%>
+        </div><%-- end main--%>
     </div>
     </form>
 </body>
