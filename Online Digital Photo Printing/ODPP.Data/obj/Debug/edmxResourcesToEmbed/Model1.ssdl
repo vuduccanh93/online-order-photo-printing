@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectIIIModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ProjectIIIModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="ProjectIIIModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblAccountBank" EntityType="ProjectIIIModel.Store.tblAccountBank" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblAdmin" EntityType="ProjectIIIModel.Store.tblAdmin" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblImages" EntityType="ProjectIIIModel.Store.tblImages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblOrder" EntityType="ProjectIIIModel.Store.tblOrder" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.Store.tblOrderDetails" store:Type="Tables" store:Schema="dbo" store:Name="tblOrderDetails">
+      <DefiningQuery>SELECT 
+      [tblOrderDetails].[ImageID] AS [ImageID], 
+      [tblOrderDetails].[OrderID] AS [OrderID], 
+      [tblOrderDetails].[SizeType] AS [SizeType], 
+      [tblOrderDetails].[Number] AS [Number]
+      FROM [dbo].[tblOrderDetails] AS [tblOrderDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tblSize" EntityType="ProjectIIIModel.Store.tblSize" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblUser" EntityType="ProjectIIIModel.Store.tblUser" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_tblOrder_tblUser" Association="ProjectIIIModel.Store.FK_tblOrder_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblOrder" EntitySet="tblOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOrderDetails_tblImages" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblImages">
+      <End Role="tblImages" EntitySet="tblImages" />
+      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOrderDetails_tblOrder" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblOrder">
+      <End Role="tblOrder" EntitySet="tblOrder" />
+      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOrderDetails_tblSize" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblSize">
+      <End Role="tblSize" EntitySet="tblSize" />
+      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblAccountBank">
+    <Key>
+      <PropertyRef Name="CreditCard" />
+    </Key>
+    <Property Name="CreditCard" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Balance" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblAdmin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AdminRole" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tblImages">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="DateOfOrder" Type="date" Nullable="false" />
+    <Property Name="DateOfAssign" Type="date" Nullable="false" />
+    <Property Name="TotalPrice" Type="float" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="DirectoryName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Paytype" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="CreditCard" Type="bigint" Nullable="false" />
+    <Property Name="Receiver" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Phone" Type="nchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'ProjectIII.dbo.tblOrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="tblOrderDetails">
+    <Key>
+      <PropertyRef Name="ImageID" />
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="SizeType" />
+      <PropertyRef Name="Number" />
+    </Key>
+    <Property Name="ImageID" Type="int" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="SizeType" Type="int" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSize">
+    <Key>
+      <PropertyRef Name="SizeType" />
+    </Key>
+    <Property Name="SizeType" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MinSize" Type="float" Nullable="false" />
+    <Property Name="MaxSize" Type="float" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_tblOrder_tblUser">
+    <End Role="tblUser" Type="ProjectIIIModel.Store.tblUser" Multiplicity="1" />
+    <End Role="tblOrder" Type="ProjectIIIModel.Store.tblOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tblOrder">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOrderDetails_tblImages">
+    <End Role="tblImages" Type="ProjectIIIModel.Store.tblImages" Multiplicity="1" />
+    <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblImages">
+        <PropertyRef Name="ImageID" />
+      </Principal>
+      <Dependent Role="tblOrderDetails">
+        <PropertyRef Name="ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOrderDetails_tblOrder">
+    <End Role="tblOrder" Type="ProjectIIIModel.Store.tblOrder" Multiplicity="1" />
+    <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrder">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="tblOrderDetails">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOrderDetails_tblSize">
+    <End Role="tblSize" Type="ProjectIIIModel.Store.tblSize" Multiplicity="1" />
+    <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSize">
+        <PropertyRef Name="SizeType" />
+      </Principal>
+      <Dependent Role="tblOrderDetails">
+        <PropertyRef Name="SizeType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
