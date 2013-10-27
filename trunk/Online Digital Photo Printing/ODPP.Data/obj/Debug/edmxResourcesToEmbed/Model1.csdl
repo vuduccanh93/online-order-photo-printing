@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectIIIModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="ProjectIIIEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="ProjectIIIModel.sysdiagram" />
+    <EntitySet Name="tblAccountBanks" EntityType="ProjectIIIModel.tblAccountBank" />
+    <EntitySet Name="tblAdmins" EntityType="ProjectIIIModel.tblAdmin" />
+    <EntitySet Name="tblImages" EntityType="ProjectIIIModel.tblImage" />
+    <EntitySet Name="tblOrders" EntityType="ProjectIIIModel.tblOrder" />
+    <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.tblOrderDetail" />
+    <EntitySet Name="tblSizes" EntityType="ProjectIIIModel.tblSize" />
+    <EntitySet Name="tblUsers" EntityType="ProjectIIIModel.tblUser" />
+    <AssociationSet Name="FK_tblOrderDetails_tblImages" Association="ProjectIIIModel.FK_tblOrderDetails_tblImages">
+      <End Role="tblImages" EntitySet="tblImages" />
+      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOrder_tblUser" Association="ProjectIIIModel.FK_tblOrder_tblUser">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblOrder" EntitySet="tblOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOrderDetails_tblOrder" Association="ProjectIIIModel.FK_tblOrderDetails_tblOrder">
+      <End Role="tblOrder" EntitySet="tblOrders" />
+      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblOrderDetails_tblSize" Association="ProjectIIIModel.FK_tblOrderDetails_tblSize">
+      <End Role="tblSize" EntitySet="tblSizes" />
+      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblAccountBank">
+    <Key>
+      <PropertyRef Name="CreditCard" />
+    </Key>
+    <Property Name="CreditCard" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Balance" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblAdmin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminRole" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblImage">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImageName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblImages" ToRole="tblOrderDetails" />
+  </EntityType>
+  <EntityType Name="tblOrder">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="DateOfOrder" Type="DateTime" Nullable="false" />
+    <Property Name="DateOfAssign" Type="DateTime" Nullable="false" />
+    <Property Name="TotalPrice" Type="Double" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="DirectoryName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="Paytype" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="CreditCard" Type="Int64" Nullable="false" />
+    <Property Name="Receiver" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="tblUser" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblOrder" ToRole="tblUser" />
+    <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblOrder" FromRole="tblOrder" ToRole="tblOrderDetails" />
+  </EntityType>
+  <EntityType Name="tblOrderDetail">
+    <Key>
+      <PropertyRef Name="ImageID" />
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="SizeType" />
+      <PropertyRef Name="Number" />
+    </Key>
+    <Property Name="ImageID" Type="Int32" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="SizeType" Type="Int32" Nullable="false" />
+    <Property Name="Number" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblImage" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblOrderDetails" ToRole="tblImages" />
+    <NavigationProperty Name="tblOrder" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblOrder" FromRole="tblOrderDetails" ToRole="tblOrder" />
+    <NavigationProperty Name="tblSize" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblSize" FromRole="tblOrderDetails" ToRole="tblSize" />
+  </EntityType>
+  <EntityType Name="tblSize">
+    <Key>
+      <PropertyRef Name="SizeType" />
+    </Key>
+    <Property Name="SizeType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MinSize" Type="Double" Nullable="false" />
+    <Property Name="MaxSize" Type="Double" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblSize" FromRole="tblSize" ToRole="tblOrderDetails" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="tblOrders" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
+  </EntityType>
+  <Association Name="FK_tblOrderDetails_tblImages">
+    <End Role="tblImages" Type="ProjectIIIModel.tblImage" Multiplicity="1" />
+    <End Role="tblOrderDetails" Type="ProjectIIIModel.tblOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblImages">
+        <PropertyRef Name="ImageID" />
+      </Principal>
+      <Dependent Role="tblOrderDetails">
+        <PropertyRef Name="ImageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOrder_tblUser">
+    <End Role="tblUser" Type="ProjectIIIModel.tblUser" Multiplicity="1" />
+    <End Role="tblOrder" Type="ProjectIIIModel.tblOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tblOrder">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOrderDetails_tblOrder">
+    <End Role="tblOrder" Type="ProjectIIIModel.tblOrder" Multiplicity="1" />
+    <End Role="tblOrderDetails" Type="ProjectIIIModel.tblOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrder">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="tblOrderDetails">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblOrderDetails_tblSize">
+    <End Role="tblSize" Type="ProjectIIIModel.tblSize" Multiplicity="1" />
+    <End Role="tblOrderDetails" Type="ProjectIIIModel.tblOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSize">
+        <PropertyRef Name="SizeType" />
+      </Principal>
+      <Dependent Role="tblOrderDetails">
+        <PropertyRef Name="SizeType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
