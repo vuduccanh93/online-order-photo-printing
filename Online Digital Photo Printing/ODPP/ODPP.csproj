@@ -54,15 +54,50 @@
     <Content Include="Admin\adm-controls\adm-left.ascx" />
     <Content Include="Admin\adm-controls\adm-right.ascx" />
     <Content Include="Admin\adm-controls\adm-top.ascx" />
+    <Content Include="Admin\adm-controls\jquery-slide.ascx" />
     <Content Include="Admin\css\adm-style.css" />
+    <Content Include="Admin\css\bootstrap-responsive.css" />
+    <Content Include="Admin\css\bootstrap-responsive.min.css" />
     <Content Include="Admin\css\bootstrap-theme.css" />
     <Content Include="Admin\css\bootstrap-theme.min.css" />
     <Content Include="Admin\css\bootstrap.css" />
     <Content Include="Admin\css\bootstrap.min.css" />
+    <Content Include="Admin\css\demo.css" />
+    <Content Include="Admin\css\fonts\BebasNeue-webfont.svg" />
+    <Content Include="Admin\css\fonts\Dharma Type Font License.txt" />
+    <Content Include="Admin\css\jquery.easy-pie-chart.css" />
+    <Content Include="Admin\css\mater-style.css" />
+    <Content Include="Admin\css\style.css" />
     <Content Include="Admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Admin\img\1.jpg" />
+    <Content Include="Admin\img\10.jpg" />
+    <Content Include="Admin\img\11.jpg" />
+    <Content Include="Admin\img\12.jpg" />
+    <Content Include="Admin\img\2.jpg" />
+    <Content Include="Admin\img\3.jpg" />
+    <Content Include="Admin\img\4.jpg" />
+    <Content Include="Admin\img\5.jpg" />
+    <Content Include="Admin\img\6.jpg" />
+    <Content Include="Admin\img\7.jpg" />
+    <Content Include="Admin\img\8.jpg" />
+    <Content Include="Admin\img\9.jpg" />
+    <Content Include="Admin\img\arrows.png" />
+    <Content Include="Admin\img\bg.jpg" />
+    <Content Include="Admin\img\browser.png" />
+    <Content Include="Admin\img\glyphicons-halflings-white.png" />
+    <Content Include="Admin\img\glyphicons-halflings.png" />
+    <Content Include="Admin\img\ImageAttribution.txt" />
     <Content Include="Admin\js\bootstrap.js" />
     <Content Include="Admin\js\bootstrap.min.js" />
+    <Content Include="Admin\js\jquery-1.9.1.min.js" />
+    <Content Include="Admin\js\jquery.easy-pie-chart.js" />
+    <Content Include="Admin\js\jquery.gallery.js" />
+    <Content Include="Admin\js\modernizr-2.6.2-respond-1.1.0.min.js" />
+    <Content Include="Admin\js\modernizr.custom.53451.js" />
+    <Content Include="Admin\js\scripts.js" />
     <Content Include="Admin\Login.aspx" />
+    <Content Include="Admin\WebForm1.aspx" />
+    <Content Include="Admin\webs\index.aspx" />
     <Content Include="bin\ODPP.dll" />
     <Content Include="bin\ODPP.pdb" />
     <Content Include="Client\css\bootstrap.css" />
@@ -160,6 +195,13 @@
     <Compile Include="Admin\adm-controls\adm-top.ascx.designer.cs">
       <DependentUpon>adm-top.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\adm-controls\jquery-slide.ascx.cs">
+      <DependentUpon>jquery-slide.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\adm-controls\jquery-slide.ascx.designer.cs">
+      <DependentUpon>jquery-slide.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -173,6 +215,20 @@
     </Compile>
     <Compile Include="Admin\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\webs\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\webs\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Client\webs\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -250,13 +306,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Admin\img\" />
-    <Folder Include="Admin\webs\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\upload\Handler.ashx" />
     <Content Include="Admin\Admin.Master" />
+    <None Include="Admin\css\fonts\BebasNeue-webfont.eot" />
+    <None Include="Admin\css\fonts\BebasNeue-webfont.ttf" />
+    <None Include="Admin\css\fonts\BebasNeue-webfont.woff" />
     <None Include="Admin\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Admin\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Admin\fonts\glyphicons-halflings-regular.woff" />
