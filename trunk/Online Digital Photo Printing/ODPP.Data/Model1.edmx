@@ -9,14 +9,15 @@
           <EntitySet Name="sysdiagrams" EntityType="ProjectIIIModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblAccountBank" EntityType="ProjectIIIModel.Store.tblAccountBank" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblAdmin" EntityType="ProjectIIIModel.Store.tblAdmin" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblContact" EntityType="ProjectIIIModel.Store.tblContact" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblImages" EntityType="ProjectIIIModel.Store.tblImages" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblOrder" EntityType="ProjectIIIModel.Store.tblOrder" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.Store.tblOrderDetails" store:Type="Tables" store:Schema="dbo" store:Name="tblOrderDetails">
             <DefiningQuery>SELECT 
       [tblOrderDetails].[ImageID] AS [ImageID], 
       [tblOrderDetails].[OrderID] AS [OrderID], 
-      [tblOrderDetails].[SizeType] AS [SizeType], 
-      [tblOrderDetails].[Number] AS [Number]
+      [tblOrderDetails].[SizeID] AS [SizeID], 
+      [tblOrderDetails].[Quantity] AS [Quantity]
       FROM [dbo].[tblOrderDetails] AS [tblOrderDetails]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="tblSize" EntityType="ProjectIIIModel.Store.tblSize" store:Type="Tables" Schema="dbo" />
@@ -73,6 +74,18 @@
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblContact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="tblImages">
           <Key>
@@ -80,6 +93,7 @@
           </Key>
           <Property Name="ImageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="ImageRaw" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
@@ -93,9 +107,11 @@
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="DirectoryName" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="Paytype" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="CreditCard" Type="bigint" Nullable="false" />
+          <Property Name="CreditCard" Type="bigint" />
           <Property Name="Receiver" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Phone" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Request" Type="nvarchar" Nullable="false" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'ProjectIII.dbo.tblOrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -104,21 +120,20 @@
           <Key>
             <PropertyRef Name="ImageID" />
             <PropertyRef Name="OrderID" />
-            <PropertyRef Name="SizeType" />
-            <PropertyRef Name="Number" />
+            <PropertyRef Name="SizeID" />
+            <PropertyRef Name="Quantity" />
           </Key>
           <Property Name="ImageID" Type="int" Nullable="false" />
           <Property Name="OrderID" Type="int" Nullable="false" />
-          <Property Name="SizeType" Type="int" Nullable="false" />
-          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="SizeID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblSize">
           <Key>
-            <PropertyRef Name="SizeType" />
+            <PropertyRef Name="SizeID" />
           </Key>
-          <Property Name="SizeType" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="MinSize" Type="float" Nullable="false" />
-          <Property Name="MaxSize" Type="float" Nullable="false" />
+          <Property Name="SizeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Size" Type="nvarchar" Nullable="false" MaxLength="10" />
           <Property Name="Price" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUser">
@@ -134,6 +149,8 @@
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_tblOrder_tblUser">
           <End Role="tblUser" Type="ProjectIIIModel.Store.tblUser" Multiplicity="1" />
@@ -176,10 +193,10 @@
           <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSize">
-              <PropertyRef Name="SizeType" />
+              <PropertyRef Name="SizeID" />
             </Principal>
             <Dependent Role="tblOrderDetails">
-              <PropertyRef Name="SizeType" />
+              <PropertyRef Name="SizeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -188,10 +205,11 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectIIIModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="ProjectIIIEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProjectIIIEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="ProjectIIIModel.sysdiagram" />
           <EntitySet Name="tblAccountBanks" EntityType="ProjectIIIModel.tblAccountBank" />
           <EntitySet Name="tblAdmins" EntityType="ProjectIIIModel.tblAdmin" />
+          <EntitySet Name="tblContacts" EntityType="ProjectIIIModel.tblContact" />
           <EntitySet Name="tblImages" EntityType="ProjectIIIModel.tblImage" />
           <EntitySet Name="tblOrders" EntityType="ProjectIIIModel.tblOrder" />
           <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.tblOrderDetail" />
@@ -249,6 +267,18 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Sex" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblContact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="tblImage">
           <Key>
@@ -256,6 +286,7 @@
           </Key>
           <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImageName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="ImageRaw" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblImages" ToRole="tblOrderDetails" />
         </EntityType>
         <EntityType Name="tblOrder">
@@ -270,9 +301,11 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="DirectoryName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="Paytype" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="CreditCard" Type="Int64" Nullable="false" />
+          <Property Name="CreditCard" Type="Int64" />
           <Property Name="Receiver" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Request" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="tblUser" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblOrder" ToRole="tblUser" />
           <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblOrder" FromRole="tblOrder" ToRole="tblOrderDetails" />
         </EntityType>
@@ -280,24 +313,23 @@
           <Key>
             <PropertyRef Name="ImageID" />
             <PropertyRef Name="OrderID" />
-            <PropertyRef Name="SizeType" />
-            <PropertyRef Name="Number" />
+            <PropertyRef Name="SizeID" />
+            <PropertyRef Name="Quantity" />
           </Key>
           <Property Name="ImageID" Type="Int32" Nullable="false" />
           <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="SizeType" Type="Int32" Nullable="false" />
-          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="SizeID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblImage" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblOrderDetails" ToRole="tblImages" />
           <NavigationProperty Name="tblOrder" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblOrder" FromRole="tblOrderDetails" ToRole="tblOrder" />
           <NavigationProperty Name="tblSize" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblSize" FromRole="tblOrderDetails" ToRole="tblSize" />
         </EntityType>
         <EntityType Name="tblSize">
           <Key>
-            <PropertyRef Name="SizeType" />
+            <PropertyRef Name="SizeID" />
           </Key>
-          <Property Name="SizeType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MinSize" Type="Double" Nullable="false" />
-          <Property Name="MaxSize" Type="Double" Nullable="false" />
+          <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Size" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblSize" FromRole="tblSize" ToRole="tblOrderDetails" />
         </EntityType>
@@ -314,6 +346,8 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Sex" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblOrders" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
         </EntityType>
         <Association Name="FK_tblOrderDetails_tblImages">
@@ -357,10 +391,10 @@
           <End Role="tblOrderDetails" Type="ProjectIIIModel.tblOrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSize">
-              <PropertyRef Name="SizeType" />
+              <PropertyRef Name="SizeID" />
             </Principal>
             <Dependent Role="tblOrderDetails">
-              <PropertyRef Name="SizeType" />
+              <PropertyRef Name="SizeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -369,7 +403,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProjectIIIModelStoreContainer" CdmEntityContainer="ProjectIIIEntities">
+        <EntityContainerMapping StorageEntityContainer="ProjectIIIModelStoreContainer" CdmEntityContainer="ProjectIIIEntities1">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ProjectIIIModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -406,6 +440,19 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContacts">
+            <EntityTypeMapping TypeName="ProjectIIIModel.tblContact">
+              <MappingFragment StoreEntitySet="tblContact">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -414,6 +461,7 @@
               <MappingFragment StoreEntitySet="tblImages">
                 <ScalarProperty Name="ImageID" ColumnName="ImageID" />
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="ImageRaw" ColumnName="ImageRaw" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -431,6 +479,8 @@
                 <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
                 <ScalarProperty Name="Receiver" ColumnName="Receiver" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Request" ColumnName="Request" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -439,17 +489,16 @@
               <MappingFragment StoreEntitySet="tblOrderDetails">
                 <ScalarProperty Name="ImageID" ColumnName="ImageID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="SizeType" ColumnName="SizeType" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblSizes">
             <EntityTypeMapping TypeName="ProjectIIIModel.tblSize">
               <MappingFragment StoreEntitySet="tblSize">
-                <ScalarProperty Name="SizeType" ColumnName="SizeType" />
-                <ScalarProperty Name="MinSize" ColumnName="MinSize" />
-                <ScalarProperty Name="MaxSize" ColumnName="MaxSize" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -466,6 +515,8 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -490,33 +541,33 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model1">
-        <EntityTypeShape EntityType="ProjectIIIModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblAccountBank" Width="1.5" PointX="7.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblImage" Width="1.5" PointX="3" PointY="6.125" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.5186979166666656" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.25" PointY="1.625" Height="2.3648893229166665" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="8.5" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="3.1340950520833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblContact" Width="1.5" PointX="5.75" PointY="8.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblImage" Width="1.5" PointX="3" PointY="5.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.25" PointY="1.75" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="9.375" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="3.3263964843749996" IsExpanded="true" />
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblImages" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.2567350260416665" />
-          <ConnectorPoint PointX="5.2447891666666671" PointY="7.2567350260416656" />
-          <ConnectorPoint PointX="5.4114558333333331" PointY="7.2567350260416665" />
-          <ConnectorPoint PointX="5.46875" PointY="7.2567350260416665" />
-          <ConnectorPoint PointX="5.46875" PointY="3.9898893229166665" />
+          <ConnectorPoint PointX="4.5" PointY="5.75" />
+          <ConnectorPoint PointX="4.875" PointY="5.375" />
+          <ConnectorPoint PointX="4.875" PointY="2.9324446614583337" />
+          <ConnectorPoint PointX="5.25" PointY="2.9324446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrder_tblUser" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="2.7208968098958337" />
-          <ConnectorPoint PointX="3" PointY="2.7208968098958337" />
+          <ConnectorPoint PointX="2.25" PointY="2.9131982421875" />
+          <ConnectorPoint PointX="3" PointY="2.9131982421875" />
         </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblOrder" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="2.8074446614583333" />
-          <ConnectorPoint PointX="5.25" PointY="2.8074446614583333" />
+          <ConnectorPoint PointX="4.5" PointY="2.2787223307291669" />
+          <ConnectorPoint PointX="5.25" PointY="2.2787223307291669" />
         </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblSize" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="9.4901432291666659" />
-          <ConnectorPoint PointX="5.3281225" PointY="9.4901432291666659" />
-          <ConnectorPoint PointX="5.3281225" PointY="3.9898893229166665" />
+          <ConnectorPoint PointX="4.5" PointY="10.9778857421875" />
+          <ConnectorPoint PointX="5.46875" PointY="10.9778857421875" />
+          <ConnectorPoint PointX="5.46875" PointY="4.1148893229166674" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

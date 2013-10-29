@@ -11,7 +11,7 @@ namespace ODPP.Business
     {
         public static List<tblUser> User_GetByAll()
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 List<tblUser> lst = new List<tblUser>();
                 lst = ett.tblUsers.ToList();
@@ -21,7 +21,7 @@ namespace ODPP.Business
 
         public static tblUser User_GetById(int Id)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblUser obj = new tblUser();
                 obj = ett.tblUsers.FirstOrDefault(e => e.UserID == Id);
@@ -31,7 +31,7 @@ namespace ODPP.Business
 
         public static bool User_Insert(tblUser data)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 ett.tblUsers.AddObject(data);
                 ett.SaveChanges();
@@ -41,10 +41,20 @@ namespace ODPP.Business
 
         public static bool User_Update(tblUser data)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
-                tblUser obj = ett.tblUsers.FirstOrDefault(e => e.UserID == data.UserID); obj.UserID = data.UserID;
+                tblUser obj = ett.tblUsers.FirstOrDefault(e => e.UserID == data.UserID);
+                obj.FirstName = data.FirstName;
+                obj.LastName = data.LastName;
+                obj.DateOfBirth = data.DateOfBirth;
+                obj.Address = data.Address;
+                obj.Phone = data.Phone;
+                obj.Email = data.Email;
                 obj.UserName = data.UserName;
+                obj.Password = data.Password;
+                obj.Photo = data.Photo;
+                obj.Sex = data.Sex;
+
                 ett.SaveChanges();
             }
             return true;
@@ -52,7 +62,7 @@ namespace ODPP.Business
 
         public static bool User_Delete(int Id)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblUser obj = ett.tblUsers.FirstOrDefault(e => e.UserID == Id);
                 ett.tblUsers.DeleteObject(obj);

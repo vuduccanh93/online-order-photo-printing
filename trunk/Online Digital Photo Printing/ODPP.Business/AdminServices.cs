@@ -7,11 +7,11 @@ using System.Data.Entity;
 
 namespace ODPP.Business
 {
-   public class AdminServices
+    public class AdminServices
     {
         public static List<tblAdmin> Admin_GetByAll()
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 List<tblAdmin> lst = new List<tblAdmin>();
                 lst = ett.tblAdmins.ToList();
@@ -21,7 +21,7 @@ namespace ODPP.Business
 
         public static tblAdmin Admin_GetById(int Id)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblAdmin obj = new tblAdmin();
                 obj = ett.tblAdmins.FirstOrDefault(e => e.AdminID == Id);
@@ -31,7 +31,7 @@ namespace ODPP.Business
 
         public static bool Admin_Insert(tblAdmin data)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 ett.tblAdmins.AddObject(data);
                 ett.SaveChanges();
@@ -41,12 +41,22 @@ namespace ODPP.Business
 
         public static bool Admin_Update(tblAdmin data)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblAdmin obj = ett.tblAdmins.FirstOrDefault(e => e.AdminID == data.AdminID);
-                obj.AdminID = data.AdminID;
+
                 obj.FirstName = data.FirstName;
                 obj.LastName = data.LastName;
+                obj.DateOfBirth = data.DateOfBirth;
+                obj.Phone = data.Phone;
+                obj.Email = data.Email;
+                obj.UserName = data.UserName;
+                obj.Password = data.Password;
+                obj.Phone = data.Phone;
+                obj.Sex = data.Sex;
+
+
+
                 ett.SaveChanges();
             }
             return true;
@@ -54,7 +64,7 @@ namespace ODPP.Business
 
         public static bool Admin_Delete(int Id)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblAdmin obj = ett.tblAdmins.FirstOrDefault(e => e.AdminID == Id);
                 ett.tblAdmins.DeleteObject(obj);

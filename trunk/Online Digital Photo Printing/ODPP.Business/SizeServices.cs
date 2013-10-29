@@ -12,7 +12,7 @@ namespace ODPP.Business
     {
         public static List<tblSize> Size_GetByAll()
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 List<tblSize> lst = new List<tblSize>();
                 lst = ett.tblSizes.ToList();
@@ -20,19 +20,19 @@ namespace ODPP.Business
             }
         }
 
-        public static tblSize Size_GetByType(int Type)
+        public static tblSize Size_GetById(int Id)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblSize obj = new tblSize();
-                obj = ett.tblSizes.FirstOrDefault(e => e.SizeType == Type);
+                obj = ett.tblSizes.FirstOrDefault(e => e.SizeID == Id);
                 return obj;
             }
         }
 
         public static bool Size_Insert(tblSize data)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 ett.tblSizes.AddObject(data);
                 ett.SaveChanges();
@@ -42,20 +42,22 @@ namespace ODPP.Business
 
         public static bool Size_Update(tblSize data)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
-                tblSize obj = ett.tblSizes.FirstOrDefault(e => e.SizeType == data.SizeType);
-                obj.SizeType = data.SizeType;
+                tblSize obj = ett.tblSizes.FirstOrDefault(e => e.SizeID == data.SizeID);
+                obj.SizeID = data.SizeID;
+                obj.Size = data.Size;
+                obj.Price = data.Price;
                 ett.SaveChanges();
             }
             return true;
         }
 
-        public static bool Size_Delete(int Type)
+        public static bool Size_Delete(int Id)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
-                tblSize obj = ett.tblSizes.FirstOrDefault(e => e.SizeType == Type);
+                tblSize obj = ett.tblSizes.FirstOrDefault(e => e.SizeID == Id);
                 ett.tblSizes.DeleteObject(obj);
                 ett.SaveChanges();
             }
