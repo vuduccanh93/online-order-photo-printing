@@ -55,6 +55,7 @@
     <Content Include="Admin\adm-controls\adm-right.ascx" />
     <Content Include="Admin\adm-controls\adm-top.ascx" />
     <Content Include="Admin\adm-controls\jquery-slide.ascx" />
+    <Content Include="Admin\css\adm-master.css" />
     <Content Include="Admin\css\adm-style.css" />
     <Content Include="Admin\css\bootstrap-responsive.css" />
     <Content Include="Admin\css\bootstrap-responsive.min.css" />
@@ -62,13 +63,16 @@
     <Content Include="Admin\css\bootstrap-theme.min.css" />
     <Content Include="Admin\css\bootstrap.css" />
     <Content Include="Admin\css\bootstrap.min.css" />
+    <Content Include="Admin\css\bootstrap.min.master.css" />
     <Content Include="Admin\css\demo.css" />
     <Content Include="Admin\css\fonts\BebasNeue-webfont.svg" />
+    <Content Include="Admin\css\fonts\bootstrap-master.css" />
     <Content Include="Admin\css\fonts\Dharma Type Font License.txt" />
     <Content Include="Admin\css\jquery.easy-pie-chart.css" />
-    <Content Include="Admin\css\mater-style.css" />
+    <Content Include="Admin\css\style.mater.css" />
     <Content Include="Admin\css\style.css" />
     <Content Include="Admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Admin\Found.aspx" />
     <Content Include="Admin\img\1.jpg" />
     <Content Include="Admin\img\10.jpg" />
     <Content Include="Admin\img\11.jpg" />
@@ -82,6 +86,7 @@
     <Content Include="Admin\img\8.jpg" />
     <Content Include="Admin\img\9.jpg" />
     <Content Include="Admin\img\arrows.png" />
+    <Content Include="Admin\img\AWT-Camera.png" />
     <Content Include="Admin\img\bg.jpg" />
     <Content Include="Admin\img\browser.png" />
     <Content Include="Admin\img\glyphicons-halflings-white.png" />
@@ -96,7 +101,6 @@
     <Content Include="Admin\js\modernizr.custom.53451.js" />
     <Content Include="Admin\js\scripts.js" />
     <Content Include="Admin\Login.aspx" />
-    <Content Include="Admin\WebForm1.aspx" />
     <Content Include="Admin\webs\index.aspx" />
     <Content Include="bin\ODPP.dll" />
     <Content Include="bin\ODPP.pdb" />
@@ -209,19 +213,19 @@
     <Compile Include="Admin\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Found.aspx.cs">
+      <DependentUpon>Found.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Found.aspx.designer.cs">
+      <DependentUpon>Found.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\webs\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
