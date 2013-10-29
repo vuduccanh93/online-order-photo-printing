@@ -11,7 +11,7 @@ namespace ODPP.Business
     {
         public static List<tblOrder> Order_GetByAll()
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 List<tblOrder> lst = new List<tblOrder>();
                 lst = ett.tblOrders.ToList();
@@ -21,7 +21,7 @@ namespace ODPP.Business
 
         public static tblOrder Order_GetById(int Id)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblOrder obj = new tblOrder();
                 obj = ett.tblOrders.FirstOrDefault(e => e.OrderID == Id);
@@ -31,7 +31,7 @@ namespace ODPP.Business
 
         public static bool Ordder_Insert(tblOrder data)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 ett.tblOrders.AddObject(data);
                 ett.SaveChanges();
@@ -41,10 +41,20 @@ namespace ODPP.Business
 
         public static bool Order_Update(tblOrder data)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblOrder obj = ett.tblOrders.FirstOrDefault(e => e.OrderID == data.OrderID);
-                obj.OrderID = data.OrderID;
+                obj.UserID = data.UserID;
+                obj.DateOfOrder = data.DateOfOrder;
+                obj.DateOfAssign = data.DateOfAssign;
+                obj.TotalPrice = data.TotalPrice;
+                obj.Status = data.Status;
+                obj.DirectoryName = data.DirectoryName;
+                obj.Paytype = data.Paytype;
+                obj.CreditCard = data.CreditCard;
+                obj.Receiver = data.Receiver;
+                obj.Phone = data.Phone;
+
                 ett.SaveChanges();
             }
             return true;
@@ -52,7 +62,7 @@ namespace ODPP.Business
 
         public static bool Oeder_Delete(int Id)
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 tblOrder obj = ett.tblOrders.FirstOrDefault(e => e.OrderID == Id);
                 ett.tblOrders.DeleteObject(obj);

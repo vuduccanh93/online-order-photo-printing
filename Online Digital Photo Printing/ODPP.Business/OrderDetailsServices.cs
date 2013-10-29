@@ -11,7 +11,7 @@ namespace ODPP.Business
     {
         public static List<tblOrderDetail> OrderDetail_GetByAll()
         {
-            using (ProjectIIIEntities ett = new ProjectIIIEntities())
+            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
             {
                 List<tblOrderDetail> lst = new List<tblOrderDetail>();
                 lst = ett.tblOrderDetails.ToList();
