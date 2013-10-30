@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ProjectIIIModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-  <EntityContainer Name="ProjectIIIEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="ProjectIIIEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="sysdiagrams" EntityType="ProjectIIIModel.sysdiagram" />
     <EntitySet Name="tblAccountBanks" EntityType="ProjectIIIModel.tblAccountBank" />
     <EntitySet Name="tblAdmins" EntityType="ProjectIIIModel.tblAdmin" />
+    <EntitySet Name="tblContacts" EntityType="ProjectIIIModel.tblContact" />
     <EntitySet Name="tblImages" EntityType="ProjectIIIModel.tblImage" />
     <EntitySet Name="tblOrders" EntityType="ProjectIIIModel.tblOrder" />
     <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.tblOrderDetail" />
@@ -61,6 +62,18 @@
     <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
     <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="Sex" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblContact">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
   </EntityType>
   <EntityType Name="tblImage">
     <Key>
@@ -68,6 +81,7 @@
     </Key>
     <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ImageName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="ImageRaw" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblImages" ToRole="tblOrderDetails" />
   </EntityType>
   <EntityType Name="tblOrder">
@@ -82,9 +96,11 @@
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <Property Name="DirectoryName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
     <Property Name="Paytype" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-    <Property Name="CreditCard" Type="Int64" Nullable="false" />
+    <Property Name="CreditCard" Type="Int64" />
     <Property Name="Receiver" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Request" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="tblUser" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblOrder" ToRole="tblUser" />
     <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblOrder" FromRole="tblOrder" ToRole="tblOrderDetails" />
   </EntityType>
@@ -92,24 +108,23 @@
     <Key>
       <PropertyRef Name="ImageID" />
       <PropertyRef Name="OrderID" />
-      <PropertyRef Name="SizeType" />
-      <PropertyRef Name="Number" />
+      <PropertyRef Name="SizeID" />
+      <PropertyRef Name="Quantity" />
     </Key>
     <Property Name="ImageID" Type="Int32" Nullable="false" />
     <Property Name="OrderID" Type="Int32" Nullable="false" />
-    <Property Name="SizeType" Type="Int32" Nullable="false" />
-    <Property Name="Number" Type="Int32" Nullable="false" />
+    <Property Name="SizeID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tblImage" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblOrderDetails" ToRole="tblImages" />
     <NavigationProperty Name="tblOrder" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblOrder" FromRole="tblOrderDetails" ToRole="tblOrder" />
     <NavigationProperty Name="tblSize" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblSize" FromRole="tblOrderDetails" ToRole="tblSize" />
   </EntityType>
   <EntityType Name="tblSize">
     <Key>
-      <PropertyRef Name="SizeType" />
+      <PropertyRef Name="SizeID" />
     </Key>
-    <Property Name="SizeType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MinSize" Type="Double" Nullable="false" />
-    <Property Name="MaxSize" Type="Double" Nullable="false" />
+    <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Size" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
     <Property Name="Price" Type="Double" Nullable="false" />
     <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblSize" FromRole="tblSize" ToRole="tblOrderDetails" />
   </EntityType>
@@ -126,6 +141,8 @@
     <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
     <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="Sex" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tblOrders" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
   </EntityType>
   <Association Name="FK_tblOrderDetails_tblImages">
@@ -169,10 +186,10 @@
     <End Role="tblOrderDetails" Type="ProjectIIIModel.tblOrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblSize">
-        <PropertyRef Name="SizeType" />
+        <PropertyRef Name="SizeID" />
       </Principal>
       <Dependent Role="tblOrderDetails">
-        <PropertyRef Name="SizeType" />
+        <PropertyRef Name="SizeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
