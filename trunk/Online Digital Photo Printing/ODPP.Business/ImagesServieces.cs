@@ -26,6 +26,7 @@ namespace ODPP.Business
                 tblImage obj = new tblImage();
                 obj = ett.tblImages.FirstOrDefault(e => e.ImageID == Id);
                 return obj;
+                
             }
         }
 
@@ -35,6 +36,7 @@ namespace ODPP.Business
             {
                 ett.tblImages.AddObject(data);
                 ett.SaveChanges();
+
             }
             return true;
         }
