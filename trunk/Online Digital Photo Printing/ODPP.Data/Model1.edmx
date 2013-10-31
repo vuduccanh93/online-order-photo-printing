@@ -543,6 +543,14 @@
       <Diagram Name="Model1">
         <EntityTypeShape EntityType="ProjectIIIModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblAccountBank" Width="1.5" PointX="7.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
+
+        <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblImage" Width="1.5" PointX="2.625" PointY="5.125" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.25" PointY="1.625" Height="2.3648893229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="8.5" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="2.9417936197916674" IsExpanded="true" />
+
         <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="3.1340950520833335" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblContact" Width="1.5" PointX="5.75" PointY="8.75" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblImage" Width="1.5" PointX="3" PointY="5.75" Height="1.7879850260416674" IsExpanded="true" />
@@ -550,11 +558,22 @@
         <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.25" PointY="1.75" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="9.375" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="3.3263964843749996" IsExpanded="true" />
+
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblImages" ManuallyRouted="false">
+
+          <ConnectorPoint PointX="4.125" PointY="5.922841796875" />
+          <ConnectorPoint PointX="5.375" PointY="5.922841796875" />
+          <ConnectorPoint PointX="5.375" PointY="4.5" />
+          <ConnectorPoint PointX="5.447916666666667" PointY="4.4999999999999991" />
+          <ConnectorPoint PointX="5.614583333333333" PointY="4.5" />
+          <ConnectorPoint PointX="6.171877" PointY="4.5" />
+          <ConnectorPoint PointX="6.171877" PointY="3.9898893229166665" />
+
           <ConnectorPoint PointX="4.5" PointY="5.75" />
           <ConnectorPoint PointX="4.875" PointY="5.375" />
           <ConnectorPoint PointX="4.875" PointY="2.9324446614583337" />
           <ConnectorPoint PointX="5.25" PointY="2.9324446614583337" />
+
         </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrder_tblUser" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="2.9131982421875" />
@@ -565,9 +584,15 @@
           <ConnectorPoint PointX="5.25" PointY="2.2787223307291669" />
         </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblSize" ManuallyRouted="false">
+
+          <ConnectorPoint PointX="4.5" PointY="9.4901432291666659" />
+          <ConnectorPoint PointX="5.53125" PointY="9.4901432291666659" />
+          <ConnectorPoint PointX="5.53125" PointY="3.9898893229166665" />
+
           <ConnectorPoint PointX="4.5" PointY="10.9778857421875" />
           <ConnectorPoint PointX="5.46875" PointY="10.9778857421875" />
           <ConnectorPoint PointX="5.46875" PointY="4.1148893229166674" />
+
         </AssociationConnector>
       </Diagram>
     </Diagrams>
