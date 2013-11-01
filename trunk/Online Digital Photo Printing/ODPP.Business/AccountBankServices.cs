@@ -11,7 +11,7 @@ namespace ODPP.Business
     {
         public static List<tblAccountBank> AccountBank_GetByAll()
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 List<tblAccountBank> lst = new List<tblAccountBank>();
                 lst = ett.tblAccountBanks.ToList();
@@ -21,7 +21,7 @@ namespace ODPP.Business
 
         public static tblAccountBank AccountBank_GetByCart(int Cart)
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 tblAccountBank obj = new tblAccountBank();
                 obj = ett.tblAccountBanks.FirstOrDefault(e => e.CreditCard == Cart);
@@ -31,7 +31,7 @@ namespace ODPP.Business
 
         public static bool AccountBank_Insert(tblAccountBank data)
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 ett.tblAccountBanks.AddObject(data);
                 ett.SaveChanges();
@@ -41,7 +41,7 @@ namespace ODPP.Business
 
         public static bool AccountBank_Update(tblAccountBank data)
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 tblAccountBank obj = ett.tblAccountBanks.FirstOrDefault(e => e.CreditCard == data.CreditCard);
                 // obj.CreditCard = data.CreditCard;
@@ -58,7 +58,7 @@ namespace ODPP.Business
 
         public static bool AccountBank_Delete(int Id)
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 tblAccountBank obj = ett.tblAccountBanks.FirstOrDefault(e => e.CreditCard == Id);
                 ett.tblAccountBanks.DeleteObject(obj);

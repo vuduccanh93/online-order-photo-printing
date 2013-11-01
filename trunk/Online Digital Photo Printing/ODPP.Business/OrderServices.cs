@@ -11,7 +11,7 @@ namespace ODPP.Business
     {
         public static List<tblOrder> Order_GetByAll()
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 List<tblOrder> lst = new List<tblOrder>();
                 lst = ett.tblOrders.ToList();
@@ -21,7 +21,7 @@ namespace ODPP.Business
 
         public static tblOrder Order_GetById(int Id)
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 tblOrder obj = new tblOrder();
                 obj = ett.tblOrders.FirstOrDefault(e => e.OrderID == Id);
@@ -31,7 +31,7 @@ namespace ODPP.Business
 
         public static bool Ordder_Insert(tblOrder data)
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 ett.tblOrders.AddObject(data);
                 ett.SaveChanges();
@@ -41,7 +41,7 @@ namespace ODPP.Business
 
         public static bool Order_Update(tblOrder data)
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 tblOrder obj = ett.tblOrders.FirstOrDefault(e => e.OrderID == data.OrderID);
                 obj.UserID = data.UserID;
@@ -62,7 +62,7 @@ namespace ODPP.Business
 
         public static bool Oeder_Delete(int Id)
         {
-            using (ProjectIIIEntities1 ett = new ProjectIIIEntities1())
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
                 tblOrder obj = ett.tblOrders.FirstOrDefault(e => e.OrderID == Id);
                 ett.tblOrders.DeleteObject(obj);

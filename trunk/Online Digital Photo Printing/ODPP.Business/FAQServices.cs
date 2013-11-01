@@ -7,58 +7,58 @@ using System.Data.Entity;
 
 namespace ODPP.Business
 {
-    public class ImagesServieces
+    public class FAQServices
     {
-        public static List<tblImage> Images_GetByAll()
+        public static List<tblFAQ> FAQ_GetByAll()
         {
             using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
-                List<tblImage> lst = new List<tblImage>();
-                lst = ett.tblImages.ToList();
+                List<tblFAQ> lst = new List<tblFAQ>();
+                lst = ett.tblFAQs.ToList();
                 return lst;
             }
         }
 
-        public static tblImage Images_GetById(int Id)
+        public static tblFAQ FAQ_GetById(int Id)
         {
             using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
-                tblImage obj = new tblImage();
-                obj = ett.tblImages.FirstOrDefault(e => e.ImageID == Id);
+                tblFAQ obj = new tblFAQ();
+                obj = ett.tblFAQs.FirstOrDefault(e => e.FaqID == Id);
                 return obj;
-                
             }
         }
 
-        public static bool Images_Insert(tblImage data)
+        public static bool FAQ_Insert(tblFAQ data)
         {
             using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
-                ett.tblImages.AddObject(data);
-                ett.SaveChanges();
-
-            }
-            return true;
-        }
-
-        public static bool Images_Update(tblImage data)
-        {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
-            {
-                tblImage obj = ett.tblImages.FirstOrDefault(e => e.ImageID == data.ImageID);
-                obj.ImageName = data.ImageName;
-                obj.ImageRaw = data.ImageRaw;
+                ett.tblFAQs.AddObject(data);
                 ett.SaveChanges();
             }
             return true;
         }
 
-        public static bool Images_Delete(int Id)
+        public static bool User_Update(tblFAQ data)
         {
             using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
             {
-                tblImage obj = ett.tblImages.FirstOrDefault(e => e.ImageID == Id);
-                ett.tblImages.DeleteObject(obj);
+                tblFAQ obj = ett.tblFAQs.FirstOrDefault(e => e.FaqID == data.FaqID);
+                obj.FaqID = data.FaqID;
+                obj.Question = data.Question;
+                obj.Answer = data.Answer;
+               
+                ett.SaveChanges();
+            }
+            return true;
+        }
+
+        public static bool FAQ_Delete(int Id)
+        {
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            {
+                tblFAQ obj = ett.tblFAQs.FirstOrDefault(e => e.FaqID == Id);
+                ett.tblFAQs.DeleteObject(obj);
                 ett.SaveChanges();
             }
             return true;
