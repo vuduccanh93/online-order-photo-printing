@@ -10,6 +10,13 @@
           <EntitySet Name="tblAccountBank" EntityType="ProjectIIIModel.Store.tblAccountBank" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblAdmin" EntityType="ProjectIIIModel.Store.tblAdmin" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblContact" EntityType="ProjectIIIModel.Store.tblContact" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblFAQ" EntityType="ProjectIIIModel.Store.tblFAQ" store:Type="Tables" store:Schema="dbo" store:Name="tblFAQ">
+            <DefiningQuery>SELECT 
+      [tblFAQ].[FaqID] AS [FaqID], 
+      [tblFAQ].[Question] AS [Question], 
+      [tblFAQ].[Answer] AS [Answer]
+      FROM [dbo].[tblFAQ] AS [tblFAQ]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="tblImages" EntityType="ProjectIIIModel.Store.tblImages" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblOrder" EntityType="ProjectIIIModel.Store.tblOrder" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.Store.tblOrderDetails" store:Type="Tables" store:Schema="dbo" store:Name="tblOrderDetails">
@@ -74,7 +81,7 @@
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="Sex" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tblContact">
@@ -87,13 +94,26 @@
           <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'ProjectIII.dbo.tblFAQ' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="tblFAQ">
+          <Key>
+            <PropertyRef Name="FaqID" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="Answer" />
+          </Key>
+          <Property Name="FaqID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Answer" Type="nvarchar" Nullable="false" MaxLength="30" />
+        </EntityType>
         <EntityType Name="tblImages">
           <Key>
             <PropertyRef Name="ImageID" />
           </Key>
           <Property Name="ImageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="ImageRaw" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ImageRaw" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
@@ -149,7 +169,7 @@
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="Sex" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_tblOrder_tblUser">
@@ -205,11 +225,12 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectIIIModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="ProjectIIIEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProjectIIIEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="ProjectIIIModel.sysdiagram" />
           <EntitySet Name="tblAccountBanks" EntityType="ProjectIIIModel.tblAccountBank" />
           <EntitySet Name="tblAdmins" EntityType="ProjectIIIModel.tblAdmin" />
           <EntitySet Name="tblContacts" EntityType="ProjectIIIModel.tblContact" />
+          <EntitySet Name="tblFAQs" EntityType="ProjectIIIModel.tblFAQ" />
           <EntitySet Name="tblImages" EntityType="ProjectIIIModel.tblImage" />
           <EntitySet Name="tblOrders" EntityType="ProjectIIIModel.tblOrder" />
           <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.tblOrderDetail" />
@@ -267,7 +288,7 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Sex" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tblContact">
@@ -280,13 +301,23 @@
           <Property Name="Message" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
         </EntityType>
+        <EntityType Name="tblFAQ">
+          <Key>
+            <PropertyRef Name="FaqID" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="Answer" />
+          </Key>
+          <Property Name="FaqID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Answer" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+        </EntityType>
         <EntityType Name="tblImage">
           <Key>
             <PropertyRef Name="ImageID" />
           </Key>
           <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImageName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="ImageRaw" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageRaw" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblImages" ToRole="tblOrderDetails" />
         </EntityType>
         <EntityType Name="tblOrder">
@@ -346,7 +377,7 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Sex" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblOrders" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
         </EntityType>
@@ -403,7 +434,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProjectIIIModelStoreContainer" CdmEntityContainer="ProjectIIIEntities1">
+        <EntityContainerMapping StorageEntityContainer="ProjectIIIModelStoreContainer" CdmEntityContainer="ProjectIIIEntities2">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ProjectIIIModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -453,6 +484,15 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFAQs">
+            <EntityTypeMapping TypeName="ProjectIIIModel.tblFAQ">
+              <MappingFragment StoreEntitySet="tblFAQ">
+                <ScalarProperty Name="FaqID" ColumnName="FaqID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -553,11 +593,12 @@
 
         <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="3.1340950520833335" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblContact" Width="1.5" PointX="5.75" PointY="8.75" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblImage" Width="1.5" PointX="3" PointY="5.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblFAQ" Width="1.5" PointX="7.75" PointY="8.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblImage" Width="1.5" PointX="3" PointY="5.75" Height="1.7879850260416657" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.9033007812499996" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.25" PointY="1.75" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="9.375" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="3.3263964843750031" IsExpanded="true" />
 
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblImages" ManuallyRouted="false">
 
@@ -576,8 +617,8 @@
 
         </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrder_tblUser" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="2.9131982421875" />
-          <ConnectorPoint PointX="3" PointY="2.9131982421875" />
+          <ConnectorPoint PointX="2.25" PointY="2.9131982421875016" />
+          <ConnectorPoint PointX="3" PointY="2.9131982421875016" />
         </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblOrder" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="2.2787223307291669" />
