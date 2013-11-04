@@ -4,46 +4,28 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProjectIIIModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="ProjectIIIModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="ProjectIIIModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="ProjectIIIModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblAccountBank" EntityType="ProjectIIIModel.Store.tblAccountBank" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblAdmin" EntityType="ProjectIIIModel.Store.tblAdmin" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblContact" EntityType="ProjectIIIModel.Store.tblContact" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="tblFAQ" EntityType="ProjectIIIModel.Store.tblFAQ" store:Type="Tables" store:Schema="dbo" store:Name="tblFAQ">
-            <DefiningQuery>SELECT 
-      [tblFAQ].[FaqID] AS [FaqID], 
-      [tblFAQ].[Question] AS [Question], 
-      [tblFAQ].[Answer] AS [Answer]
-      FROM [dbo].[tblFAQ] AS [tblFAQ]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="tblImages" EntityType="ProjectIIIModel.Store.tblImages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tblFAQ" EntityType="ProjectIIIModel.Store.tblFAQ" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblOrder" EntityType="ProjectIIIModel.Store.tblOrder" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.Store.tblOrderDetails" store:Type="Tables" store:Schema="dbo" store:Name="tblOrderDetails">
-            <DefiningQuery>SELECT 
-      [tblOrderDetails].[ImageID] AS [ImageID], 
-      [tblOrderDetails].[OrderID] AS [OrderID], 
-      [tblOrderDetails].[SizeID] AS [SizeID], 
-      [tblOrderDetails].[Quantity] AS [Quantity]
-      FROM [dbo].[tblOrderDetails] AS [tblOrderDetails]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="tblOrderDetail" EntityType="ProjectIIIModel.Store.tblOrderDetail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblSize" EntityType="ProjectIIIModel.Store.tblSize" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblUser" EntityType="ProjectIIIModel.Store.tblUser" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_tblOrder_tblUser" Association="ProjectIIIModel.Store.FK_tblOrder_tblUser">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblOrder" EntitySet="tblOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblOrderDetails_tblImages" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblImages">
-            <End Role="tblImages" EntitySet="tblImages" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblOrderDetails_tblOrder" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblOrder">
+          <AssociationSet Name="FK_tblOrderDetail_tblOrder" Association="ProjectIIIModel.Store.FK_tblOrderDetail_tblOrder">
             <End Role="tblOrder" EntitySet="tblOrder" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="tblOrderDetail" EntitySet="tblOrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblOrderDetails_tblSize" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblSize">
+          <AssociationSet Name="FK_tblOrderDetail_tblSize" Association="ProjectIIIModel.Store.FK_tblOrderDetail_tblSize">
             <End Role="tblSize" EntitySet="tblSize" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="tblOrderDetail" EntitySet="tblOrderDetail" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagrams">
@@ -94,26 +76,13 @@
           <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'ProjectIII.dbo.tblFAQ' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="tblFAQ">
           <Key>
             <PropertyRef Name="FaqID" />
-            <PropertyRef Name="Question" />
-            <PropertyRef Name="Answer" />
           </Key>
           <Property Name="FaqID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="30" />
           <Property Name="Answer" Type="nvarchar" Nullable="false" MaxLength="30" />
-        </EntityType>
-        <EntityType Name="tblImages">
-          <Key>
-            <PropertyRef Name="ImageID" />
-          </Key>
-          <Property Name="ImageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="ImageRaw" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
@@ -133,20 +102,16 @@
           <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Request" Type="nvarchar" Nullable="false" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'ProjectIII.dbo.tblOrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
-        <EntityType Name="tblOrderDetails">
+        <EntityType Name="tblOrderDetail">
           <Key>
-            <PropertyRef Name="ImageID" />
             <PropertyRef Name="OrderID" />
             <PropertyRef Name="SizeID" />
-            <PropertyRef Name="Quantity" />
           </Key>
-          <Property Name="ImageID" Type="int" Nullable="false" />
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="SizeID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="ImageRaw" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tblSize">
           <Key>
@@ -184,44 +149,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblOrderDetails_tblImages">
-          <End Role="tblImages" Type="ProjectIIIModel.Store.tblImages" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblImages">
-              <PropertyRef Name="ImageID" />
-            </Principal>
-            <Dependent Role="tblOrderDetails">
-              <PropertyRef Name="ImageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblOrderDetails_tblOrder">
+        <Association Name="FK_tblOrderDetail_tblOrder">
           <End Role="tblOrder" Type="ProjectIIIModel.Store.tblOrder" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
+          <End Role="tblOrderDetail" Type="ProjectIIIModel.Store.tblOrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblOrder">
               <PropertyRef Name="OrderID" />
             </Principal>
-            <Dependent Role="tblOrderDetails">
+            <Dependent Role="tblOrderDetail">
               <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblOrderDetails_tblSize">
+        <Association Name="FK_tblOrderDetail_tblSize">
           <End Role="tblSize" Type="ProjectIIIModel.Store.tblSize" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
+          <End Role="tblOrderDetail" Type="ProjectIIIModel.Store.tblOrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSize">
               <PropertyRef Name="SizeID" />
             </Principal>
-            <Dependent Role="tblOrderDetails">
+            <Dependent Role="tblOrderDetail">
               <PropertyRef Name="SizeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectIIIModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -230,29 +182,24 @@
           <EntitySet Name="tblAccountBanks" EntityType="ProjectIIIModel.tblAccountBank" />
           <EntitySet Name="tblAdmins" EntityType="ProjectIIIModel.tblAdmin" />
           <EntitySet Name="tblContacts" EntityType="ProjectIIIModel.tblContact" />
-          <EntitySet Name="tblFAQs" EntityType="ProjectIIIModel.tblFAQ" />
-          <EntitySet Name="tblImages" EntityType="ProjectIIIModel.tblImage" />
           <EntitySet Name="tblOrders" EntityType="ProjectIIIModel.tblOrder" />
-          <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.tblOrderDetail" />
           <EntitySet Name="tblSizes" EntityType="ProjectIIIModel.tblSize" />
           <EntitySet Name="tblUsers" EntityType="ProjectIIIModel.tblUser" />
-          <AssociationSet Name="FK_tblOrderDetails_tblImages" Association="ProjectIIIModel.FK_tblOrderDetails_tblImages">
-            <End Role="tblImages" EntitySet="tblImages" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblOrder_tblUser" Association="ProjectIIIModel.FK_tblOrder_tblUser">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblOrder" EntitySet="tblOrders" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblOrderDetails_tblOrder" Association="ProjectIIIModel.FK_tblOrderDetails_tblOrder">
+          <EntitySet Name="tblFAQs" EntityType="ProjectIIIModel.tblFAQ" />
+          <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.tblOrderDetail" />
+          <AssociationSet Name="FK_tblOrderDetail_tblOrder" Association="ProjectIIIModel.FK_tblOrderDetail_tblOrder">
             <End Role="tblOrder" EntitySet="tblOrders" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="tblOrderDetail" EntitySet="tblOrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblOrderDetails_tblSize" Association="ProjectIIIModel.FK_tblOrderDetails_tblSize">
+          <AssociationSet Name="FK_tblOrderDetail_tblSize" Association="ProjectIIIModel.FK_tblOrderDetail_tblSize">
             <End Role="tblSize" EntitySet="tblSizes" />
-            <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+            <End Role="tblOrderDetail" EntitySet="tblOrderDetails" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -301,25 +248,6 @@
           <Property Name="Message" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
         </EntityType>
-        <EntityType Name="tblFAQ">
-          <Key>
-            <PropertyRef Name="FaqID" />
-            <PropertyRef Name="Question" />
-            <PropertyRef Name="Answer" />
-          </Key>
-          <Property Name="FaqID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Question" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
-          <Property Name="Answer" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="tblImage">
-          <Key>
-            <PropertyRef Name="ImageID" />
-          </Key>
-          <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ImageName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="ImageRaw" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblImages" ToRole="tblOrderDetails" />
-        </EntityType>
         <EntityType Name="tblOrder">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -338,22 +266,7 @@
           <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Request" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="tblUser" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblOrder" ToRole="tblUser" />
-          <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblOrder" FromRole="tblOrder" ToRole="tblOrderDetails" />
-        </EntityType>
-        <EntityType Name="tblOrderDetail">
-          <Key>
-            <PropertyRef Name="ImageID" />
-            <PropertyRef Name="OrderID" />
-            <PropertyRef Name="SizeID" />
-            <PropertyRef Name="Quantity" />
-          </Key>
-          <Property Name="ImageID" Type="Int32" Nullable="false" />
-          <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="SizeID" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblImage" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblImages" FromRole="tblOrderDetails" ToRole="tblImages" />
-          <NavigationProperty Name="tblOrder" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblOrder" FromRole="tblOrderDetails" ToRole="tblOrder" />
-          <NavigationProperty Name="tblSize" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblSize" FromRole="tblOrderDetails" ToRole="tblSize" />
+          <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetail_tblOrder" FromRole="tblOrder" ToRole="tblOrderDetail" />
         </EntityType>
         <EntityType Name="tblSize">
           <Key>
@@ -362,7 +275,7 @@
           <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Size" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
-          <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetails_tblSize" FromRole="tblSize" ToRole="tblOrderDetails" />
+          <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetail_tblSize" FromRole="tblSize" ToRole="tblOrderDetail" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -381,18 +294,6 @@
           <Property Name="Sex" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblOrders" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
         </EntityType>
-        <Association Name="FK_tblOrderDetails_tblImages">
-          <End Role="tblImages" Type="ProjectIIIModel.tblImage" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="ProjectIIIModel.tblOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblImages">
-              <PropertyRef Name="ImageID" />
-            </Principal>
-            <Dependent Role="tblOrderDetails">
-              <PropertyRef Name="ImageID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblOrder_tblUser">
           <End Role="tblUser" Type="ProjectIIIModel.tblUser" Multiplicity="1" />
           <End Role="tblOrder" Type="ProjectIIIModel.tblOrder" Multiplicity="*" />
@@ -405,31 +306,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblOrderDetails_tblOrder">
-          <End Role="tblOrder" Type="ProjectIIIModel.tblOrder" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="ProjectIIIModel.tblOrderDetail" Multiplicity="*" />
+        <EntityType Name="tblFAQ">
+          <Key>
+            <PropertyRef Name="FaqID" />
+          </Key>
+          <Property Type="Int32" Name="FaqID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Question" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Answer" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblOrderDetail">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="Int32" Name="SizeID" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="String" Name="ImageName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="ImageRaw" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tblOrder" Relationship="ProjectIIIModel.FK_tblOrderDetail_tblOrder" FromRole="tblOrderDetail" ToRole="tblOrder" />
+          <NavigationProperty Name="tblSize" Relationship="ProjectIIIModel.FK_tblOrderDetail_tblSize" FromRole="tblOrderDetail" ToRole="tblSize" />
+        </EntityType>
+        <Association Name="FK_tblOrderDetail_tblOrder">
+          <End Type="ProjectIIIModel.tblOrder" Role="tblOrder" Multiplicity="1" />
+          <End Type="ProjectIIIModel.tblOrderDetail" Role="tblOrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblOrder">
               <PropertyRef Name="OrderID" />
             </Principal>
-            <Dependent Role="tblOrderDetails">
+            <Dependent Role="tblOrderDetail">
               <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblOrderDetails_tblSize">
-          <End Role="tblSize" Type="ProjectIIIModel.tblSize" Multiplicity="1" />
-          <End Role="tblOrderDetails" Type="ProjectIIIModel.tblOrderDetail" Multiplicity="*" />
+        <Association Name="FK_tblOrderDetail_tblSize">
+          <End Type="ProjectIIIModel.tblSize" Role="tblSize" Multiplicity="1" />
+          <End Type="ProjectIIIModel.tblOrderDetail" Role="tblOrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblSize">
               <PropertyRef Name="SizeID" />
             </Principal>
-            <Dependent Role="tblOrderDetails">
+            <Dependent Role="tblOrderDetail">
               <PropertyRef Name="SizeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -487,24 +409,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblFAQs">
-            <EntityTypeMapping TypeName="ProjectIIIModel.tblFAQ">
-              <MappingFragment StoreEntitySet="tblFAQ">
-                <ScalarProperty Name="FaqID" ColumnName="FaqID" />
-                <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblImages">
-            <EntityTypeMapping TypeName="ProjectIIIModel.tblImage">
-              <MappingFragment StoreEntitySet="tblImages">
-                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
-                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
-                <ScalarProperty Name="ImageRaw" ColumnName="ImageRaw" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblOrders">
             <EntityTypeMapping TypeName="ProjectIIIModel.tblOrder">
               <MappingFragment StoreEntitySet="tblOrder">
@@ -521,16 +425,6 @@
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Request" ColumnName="Request" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblOrderDetails">
-            <EntityTypeMapping TypeName="ProjectIIIModel.tblOrderDetail">
-              <MappingFragment StoreEntitySet="tblOrderDetails">
-                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -560,6 +454,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblFAQs">
+            <EntityTypeMapping TypeName="ProjectIIIModel.tblFAQ">
+              <MappingFragment StoreEntitySet="tblFAQ">
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="FaqID" ColumnName="FaqID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrderDetails">
+            <EntityTypeMapping TypeName="ProjectIIIModel.tblOrderDetail">
+              <MappingFragment StoreEntitySet="tblOrderDetail">
+                <ScalarProperty Name="ImageRaw" ColumnName="ImageRaw" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -585,57 +499,31 @@
         <EntityTypeShape EntityType="ProjectIIIModel.tblAccountBank" Width="1.5" PointX="7.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
 
         <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblImage" Width="1.5" PointX="2.625" PointY="5.125" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.5186979166666656" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.25" PointY="1.625" Height="2.3648893229166665" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="8.5" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="2.9417936197916674" IsExpanded="true" />
 
         <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="3.1340950520833335" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblContact" Width="1.5" PointX="5.75" PointY="8.75" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblFAQ" Width="1.5" PointX="7.75" PointY="8.75" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblImage" Width="1.5" PointX="3" PointY="5.75" Height="1.7879850260416657" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.9033007812499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.25" PointY="1.75" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="9.375" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="3.3263964843750031" IsExpanded="true" />
-
-        <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblImages" ManuallyRouted="false">
-
-          <ConnectorPoint PointX="4.125" PointY="5.922841796875" />
-          <ConnectorPoint PointX="5.375" PointY="5.922841796875" />
-          <ConnectorPoint PointX="5.375" PointY="4.5" />
-          <ConnectorPoint PointX="5.447916666666667" PointY="4.4999999999999991" />
-          <ConnectorPoint PointX="5.614583333333333" PointY="4.5" />
-          <ConnectorPoint PointX="6.171877" PointY="4.5" />
-          <ConnectorPoint PointX="6.171877" PointY="3.9898893229166665" />
-
-          <ConnectorPoint PointX="4.5" PointY="5.75" />
-          <ConnectorPoint PointX="4.875" PointY="5.375" />
-          <ConnectorPoint PointX="4.875" PointY="2.9324446614583337" />
-          <ConnectorPoint PointX="5.25" PointY="2.9324446614583337" />
-
-        </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrder_tblUser" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="2.9131982421875016" />
-          <ConnectorPoint PointX="3" PointY="2.9131982421875016" />
+          <ConnectorPoint PointX="2.25" PointY="2.9131982421875" />
+          <ConnectorPoint PointX="3" PointY="2.9131982421875" />
         </AssociationConnector>
-        <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblOrder" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="2.2787223307291669" />
-          <ConnectorPoint PointX="5.25" PointY="2.2787223307291669" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblFAQ" Width="1.5" PointX="0.75" PointY="5.75" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.625" PointY="2.5" Height="2.3648893229166674" />
+        <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetail_tblOrder" >
+          <ConnectorPoint PointX="4.5" PointY="3.6824446614583337" />
+          <ConnectorPoint PointX="5.625" PointY="3.6824446614583337" />
         </AssociationConnector>
-        <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetails_tblSize" ManuallyRouted="false">
-
-          <ConnectorPoint PointX="4.5" PointY="9.4901432291666659" />
-          <ConnectorPoint PointX="5.53125" PointY="9.4901432291666659" />
-          <ConnectorPoint PointX="5.53125" PointY="3.9898893229166665" />
-
-          <ConnectorPoint PointX="4.5" PointY="10.9778857421875" />
-          <ConnectorPoint PointX="5.46875" PointY="10.9778857421875" />
-          <ConnectorPoint PointX="5.46875" PointY="4.1148893229166674" />
-
+        <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetail_tblSize" >
+          <ConnectorPoint PointX="4.5" PointY="8.59375" />
+          <ConnectorPoint PointX="5.65625" PointY="8.59375" />
+          <ConnectorPoint PointX="5.65625" PointY="4.8648893229166674" />
         </AssociationConnector>
-      </Diagram>
+        </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>

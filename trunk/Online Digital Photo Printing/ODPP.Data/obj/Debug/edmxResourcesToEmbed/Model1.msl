@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ProjectIIIModelStoreContainer" CdmEntityContainer="ProjectIIIEntities1">
+  <EntityContainerMapping StorageEntityContainer="ProjectIIIModelStoreContainer" CdmEntityContainer="ProjectIIIEntities2">
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="ProjectIIIModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -53,15 +53,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblImages">
-      <EntityTypeMapping TypeName="ProjectIIIModel.tblImage">
-        <MappingFragment StoreEntitySet="tblImages">
-          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
-          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
-          <ScalarProperty Name="ImageRaw" ColumnName="ImageRaw" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tblOrders">
       <EntityTypeMapping TypeName="ProjectIIIModel.tblOrder">
         <MappingFragment StoreEntitySet="tblOrder">
@@ -78,16 +69,6 @@
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Request" ColumnName="Request" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblOrderDetails">
-      <EntityTypeMapping TypeName="ProjectIIIModel.tblOrderDetail">
-        <MappingFragment StoreEntitySet="tblOrderDetails">
-          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
-          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-          <ScalarProperty Name="SizeID" ColumnName="SizeID" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -114,6 +95,26 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Sex" ColumnName="Sex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFAQs">
+      <EntityTypeMapping TypeName="ProjectIIIModel.tblFAQ">
+        <MappingFragment StoreEntitySet="tblFAQ">
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="FaqID" ColumnName="FaqID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOrderDetails">
+      <EntityTypeMapping TypeName="ProjectIIIModel.tblOrderDetail">
+        <MappingFragment StoreEntitySet="tblOrderDetail">
+          <ScalarProperty Name="ImageRaw" ColumnName="ImageRaw" />
+          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

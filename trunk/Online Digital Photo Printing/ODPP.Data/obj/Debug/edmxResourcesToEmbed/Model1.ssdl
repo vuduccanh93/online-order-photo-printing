@@ -5,33 +5,22 @@
     <EntitySet Name="tblAccountBank" EntityType="ProjectIIIModel.Store.tblAccountBank" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="tblAdmin" EntityType="ProjectIIIModel.Store.tblAdmin" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="tblContact" EntityType="ProjectIIIModel.Store.tblContact" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tblImages" EntityType="ProjectIIIModel.Store.tblImages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tblFAQ" EntityType="ProjectIIIModel.Store.tblFAQ" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="tblOrder" EntityType="ProjectIIIModel.Store.tblOrder" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.Store.tblOrderDetails" store:Type="Tables" store:Schema="dbo" store:Name="tblOrderDetails">
-      <DefiningQuery>SELECT 
-      [tblOrderDetails].[ImageID] AS [ImageID], 
-      [tblOrderDetails].[OrderID] AS [OrderID], 
-      [tblOrderDetails].[SizeID] AS [SizeID], 
-      [tblOrderDetails].[Quantity] AS [Quantity]
-      FROM [dbo].[tblOrderDetails] AS [tblOrderDetails]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="tblOrderDetail" EntityType="ProjectIIIModel.Store.tblOrderDetail" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="tblSize" EntityType="ProjectIIIModel.Store.tblSize" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="tblUser" EntityType="ProjectIIIModel.Store.tblUser" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_tblOrder_tblUser" Association="ProjectIIIModel.Store.FK_tblOrder_tblUser">
       <End Role="tblUser" EntitySet="tblUser" />
       <End Role="tblOrder" EntitySet="tblOrder" />
     </AssociationSet>
-    <AssociationSet Name="FK_tblOrderDetails_tblImages" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblImages">
-      <End Role="tblImages" EntitySet="tblImages" />
-      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tblOrderDetails_tblOrder" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblOrder">
+    <AssociationSet Name="FK_tblOrderDetail_tblOrder" Association="ProjectIIIModel.Store.FK_tblOrderDetail_tblOrder">
       <End Role="tblOrder" EntitySet="tblOrder" />
-      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+      <End Role="tblOrderDetail" EntitySet="tblOrderDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK_tblOrderDetails_tblSize" Association="ProjectIIIModel.Store.FK_tblOrderDetails_tblSize">
+    <AssociationSet Name="FK_tblOrderDetail_tblSize" Association="ProjectIIIModel.Store.FK_tblOrderDetail_tblSize">
       <End Role="tblSize" EntitySet="tblSize" />
-      <End Role="tblOrderDetails" EntitySet="tblOrderDetails" />
+      <End Role="tblOrderDetail" EntitySet="tblOrderDetail" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="sysdiagrams">
@@ -69,7 +58,7 @@
     <Property Name="Email" Type="varchar" Nullable="false" MaxLength="30" />
     <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
-    <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Photo" Type="varbinary(max)" />
     <Property Name="Sex" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="tblContact">
@@ -82,13 +71,13 @@
     <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
   </EntityType>
-  <EntityType Name="tblImages">
+  <EntityType Name="tblFAQ">
     <Key>
-      <PropertyRef Name="ImageID" />
+      <PropertyRef Name="FaqID" />
     </Key>
-    <Property Name="ImageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
-    <Property Name="ImageRaw" Type="varbinary(max)" Nullable="false" />
+    <Property Name="FaqID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Answer" Type="nvarchar" Nullable="false" MaxLength="30" />
   </EntityType>
   <EntityType Name="tblOrder">
     <Key>
@@ -108,20 +97,16 @@
     <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Request" Type="nvarchar" Nullable="false" MaxLength="100" />
   </EntityType>
-  <!--Errors Found During Generation:
-      warning 6002: The table/view 'ProjectIII.dbo.tblOrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
-  <EntityType Name="tblOrderDetails">
+  <EntityType Name="tblOrderDetail">
     <Key>
-      <PropertyRef Name="ImageID" />
       <PropertyRef Name="OrderID" />
       <PropertyRef Name="SizeID" />
-      <PropertyRef Name="Quantity" />
     </Key>
-    <Property Name="ImageID" Type="int" Nullable="false" />
     <Property Name="OrderID" Type="int" Nullable="false" />
     <Property Name="SizeID" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="ImageRaw" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="tblSize">
     <Key>
@@ -144,7 +129,7 @@
     <Property Name="Email" Type="varchar" Nullable="false" MaxLength="30" />
     <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
-    <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Photo" Type="varbinary(max)" />
     <Property Name="Sex" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_tblOrder_tblUser">
@@ -159,38 +144,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tblOrderDetails_tblImages">
-    <End Role="tblImages" Type="ProjectIIIModel.Store.tblImages" Multiplicity="1" />
-    <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tblImages">
-        <PropertyRef Name="ImageID" />
-      </Principal>
-      <Dependent Role="tblOrderDetails">
-        <PropertyRef Name="ImageID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tblOrderDetails_tblOrder">
+  <Association Name="FK_tblOrderDetail_tblOrder">
     <End Role="tblOrder" Type="ProjectIIIModel.Store.tblOrder" Multiplicity="1" />
-    <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
+    <End Role="tblOrderDetail" Type="ProjectIIIModel.Store.tblOrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblOrder">
         <PropertyRef Name="OrderID" />
       </Principal>
-      <Dependent Role="tblOrderDetails">
+      <Dependent Role="tblOrderDetail">
         <PropertyRef Name="OrderID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tblOrderDetails_tblSize">
+  <Association Name="FK_tblOrderDetail_tblSize">
     <End Role="tblSize" Type="ProjectIIIModel.Store.tblSize" Multiplicity="1" />
-    <End Role="tblOrderDetails" Type="ProjectIIIModel.Store.tblOrderDetails" Multiplicity="*" />
+    <End Role="tblOrderDetail" Type="ProjectIIIModel.Store.tblOrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tblSize">
         <PropertyRef Name="SizeID" />
       </Principal>
-      <Dependent Role="tblOrderDetails">
+      <Dependent Role="tblOrderDetail">
         <PropertyRef Name="SizeID" />
       </Dependent>
     </ReferentialConstraint>

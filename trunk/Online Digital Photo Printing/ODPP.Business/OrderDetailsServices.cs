@@ -18,5 +18,40 @@ namespace ODPP.Business
                 return lst;
             }
         }
+        public static bool OrdderDetail_Insert(tblOrderDetail data)
+        {
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            {
+                ett.tblOrderDetails.AddObject(data);
+                ett.SaveChanges();
+            }
+            return true;
+        }
+
+        public static bool OrderDetail_Update(tblOrderDetail data)
+        {
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            {
+                tblOrderDetail obj = ett.tblOrderDetails.FirstOrDefault(e => e.OrderID == data.OrderID);
+                obj.SizeID = data.SizeID;
+                obj.Quantity = data.Quantity;
+                obj.ImageName = data.ImageName;
+                obj.ImageRaw = data.ImageRaw;
+                
+                ett.SaveChanges();
+            }
+            return true;
+        }
+
+        public static bool OederDetail_Delete(int Id)
+        {
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            {
+                tblOrderDetail obj = ett.tblOrderDetails.FirstOrDefault(e => e.OrderID == Id);
+                ett.tblOrderDetails.DeleteObject(obj);
+                ett.SaveChanges();
+            }
+            return true;
+        }
     }
 }
