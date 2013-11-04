@@ -28,6 +28,31 @@ namespace ODPP.Business
                 return obj;
             }
         }
+        
+        public static tblUser User_GetByAccount (string username, string password)
+        {
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            {
+                tblUser obj = new tblUser();
+                obj = ett.tblUsers.FirstOrDefault(e => e.UserName == username && e.Password == password);
+                return obj;
+            }
+        }
+
+        
+        public static bool User_GetByAccount(string username)
+        {
+            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            {
+                tblUser obj = new tblUser();
+                obj = ett.tblUsers.FirstOrDefault(e => e.UserName == username);
+                if (obj != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
 
         public static bool User_Insert(tblUser data)
         {

@@ -8,6 +8,5 @@ E:\project Sem III\online-order-photo-printing\Online Digital Photo Printing\ODP
 C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.dll.config
 C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.dll
 C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.pdb
-C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.csprojResolveAssemblyReference.cache
 C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.dll
 C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.pdb
