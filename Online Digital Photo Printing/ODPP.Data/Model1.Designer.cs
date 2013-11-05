@@ -19,10 +19,9 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblImages", "tblImages", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ODPP.Data.tblImage), "tblOrderDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ODPP.Data.tblOrderDetail), true)]
 [assembly: EdmRelationshipAttribute("ProjectIIIModel", "FK_tblOrder_tblUser", "tblUser", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ODPP.Data.tblUser), "tblOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ODPP.Data.tblOrder), true)]
-[assembly: EdmRelationshipAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblOrder", "tblOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ODPP.Data.tblOrder), "tblOrderDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ODPP.Data.tblOrderDetail), true)]
-[assembly: EdmRelationshipAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblSize", "tblSize", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ODPP.Data.tblSize), "tblOrderDetails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ODPP.Data.tblOrderDetail), true)]
+[assembly: EdmRelationshipAttribute("ProjectIIIModel", "FK_tblOrderDetail_tblOrder", "tblOrder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ODPP.Data.tblOrder), "tblOrderDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ODPP.Data.tblOrderDetail), true)]
+[assembly: EdmRelationshipAttribute("ProjectIIIModel", "FK_tblOrderDetail_tblSize", "tblSize", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ODPP.Data.tblSize), "tblOrderDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ODPP.Data.tblOrderDetail), true)]
 
 #endregion
 
@@ -33,32 +32,32 @@ namespace ODPP.Data
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class ProjectIIIEntities1 : ObjectContext
+    public partial class ODPPEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new ProjectIIIEntities1 object using the connection string found in the 'ProjectIIIEntities1' section of the application configuration file.
+        /// Initializes a new ODPPEntities object using the connection string found in the 'ODPPEntities' section of the application configuration file.
         /// </summary>
-        public ProjectIIIEntities1() : base("name=ProjectIIIEntities1", "ProjectIIIEntities1")
+        public ODPPEntities() : base("name=ODPPEntities", "ODPPEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ProjectIIIEntities1 object.
+        /// Initialize a new ODPPEntities object.
         /// </summary>
-        public ProjectIIIEntities1(string connectionString) : base(connectionString, "ProjectIIIEntities1")
+        public ODPPEntities(string connectionString) : base(connectionString, "ODPPEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ProjectIIIEntities1 object.
+        /// Initialize a new ODPPEntities object.
         /// </summary>
-        public ProjectIIIEntities1(EntityConnection connection) : base(connection, "ProjectIIIEntities1")
+        public ODPPEntities(EntityConnection connection) : base(connection, "ODPPEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -141,22 +140,6 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<tblImage> tblImages
-        {
-            get
-            {
-                if ((_tblImages == null))
-                {
-                    _tblImages = base.CreateObjectSet<tblImage>("tblImages");
-                }
-                return _tblImages;
-            }
-        }
-        private ObjectSet<tblImage> _tblImages;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<tblOrder> tblOrders
         {
             get
@@ -169,22 +152,6 @@ namespace ODPP.Data
             }
         }
         private ObjectSet<tblOrder> _tblOrders;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<tblOrderDetail> tblOrderDetails
-        {
-            get
-            {
-                if ((_tblOrderDetails == null))
-                {
-                    _tblOrderDetails = base.CreateObjectSet<tblOrderDetail>("tblOrderDetails");
-                }
-                return _tblOrderDetails;
-            }
-        }
-        private ObjectSet<tblOrderDetail> _tblOrderDetails;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -217,6 +184,38 @@ namespace ODPP.Data
             }
         }
         private ObjectSet<tblUser> _tblUsers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tblFAQ> tblFAQs
+        {
+            get
+            {
+                if ((_tblFAQs == null))
+                {
+                    _tblFAQs = base.CreateObjectSet<tblFAQ>("tblFAQs");
+                }
+                return _tblFAQs;
+            }
+        }
+        private ObjectSet<tblFAQ> _tblFAQs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<tblOrderDetail> tblOrderDetails
+        {
+            get
+            {
+                if ((_tblOrderDetails == null))
+                {
+                    _tblOrderDetails = base.CreateObjectSet<tblOrderDetail>("tblOrderDetails");
+                }
+                return _tblOrderDetails;
+            }
+        }
+        private ObjectSet<tblOrderDetail> _tblOrderDetails;
 
         #endregion
 
@@ -255,27 +254,11 @@ namespace ODPP.Data
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the tblImages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotblImages(tblImage tblImage)
-        {
-            base.AddObject("tblImages", tblImage);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the tblOrders EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTotblOrders(tblOrder tblOrder)
         {
             base.AddObject("tblOrders", tblOrder);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the tblOrderDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotblOrderDetails(tblOrderDetail tblOrderDetail)
-        {
-            base.AddObject("tblOrderDetails", tblOrderDetail);
         }
     
         /// <summary>
@@ -292,6 +275,22 @@ namespace ODPP.Data
         public void AddTotblUsers(tblUser tblUser)
         {
             base.AddObject("tblUsers", tblUser);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tblFAQs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotblFAQs(tblFAQ tblFAQ)
+        {
+            base.AddObject("tblFAQs", tblFAQ);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tblOrderDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotblOrderDetails(tblOrderDetail tblOrderDetail)
+        {
+            base.AddObject("tblOrderDetails", tblOrderDetail);
         }
 
         #endregion
@@ -694,9 +693,8 @@ namespace ODPP.Data
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="userName">Initial value of the UserName property.</param>
         /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="photo">Initial value of the Photo property.</param>
         /// <param name="sex">Initial value of the Sex property.</param>
-        public static tblAdmin CreatetblAdmin(global::System.Int32 adminID, global::System.String adminRole, global::System.String firstName, global::System.String lastName, global::System.DateTime dateOfBirth, global::System.String phone, global::System.String email, global::System.String userName, global::System.String password, global::System.Byte[] photo, global::System.Boolean sex)
+        public static tblAdmin CreatetblAdmin(global::System.Int32 adminID, global::System.String adminRole, global::System.String firstName, global::System.String lastName, global::System.DateTime dateOfBirth, global::System.String phone, global::System.String email, global::System.String userName, global::System.String password, global::System.Boolean sex)
         {
             tblAdmin tblAdmin = new tblAdmin();
             tblAdmin.AdminID = adminID;
@@ -708,7 +706,6 @@ namespace ODPP.Data
             tblAdmin.Email = email;
             tblAdmin.UserName = userName;
             tblAdmin.Password = password;
-            tblAdmin.Photo = photo;
             tblAdmin.Sex = sex;
             return tblAdmin;
         }
@@ -939,7 +936,7 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.Byte[] Photo
         {
@@ -951,7 +948,7 @@ namespace ODPP.Data
             {
                 OnPhotoChanging(value);
                 ReportPropertyChanging("Photo");
-                _Photo = StructuralObject.SetValidValue(value, false);
+                _Photo = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Photo");
                 OnPhotoChanged();
             }
@@ -1153,26 +1150,26 @@ namespace ODPP.Data
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectIIIModel", Name="tblImage")]
+    [EdmEntityTypeAttribute(NamespaceName="ProjectIIIModel", Name="tblFAQ")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class tblImage : EntityObject
+    public partial class tblFAQ : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new tblImage object.
+        /// Create a new tblFAQ object.
         /// </summary>
-        /// <param name="imageID">Initial value of the ImageID property.</param>
-        /// <param name="imageName">Initial value of the ImageName property.</param>
-        /// <param name="imageRaw">Initial value of the ImageRaw property.</param>
-        public static tblImage CreatetblImage(global::System.Int32 imageID, global::System.String imageName, global::System.Byte[] imageRaw)
+        /// <param name="faqID">Initial value of the FaqID property.</param>
+        /// <param name="question">Initial value of the Question property.</param>
+        /// <param name="answer">Initial value of the Answer property.</param>
+        public static tblFAQ CreatetblFAQ(global::System.Int32 faqID, global::System.String question, global::System.String answer)
         {
-            tblImage tblImage = new tblImage();
-            tblImage.ImageID = imageID;
-            tblImage.ImageName = imageName;
-            tblImage.ImageRaw = imageRaw;
-            return tblImage;
+            tblFAQ tblFAQ = new tblFAQ();
+            tblFAQ.FaqID = faqID;
+            tblFAQ.Question = question;
+            tblFAQ.Answer = answer;
+            return tblFAQ;
         }
 
         #endregion
@@ -1184,105 +1181,79 @@ namespace ODPP.Data
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 ImageID
+        public global::System.Int32 FaqID
         {
             get
             {
-                return _ImageID;
+                return _FaqID;
             }
             set
             {
-                if (_ImageID != value)
+                if (_FaqID != value)
                 {
-                    OnImageIDChanging(value);
-                    ReportPropertyChanging("ImageID");
-                    _ImageID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ImageID");
-                    OnImageIDChanged();
+                    OnFaqIDChanging(value);
+                    ReportPropertyChanging("FaqID");
+                    _FaqID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("FaqID");
+                    OnFaqIDChanged();
                 }
             }
         }
-        private global::System.Int32 _ImageID;
-        partial void OnImageIDChanging(global::System.Int32 value);
-        partial void OnImageIDChanged();
+        private global::System.Int32 _FaqID;
+        partial void OnFaqIDChanging(global::System.Int32 value);
+        partial void OnFaqIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String ImageName
+        public global::System.String Question
         {
             get
             {
-                return _ImageName;
+                return _Question;
             }
             set
             {
-                OnImageNameChanging(value);
-                ReportPropertyChanging("ImageName");
-                _ImageName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ImageName");
-                OnImageNameChanged();
+                OnQuestionChanging(value);
+                ReportPropertyChanging("Question");
+                _Question = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Question");
+                OnQuestionChanged();
             }
         }
-        private global::System.String _ImageName;
-        partial void OnImageNameChanging(global::System.String value);
-        partial void OnImageNameChanged();
+        private global::System.String _Question;
+        partial void OnQuestionChanging(global::System.String value);
+        partial void OnQuestionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte[] ImageRaw
+        public global::System.String Answer
         {
             get
             {
-                return StructuralObject.GetValidValue(_ImageRaw);
+                return _Answer;
             }
             set
             {
-                OnImageRawChanging(value);
-                ReportPropertyChanging("ImageRaw");
-                _ImageRaw = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ImageRaw");
-                OnImageRawChanged();
+                OnAnswerChanging(value);
+                ReportPropertyChanging("Answer");
+                _Answer = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Answer");
+                OnAnswerChanged();
             }
         }
-        private global::System.Byte[] _ImageRaw;
-        partial void OnImageRawChanging(global::System.Byte[] value);
-        partial void OnImageRawChanged();
+        private global::System.String _Answer;
+        partial void OnAnswerChanging(global::System.String value);
+        partial void OnAnswerChanged();
 
         #endregion
 
     
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblImages", "tblOrderDetails")]
-        public EntityCollection<tblOrderDetail> tblOrderDetails
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetails_tblImages", "tblOrderDetails");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetails_tblImages", "tblOrderDetails", value);
-                }
-            }
-        }
-
-        #endregion
-
     }
     
     /// <summary>
@@ -1696,18 +1667,18 @@ namespace ODPP.Data
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblOrder", "tblOrderDetails")]
+        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetail_tblOrder", "tblOrderDetail")]
         public EntityCollection<tblOrderDetail> tblOrderDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetails_tblOrder", "tblOrderDetails");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetail_tblOrder", "tblOrderDetail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetails_tblOrder", "tblOrderDetails", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetail_tblOrder", "tblOrderDetail", value);
                 }
             }
         }
@@ -1729,50 +1700,23 @@ namespace ODPP.Data
         /// <summary>
         /// Create a new tblOrderDetail object.
         /// </summary>
-        /// <param name="imageID">Initial value of the ImageID property.</param>
         /// <param name="orderID">Initial value of the OrderID property.</param>
         /// <param name="sizeID">Initial value of the SizeID property.</param>
         /// <param name="quantity">Initial value of the Quantity property.</param>
-        public static tblOrderDetail CreatetblOrderDetail(global::System.Int32 imageID, global::System.Int32 orderID, global::System.Int32 sizeID, global::System.Int32 quantity)
+        /// <param name="imageName">Initial value of the ImageName property.</param>
+        public static tblOrderDetail CreatetblOrderDetail(global::System.Int32 orderID, global::System.Int32 sizeID, global::System.Int32 quantity, global::System.String imageName)
         {
             tblOrderDetail tblOrderDetail = new tblOrderDetail();
-            tblOrderDetail.ImageID = imageID;
             tblOrderDetail.OrderID = orderID;
             tblOrderDetail.SizeID = sizeID;
             tblOrderDetail.Quantity = quantity;
+            tblOrderDetail.ImageName = imageName;
             return tblOrderDetail;
         }
 
         #endregion
 
         #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ImageID
-        {
-            get
-            {
-                return _ImageID;
-            }
-            set
-            {
-                if (_ImageID != value)
-                {
-                    OnImageIDChanging(value);
-                    ReportPropertyChanging("ImageID");
-                    _ImageID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ImageID");
-                    OnImageIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ImageID;
-        partial void OnImageIDChanging(global::System.Int32 value);
-        partial void OnImageIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1831,7 +1775,7 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 Quantity
         {
@@ -1841,19 +1785,64 @@ namespace ODPP.Data
             }
             set
             {
-                if (_Quantity != value)
-                {
-                    OnQuantityChanging(value);
-                    ReportPropertyChanging("Quantity");
-                    _Quantity = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Quantity");
-                    OnQuantityChanged();
-                }
+                OnQuantityChanging(value);
+                ReportPropertyChanging("Quantity");
+                _Quantity = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Quantity");
+                OnQuantityChanged();
             }
         }
         private global::System.Int32 _Quantity;
         partial void OnQuantityChanging(global::System.Int32 value);
         partial void OnQuantityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ImageName
+        {
+            get
+            {
+                return _ImageName;
+            }
+            set
+            {
+                OnImageNameChanging(value);
+                ReportPropertyChanging("ImageName");
+                _ImageName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ImageName");
+                OnImageNameChanged();
+            }
+        }
+        private global::System.String _ImageName;
+        partial void OnImageNameChanging(global::System.String value);
+        partial void OnImageNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] ImageRaw
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_ImageRaw);
+            }
+            set
+            {
+                OnImageRawChanging(value);
+                ReportPropertyChanging("ImageRaw");
+                _ImageRaw = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ImageRaw");
+                OnImageRawChanged();
+            }
+        }
+        private global::System.Byte[] _ImageRaw;
+        partial void OnImageRawChanging(global::System.Byte[] value);
+        partial void OnImageRawChanged();
 
         #endregion
 
@@ -1866,54 +1855,16 @@ namespace ODPP.Data
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblImages", "tblImages")]
-        public tblImage tblImage
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblImage>("ProjectIIIModel.FK_tblOrderDetails_tblImages", "tblImages").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblImage>("ProjectIIIModel.FK_tblOrderDetails_tblImages", "tblImages").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<tblImage> tblImageReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblImage>("ProjectIIIModel.FK_tblOrderDetails_tblImages", "tblImages");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tblImage>("ProjectIIIModel.FK_tblOrderDetails_tblImages", "tblImages", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblOrder", "tblOrder")]
+        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetail_tblOrder", "tblOrder")]
         public tblOrder tblOrder
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblOrder>("ProjectIIIModel.FK_tblOrderDetails_tblOrder", "tblOrder").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblOrder>("ProjectIIIModel.FK_tblOrderDetail_tblOrder", "tblOrder").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblOrder>("ProjectIIIModel.FK_tblOrderDetails_tblOrder", "tblOrder").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblOrder>("ProjectIIIModel.FK_tblOrderDetail_tblOrder", "tblOrder").Value = value;
             }
         }
         /// <summary>
@@ -1925,13 +1876,13 @@ namespace ODPP.Data
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblOrder>("ProjectIIIModel.FK_tblOrderDetails_tblOrder", "tblOrder");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblOrder>("ProjectIIIModel.FK_tblOrderDetail_tblOrder", "tblOrder");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tblOrder>("ProjectIIIModel.FK_tblOrderDetails_tblOrder", "tblOrder", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tblOrder>("ProjectIIIModel.FK_tblOrderDetail_tblOrder", "tblOrder", value);
                 }
             }
         }
@@ -1942,16 +1893,16 @@ namespace ODPP.Data
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblSize", "tblSize")]
+        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetail_tblSize", "tblSize")]
         public tblSize tblSize
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblSize>("ProjectIIIModel.FK_tblOrderDetails_tblSize", "tblSize").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblSize>("ProjectIIIModel.FK_tblOrderDetail_tblSize", "tblSize").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblSize>("ProjectIIIModel.FK_tblOrderDetails_tblSize", "tblSize").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblSize>("ProjectIIIModel.FK_tblOrderDetail_tblSize", "tblSize").Value = value;
             }
         }
         /// <summary>
@@ -1963,13 +1914,13 @@ namespace ODPP.Data
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblSize>("ProjectIIIModel.FK_tblOrderDetails_tblSize", "tblSize");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblSize>("ProjectIIIModel.FK_tblOrderDetail_tblSize", "tblSize");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tblSize>("ProjectIIIModel.FK_tblOrderDetails_tblSize", "tblSize", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tblSize>("ProjectIIIModel.FK_tblOrderDetail_tblSize", "tblSize", value);
                 }
             }
         }
@@ -2093,18 +2044,18 @@ namespace ODPP.Data
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetails_tblSize", "tblOrderDetails")]
+        [EdmRelationshipNavigationPropertyAttribute("ProjectIIIModel", "FK_tblOrderDetail_tblSize", "tblOrderDetail")]
         public EntityCollection<tblOrderDetail> tblOrderDetails
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetails_tblSize", "tblOrderDetails");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetail_tblSize", "tblOrderDetail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetails_tblSize", "tblOrderDetails", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<tblOrderDetail>("ProjectIIIModel.FK_tblOrderDetail_tblSize", "tblOrderDetail", value);
                 }
             }
         }
@@ -2135,9 +2086,8 @@ namespace ODPP.Data
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="userName">Initial value of the UserName property.</param>
         /// <param name="password">Initial value of the Password property.</param>
-        /// <param name="photo">Initial value of the Photo property.</param>
         /// <param name="sex">Initial value of the Sex property.</param>
-        public static tblUser CreatetblUser(global::System.Int32 userID, global::System.String firstName, global::System.String lastName, global::System.DateTime dateOfBirth, global::System.String address, global::System.String phone, global::System.String email, global::System.String userName, global::System.String password, global::System.Byte[] photo, global::System.Boolean sex)
+        public static tblUser CreatetblUser(global::System.Int32 userID, global::System.String firstName, global::System.String lastName, global::System.DateTime dateOfBirth, global::System.String address, global::System.String phone, global::System.String email, global::System.String userName, global::System.String password, global::System.Boolean sex)
         {
             tblUser tblUser = new tblUser();
             tblUser.UserID = userID;
@@ -2149,7 +2099,6 @@ namespace ODPP.Data
             tblUser.Email = email;
             tblUser.UserName = userName;
             tblUser.Password = password;
-            tblUser.Photo = photo;
             tblUser.Sex = sex;
             return tblUser;
         }
@@ -2380,7 +2329,7 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.Byte[] Photo
         {
@@ -2392,7 +2341,7 @@ namespace ODPP.Data
             {
                 OnPhotoChanging(value);
                 ReportPropertyChanging("Photo");
-                _Photo = StructuralObject.SetValidValue(value, false);
+                _Photo = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Photo");
                 OnPhotoChanged();
             }

@@ -12,7 +12,7 @@ namespace ODPP.Business
     {
         public static List<tblSize> Size_GetByAll()
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 List<tblSize> lst = new List<tblSize>();
                 lst = ett.tblSizes.ToList();
@@ -22,7 +22,7 @@ namespace ODPP.Business
 
         public static tblSize Size_GetById(int Id)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblSize obj = new tblSize();
                 obj = ett.tblSizes.FirstOrDefault(e => e.SizeID == Id);
@@ -32,7 +32,7 @@ namespace ODPP.Business
 
         public static bool Size_Insert(tblSize data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 ett.tblSizes.AddObject(data);
                 ett.SaveChanges();
@@ -42,7 +42,7 @@ namespace ODPP.Business
 
         public static bool Size_Update(tblSize data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblSize obj = ett.tblSizes.FirstOrDefault(e => e.SizeID == data.SizeID);
                 obj.SizeID = data.SizeID;
@@ -55,7 +55,7 @@ namespace ODPP.Business
 
         public static bool Size_Delete(int Id)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblSize obj = ett.tblSizes.FirstOrDefault(e => e.SizeID == Id);
                 ett.tblSizes.DeleteObject(obj);

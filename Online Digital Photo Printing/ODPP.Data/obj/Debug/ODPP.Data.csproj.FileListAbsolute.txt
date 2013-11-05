@@ -1,7 +1,3 @@
-E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.dll
-E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.pdb
-E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.dll
-E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.pdb
 E:\project Sem III\online-order-photo-printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.csprojResolveAssemblyReference.cache
 E:\project Sem III\online-order-photo-printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.dll
 E:\project Sem III\online-order-photo-printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.pdb
@@ -10,3 +6,8 @@ C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\bin\D
 C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.pdb
 C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.dll
 C:\Users\Nguyen\Desktop\New folder\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.pdb
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.dll.config
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.dll
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\bin\Debug\ODPP.Data.pdb
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.dll
+E:\Project sem 3\Online Order Photo Printing\Online Digital Photo Printing\ODPP.Data\obj\Debug\ODPP.Data.pdb

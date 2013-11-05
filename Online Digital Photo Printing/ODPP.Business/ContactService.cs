@@ -11,7 +11,7 @@ namespace ODPP.Business
     {
         public static List<tblContact> Contact_GetByAll()
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 List<tblContact> lst = new List<tblContact>();
                 lst = ett.tblContacts.ToList();
@@ -21,7 +21,7 @@ namespace ODPP.Business
 
         public static tblContact Contact_GetById(int Cart)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblContact obj = new tblContact();
                 obj = ett.tblContacts.FirstOrDefault(e => e.ContactID == Cart);
@@ -31,7 +31,7 @@ namespace ODPP.Business
 
         public static bool Contact_Insert(tblContact data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 ett.tblContacts.AddObject(data);
                 ett.SaveChanges();
@@ -41,7 +41,7 @@ namespace ODPP.Business
 
         public static bool Contact_Update(tblContact data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblContact obj = ett.tblContacts.FirstOrDefault(e => e.ContactID == data.ContactID);
                 obj.Name = data.Name;
@@ -55,7 +55,7 @@ namespace ODPP.Business
 
         public static bool Contact_Delete(int Id)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblContact obj = ett.tblContacts.FirstOrDefault(e => e.ContactID == Id);
                 ett.tblContacts.DeleteObject(obj);

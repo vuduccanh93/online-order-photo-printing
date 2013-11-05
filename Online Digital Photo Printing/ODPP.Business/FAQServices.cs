@@ -11,7 +11,7 @@ namespace ODPP.Business
     {
         public static List<tblFAQ> FAQ_GetByAll()
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 List<tblFAQ> lst = new List<tblFAQ>();
                 lst = ett.tblFAQs.ToList();
@@ -21,7 +21,7 @@ namespace ODPP.Business
 
         public static tblFAQ FAQ_GetById(int Id)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblFAQ obj = new tblFAQ();
                 obj = ett.tblFAQs.FirstOrDefault(e => e.FaqID == Id);
@@ -31,7 +31,7 @@ namespace ODPP.Business
 
         public static bool FAQ_Insert(tblFAQ data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 ett.tblFAQs.AddObject(data);
                 ett.SaveChanges();
@@ -41,7 +41,7 @@ namespace ODPP.Business
 
         public static bool User_Update(tblFAQ data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblFAQ obj = ett.tblFAQs.FirstOrDefault(e => e.FaqID == data.FaqID);
                 obj.FaqID = data.FaqID;
@@ -55,7 +55,7 @@ namespace ODPP.Business
 
         public static bool FAQ_Delete(int Id)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblFAQ obj = ett.tblFAQs.FirstOrDefault(e => e.FaqID == Id);
                 ett.tblFAQs.DeleteObject(obj);
