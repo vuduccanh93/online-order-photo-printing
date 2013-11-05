@@ -11,7 +11,7 @@ namespace ODPP.Business
     {
         public static List<tblOrderDetail> OrderDetail_GetByAll()
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 List<tblOrderDetail> lst = new List<tblOrderDetail>();
                 lst = ett.tblOrderDetails.ToList();
@@ -20,7 +20,7 @@ namespace ODPP.Business
         }
         public static bool OrdderDetail_Insert(tblOrderDetail data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 ett.tblOrderDetails.AddObject(data);
                 ett.SaveChanges();
@@ -30,7 +30,7 @@ namespace ODPP.Business
 
         public static bool OrderDetail_Update(tblOrderDetail data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblOrderDetail obj = ett.tblOrderDetails.FirstOrDefault(e => e.OrderID == data.OrderID);
                 obj.SizeID = data.SizeID;
@@ -45,7 +45,7 @@ namespace ODPP.Business
 
         public static bool OederDetail_Delete(int Id)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblOrderDetail obj = ett.tblOrderDetails.FirstOrDefault(e => e.OrderID == Id);
                 ett.tblOrderDetails.DeleteObject(obj);

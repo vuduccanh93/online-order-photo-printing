@@ -177,7 +177,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectIIIModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="ProjectIIIEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ODPPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="ProjectIIIModel.sysdiagram" />
           <EntitySet Name="tblAccountBanks" EntityType="ProjectIIIModel.tblAccountBank" />
           <EntitySet Name="tblAdmins" EntityType="ProjectIIIModel.tblAdmin" />
@@ -356,7 +356,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProjectIIIModelStoreContainer" CdmEntityContainer="ProjectIIIEntities2">
+        <EntityContainerMapping StorageEntityContainer="ProjectIIIModelStoreContainer" CdmEntityContainer="ODPPEntities">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ProjectIIIModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -494,7 +494,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Model1">
+      <Diagram Name="Model1" ZoomLevel="81">
         <EntityTypeShape EntityType="ProjectIIIModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectIIIModel.tblAccountBank" Width="1.5" PointX="7.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
 

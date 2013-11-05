@@ -12,7 +12,7 @@ namespace ODPP.Business
     {
         public static List<tblAdmin> Admin_GetByAll()
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 List<tblAdmin> lst = new List<tblAdmin>();
                 lst = ett.tblAdmins.ToList();
@@ -22,7 +22,7 @@ namespace ODPP.Business
 
         public static tblAdmin Admin_GetById(int Id)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblAdmin obj = new tblAdmin();
                 obj = ett.tblAdmins.FirstOrDefault(e => e.AdminID == Id);
@@ -32,7 +32,7 @@ namespace ODPP.Business
 
         public static bool Admin_Insert(tblAdmin data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 ett.tblAdmins.AddObject(data);
                 ett.SaveChanges();
@@ -42,7 +42,7 @@ namespace ODPP.Business
 
         public static bool Admin_Update(tblAdmin data)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblAdmin obj = ett.tblAdmins.FirstOrDefault(e => e.AdminID == data.AdminID);
 
@@ -65,7 +65,7 @@ namespace ODPP.Business
 
         public static bool Admin_Delete(int Id)
         {
-            using (ProjectIIIEntities2 ett = new ProjectIIIEntities2())
+            using (ODPPEntities ett = new ODPPEntities())
             {
                 tblAdmin obj = ett.tblAdmins.FirstOrDefault(e => e.AdminID == Id);
                 ett.tblAdmins.DeleteObject(obj);
