@@ -29,8 +29,19 @@ namespace ODPP.Business
                 return obj;
             }
         }
-        
-        public static tblUser User_GetByAccount (string username, string password)
+
+        public static void User_ChangeAccount(string username, string password)
+        {
+            using (ODPPEntities ett = new ODPPEntities())
+            {
+                tblUser obj = new tblUser();
+                obj = ett.tblUsers.FirstOrDefault(e => e.UserName == username);
+                obj.Password = password;
+                ett.SaveChanges();
+            }
+        }
+
+        public static tblUser User_GetByAccount(string username, string password)
         {
             using (ODPPEntities ett = new ODPPEntities())
             {
@@ -40,7 +51,7 @@ namespace ODPP.Business
             }
         }
 
-        
+
         public static bool User_GetByAccount(string username)
         {
             using (ODPPEntities ett = new ODPPEntities())
@@ -57,7 +68,7 @@ namespace ODPP.Business
 
         public static bool User_Insert(tblUser data)
         {
-    
+
             using (ODPPEntities ett = new ODPPEntities())
             {
                 ett.tblUsers.AddObject(data);
@@ -77,11 +88,8 @@ namespace ODPP.Business
                 obj.Address = data.Address;
                 obj.Phone = data.Phone;
                 obj.Email = data.Email;
-                obj.UserName = data.UserName;
-                obj.Password = data.Password;
-                obj.Photo = data.Photo;
                 obj.Sex = data.Sex;
-
+                obj.Photo = data.Photo;
                 ett.SaveChanges();
             }
             return true;
