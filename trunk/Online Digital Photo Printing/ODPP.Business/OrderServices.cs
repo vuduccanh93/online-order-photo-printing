@@ -29,14 +29,24 @@ namespace ODPP.Business
             }
         }
 
-        public static bool Ordder_Insert(tblOrder data)
+        public static int Order_Insert(tblOrder data)
         {
             using (ODPPEntities ett = new ODPPEntities())
             {
                 ett.tblOrders.AddObject(data);
                 ett.SaveChanges();
             }
-            return true;
+            return data.OrderID;
+        }
+
+        public static void Order_UpdateDirectoryName(int id, string folderName)
+        {
+            using (ODPPEntities ett = new ODPPEntities())
+            {
+                tblOrder obj = ett.tblOrders.FirstOrDefault(e => e.OrderID == id);
+                obj.DirectoryName = folderName;
+                ett.SaveChanges();
+            }
         }
 
         public static bool Order_Update(tblOrder data)
@@ -51,7 +61,6 @@ namespace ODPP.Business
                 obj.Status = data.Status;
                 obj.DirectoryName = data.DirectoryName;
                 obj.Paytype = data.Paytype;
-                obj.CreditCard = data.CreditCard;
                 obj.Receiver = data.Receiver;
                 obj.Phone = data.Phone;
 
