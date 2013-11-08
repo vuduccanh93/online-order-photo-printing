@@ -22,13 +22,40 @@ namespace ODPP.Client.Webs {
         protected global::ODPP.Client.Webs.header header1;
         
         /// <summary>
-        /// upload control.
+        /// pnlOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ODPP.Client.upload.upload upload;
+        protected global::System.Web.UI.WebControls.Panel pnlOrder;
+        
+        /// <summary>
+        /// upload1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPP.Client.upload.upload upload1;
+        
+        /// <summary>
+        /// pnlUnOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlUnOrder;
+        
+        /// <summary>
+        /// edit1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPP.Client.user_controls.edit edit1;
         
         /// <summary>
         /// footer1 control.

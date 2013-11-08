@@ -1,0 +1,19 @@
+﻿.margin-r10{margin-right:10px;}
+input[type="text"],input[type="password"], input[type="file"],input[type="email"], textarea, .uneditable-input {
+    width: 242px;
+}
+ #logo
+ {  background: url(../images/logo.png) 0px -11px no-repeat;
+display: block;
+float: left;
+     }
+.form-horizontal .control-label {
+float: left;
+width: 160px;
+padding-top: 5px;
+text-align: right;
+}
+.p_top5{padding-top:5px}
+.w_auto{width:auto}
+.none{display:none}
+.show{display:block}

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ODPP.Data;
+using ODPP.Business;
 
 namespace ODPP.Client.upload
 {
@@ -11,7 +13,8 @@ namespace ODPP.Client.upload
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            rptPricing.DataSource = SizeServices.Size_GetByAll();
+            rptPricing.DataBind();
         }
     }
 }
