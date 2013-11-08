@@ -22,13 +22,13 @@ namespace ODPP.Client {
         protected global::ODPP.Client.Webs.header header1;
         
         /// <summary>
-        /// form1 control.
+        /// slider1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::ODPP.Client.user_controls.slider slider1;
         
         /// <summary>
         /// footer1 control.
