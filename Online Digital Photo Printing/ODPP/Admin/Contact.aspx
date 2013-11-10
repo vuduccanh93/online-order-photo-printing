@@ -3,9 +3,10 @@
 <h3><i class="fa fa-globe"></i>Contact Account Manager</h3>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <form id="Form1" runat="server">
-    
-    <div class="row">
+  <form  id="popup-validation" class="form-horizontal"> 
+    <form id="Form1" runat="server" class="form-horizontal">
+    <asp:Panel ID="pnlshow" runat="server">
+      <div class="row">
     <div class="col-lg-12">
         <div class="box">
              <header>
@@ -33,14 +34,9 @@
             <div class="btn-group">
                 
                 
-                <a  data-toggle="tooltip" class="btn btn-default btn-sm" runat="server" onserverclick="btndel_click" id="btndel">
-                    <i class="glyphicon glyphicon-remove"></i>
-                    Delete
-                </a>
-                <a  data-toggle="tooltip" runat="server" onserverclick="btnref_click" id="btnref" class="btn btn-default btn-sm">
-                    <i class="glyphicon glyphicon-refresh"></i>
-                    Refresh
-                </a>
+                <asp:Button ID="btnAdd" CssClass="btn btn-default btn-sm" OnClick="btnadd_click" runat="server" Text="Add" />   
+                <asp:Button ID="btnDel" CssClass="btn btn-default btn-sm" OnClick="btndel_click" runat="server" Text="Delete" />
+                <asp:Button ID="btnRef" CssClass="btn btn-default btn-sm" OnClick="btnref_click" runat="server" Text="Refresh"/>
                 <a id="vbak" href="javascript:void(0);" onclick="window.history.go(-1);"  data-toggle="tooltip" class="btn btn-default btn-sm">
                     <i class="fa fa-undo"></i>
                     Back
@@ -63,7 +59,8 @@
 <tbody>
 
 
-            <asp:Repeater ID="rpContact" runat="server">
+            <asp:Repeater ID="rpContact" runat="server" 
+                onitemcommand="rpContact_ItemCommand">
                 <ItemTemplate>
                     <tr>
                         <td><asp:CheckBox ID="chkSelect" runat="server" /></td>
@@ -79,7 +76,7 @@
                     AlternateText="Sửa" 
                     CommandArgument='<%#DataBinder.Eval(Container.DataItem,"ContactID")%>' 
                     CommandName="Edit" CssClass="Edit" ImageUrl="assets/img/edit.png" 
-                    ToolTip="Sửa" />
+                    ToolTip="Sửa"  />
                         <asp:ImageButton ID="cmdDelete" runat="server" 
                     AlternateText="Xóa" 
                     CommandArgument='<%#DataBinder.Eval(Container.DataItem,"ContactID")%>' 
@@ -100,8 +97,11 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-    </form>
+    </asp:Panel>
+  
+   
     <%--end data grid--%>
+    <asp:Panel ID="pnlupdate" runat="server" Visible="false">
     <div class="row">
     <div class="col-lg-12">
         <div class="box">
@@ -124,12 +124,22 @@
 
             </header>
             <div id="collapse2" class="body collapse in">
-              <form class="form-horizontal" id="popup-validation">
-
+                <div class="btn-toolbar mg-b10 ">
+                        <div class="btn-group">
+                
+                
+                            <a id="A4" href="javascript:void(0);" onclick="window.history.go(-1);"  data-toggle="tooltip" class="btn btn-default btn-sm">
+                                <i class="fa fa-undo"></i>
+                                Back
+                            </a>
+                        </div>
+                        </div>
+              <form class="form-horizontal">
+                    
                     <div class="row">
                         
                         <div class="col-lg-9 pd-20">
-                        
+                          <input placeholder="txtID" runat="server" visible="false" type="text" class="validate[required,minSize{5}] form-control" name="txtID" id="txtID">
                        <div class="form-group">
                         <label class="control-label col-lg-4" for="txtName">Name</label>
                         <div class="col-lg-4">
@@ -139,11 +149,11 @@
                  
                      
                     <div class="form-group">
-                        <label class="control-label col-lg-4">E-mail</label>
+                        <label class="control-label col-lg-4" for="txtemail">E-mail</label>
 
                         <div class=" col-lg-4">
-                            <input placeholder="E-mail" class="validate[required,custom[email]] form-control" type="text" name="email1"
-                                   id="email1"/>
+                            <input placeholder="E-mail" runat="server" class="validate[required,custom[email]] form-control" type="text" name="txtemail"
+                                   id="txtemail"/>
                         </div>
                     </div>
 
@@ -171,9 +181,8 @@
                     
                     <div class="form-actions no-margin-bottom">
                         <label class="control-label col-lg-5"></label>
-                        <button type="submit" value="Save"  id="btnSave" onclick="btnSave_click" class="btn btn-default"><i class=" fa fa-save"></i>Save</button>
-                        
-                         <button type="reset" value="Clear"  id="btnClear" onclick="btnClear_Click" class="btn btn-default"><i class=" fa fa-cut">Clear</i></button>
+                         <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_click"  CssClass="btn btn-default"/>
+                        <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_click" CssClass="btn btn-default" />
                 
                     </div>
                                                 
@@ -190,5 +199,9 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+    </asp:Panel>
+    
+ </form>
+ </form>
 <!-- /.row -->
 </asp:Content>
