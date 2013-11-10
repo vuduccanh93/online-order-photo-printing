@@ -3,8 +3,9 @@
 <h3><i class=" fa fa-usd"></i>Banks Account Manager</h3>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <form id="Form1" runat="server">
-    
+   <form  id="popup-validation" class="form-horizontal">
+    <form runat="server" >
+    <asp:Panel ID="pnlshow" runat="server">
     <div class="row">
     <div class="col-lg-12">
         <div class="box">
@@ -32,54 +33,41 @@
                 <div class="btn-toolbar mg-b10 ">
             <div class="btn-group">
                 
-                
-                <a  data-toggle="tooltip" class="btn btn-default btn-sm" runat="server" onserverclick="btndel_click" id="btndel">
-                    <i class="glyphicon glyphicon-remove"></i>
-                    Delete
-                </a>
-                <a  data-toggle="tooltip" runat="server" onserverclick="btnref_click" id="btnref" class="btn btn-default btn-sm">
-                    <i class="glyphicon glyphicon-refresh"></i>
-                    Refresh
-                </a>
+                <asp:Button ID="btnAdd" CssClass="btn btn-default btn-sm" OnClick="btnadd_click" runat="server" Text="Add" />   
+                <asp:Button ID="btnDel" CssClass="btn btn-default btn-sm" OnClick="btndel_click" runat="server" Text="Delete" />
+                <asp:Button ID="btnRef" CssClass="btn btn-default btn-sm" OnClick="btnref_click" runat="server" Text="Refresh"/>
                 <a id="vbak" href="javascript:void(0);" onclick="window.history.go(-1);"  data-toggle="tooltip" class="btn btn-default btn-sm">
                     <i class="fa fa-undo"></i>
                     Back
                 </a>
             </div>
             </div>
-        <asp:DataGrid ID="grvPrices" runat="server" 
-    AllowPaging="True" AutoGenerateColumns="False" 
-                    CssClass="table table-bordered table-condensed table-hover table-striped dataTable" PagerStyle-HorizontalAlign="Center" 
-    PagerStyle-Mode="NumericPages" PageSize="25" width="100%">
-            <HeaderStyle CssClass="trHeader" />
-            <ItemStyle CssClass="trOdd" />
-            <AlternatingItemStyle CssClass="trEven" />
-            <Columns>
-                <asp:TemplateColumn ItemStyle-CssClass="tdCenter">
-                    <HeaderTemplate>
-                        <asp:CheckBox ID="chkSelectAll" Runat="server" 
-                    AutoPostBack="True" oncheckedchanged="chkSelectAll_CheckedChanged" />
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <asp:CheckBox ID="chkSelect" runat="server" />
-                    </ItemTemplate>
-                    <ItemStyle CssClass="tdCenter" />
-                </asp:TemplateColumn>
-                <asp:BoundColumn DataField="SizeID" HeaderText="SizeID" 
-            Visible="False" />
-             <asp:BoundColumn DataField="Size" HeaderText="Photo Size" ItemStyle-CssClass="Text" Visible="true" />
-               
-               
-                
-                <asp:BoundColumn DataField="Price" HeaderText="Photo Price" ItemStyle-CssClass="Text" Visible="true" />
-               
-                
-                <asp:TemplateColumn ItemStyle-CssClass="Function">
-                    <HeaderTemplate>
-                       Function
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <asp:ImageButton ID="cmdEdit" runat="server" 
+           <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+                    <thead>
+<tr>
+    <th></th>
+    <th style="display:none">ID</th>
+    <th>Photo Size</th>
+    <th>Photo Price</th>
+    <th>Function</th>
+</tr>
+</thead>
+<tbody>
+
+
+            <asp:Repeater ID="rpPhotoPrice" runat="server" 
+                onitemcommand="rpPhotoPrice_ItemCommand">
+                <ItemTemplate>
+                    <tr>
+                        <td><asp:CheckBox ID="chkSelect" runat="server" /></td>
+                        <td style="display:none"><%#Eval("SizeID").ToString()%></td>
+                        <td><%#Eval("Size").ToString()%></td>
+                       <td><%#Eval("Price").ToString()%></td>
+                        
+                       
+                       
+                        <td>
+                            <asp:ImageButton ID="cmdEdit" runat="server" 
                     AlternateText="Sửa" 
                     CommandArgument='<%#DataBinder.Eval(Container.DataItem,"SizeID")%>' 
                     CommandName="Edit" CssClass="Edit" ImageUrl="assets/img/edit.png" 
@@ -90,23 +78,26 @@
                     CommandName="Delete" CssClass="Delete" 
                     ImageUrl="assets/img/delete.png" 
                     OnClientClick="javascript:return confirm('Are you want delete?');" ToolTip="Xóa" />
-                    </ItemTemplate>
-                    <ItemStyle CssClass="Function" />
-                </asp:TemplateColumn>
-            </Columns>
-            <PagerStyle CssClass="Paging" HorizontalAlign="Center" 
-        Mode="NumericPages" NextPageText="Previous" Position="Bottom" 
-        PrevPageText="Next" />
-        </asp:DataGrid>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+   
+
+</tbody>
+                </table>
     
             </div>
         </div>
     </div>
     <!-- /.col-lg-12 -->
 </div>
-    </form>
+    </asp:Panel>
+    
+
     <%--end data grid--%>
-    <div class="row">
+     <asp:Panel ID="pnlupdate" runat="server" Visible="false">
+     <div class="row">
     <div class="col-lg-12">
         <div class="box">
             <header class="dark">
@@ -128,12 +119,26 @@
 
             </header>
             <div id="collapse2" class="body collapse in">
-                 <form class="form-horizontal" id="popup-validation">
+            <div class="btn-toolbar mg-b10 ">
+                        <div class="btn-group">
+                
+                
+                            <a id="A4" href="javascript:void(0);" onclick="window.history.go(-1);"  data-toggle="tooltip" class="btn btn-default btn-sm">
+                                <i class="fa fa-undo"></i>
+                                Back
+                            </a>
+                        </div>
+                        </div>
+                 <form>
 
                     <div class="row">
                         
                         <div class="col-lg-9 pd-20">
+                         <div class="form-group">
                         
+                            <input placeholder="Photo Size" runat="server" visible="false" type="text" class="validate[required,maxSize[10]] form-control" name="txtID" id="txtID"/>
+                       
+                    </div>
                        <div class="form-group">
                         <label class="control-label col-lg-4" for="txtSize">Photo Size</label>
                         <div class="col-lg-4">
@@ -151,9 +156,8 @@
                     </div>
                     <div class="form-actions no-margin-bottom">
                         <label class="control-label col-lg-5"></label>
-                        <button type="submit" value="Save"  id="btnSave" onclick="btnSave_click" class="btn btn-default"><i class=" fa fa-save"></i>Save</button>
-                        
-                         <button type="reset" value="Clear"  id="btnClear" onclick="btnClear_Click" class="btn btn-default"><i class=" fa fa-cut">Clear</i></button>
+                        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_click"  CssClass="btn btn-default"/>
+                        <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_click" CssClass="btn btn-default" />
                 
                     </div>
                                                 
@@ -170,4 +174,8 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+    </asp:Panel>
+    
+    </form>
+    </form>
 </asp:Content>

@@ -19,16 +19,16 @@ namespace ODPP.Admin
             }
         }
         public string BindGrid() {
-            //using (ODPPEntities ctx = new ODPPEntities())
-            //{
-            //    var q = from cg in ctx.tblOrders
-            //            join us in ctx.tblUsers on cg.UserID equals us.UserID
-            //            select new { cg.OrderID, us.FirstName, us.LastName, cg.DateOfOrder, cg.DateOfAssign,cg.TotalPrice,cg.Status };
-            //    rpOrder.DataSource = q;
-            //    rpOrder.DataBind();
+            using (ODPPEntities ctx = new ODPPEntities())
+            {
+                var q = from cg in ctx.tblOrders
+                        join us in ctx.tblUsers on cg.UserID equals us.UserID
+                        select new { cg.OrderID, us.FirstName, us.LastName, cg.DateOfOrder, cg.DateOfAssign, cg.TotalPrice, cg.Status };
+                rpOrder.DataSource = q.ToList();
+                rpOrder.DataBind();
 
-               
-            //}
+
+            }
             return "";
         }
         protected void btnref_click(object sender, EventArgs e)
@@ -36,6 +36,17 @@ namespace ODPP.Admin
             BindGrid();
         }
         protected void btndel_click(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnSave_click(object sender, EventArgs e) {
+        
+        }
+        protected void btnClear_Click()
+        {
+
+        } 
+        protected void rpOrder_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
 
         }

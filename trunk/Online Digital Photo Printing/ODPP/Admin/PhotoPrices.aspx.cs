@@ -19,36 +19,86 @@ namespace ODPP.Admin
 
             }
         }
-        protected void chkSelectAll_CheckedChanged(object sender, EventArgs e)
+       
+        public string bindGrid()
         {
-            CheckBox chkAll = (CheckBox)sender;
-            foreach (DataGridItem r in this.grvPrices.Items)
-            {
-                CheckBox chk = (CheckBox)r.FindControl("chkSelect");
-                chk.Checked = chkAll.Checked;
-            }
+            rpPhotoPrice.DataSource = SizeServices.Size_GetByAll();
+
+            rpPhotoPrice.DataBind();
+            return "";
+
         }
-        void bindGrid()
+        protected void btnadd_click(object sender, EventArgs e)
         {
-            grvPrices.DataSource = SizeServices.Size_GetByAll();
-
-            grvPrices.DataBind();
-            if (grvPrices.PageCount < 1)
+            pnlshow.Visible = false;
+            pnlupdate.Visible = true;
+        }
+        protected void btnSave_click(object sender, EventArgs e) {
+            tblSize size = new tblSize();
+            if (txtID.Value != null && txtID.Value.Trim().Length > 0)
             {
-                grvPrices.Visible = true;
+                size = SizeServices.Size_GetById(int.Parse(txtID.Value));
+                size.Price = Int64.Parse(txtPrice.Value);
+                size.Size = txtSize.Value;
+                
+                SizeServices.Size_Update(size);
             }
-
+            else
+            {
+                size.Price = Int64.Parse(txtPrice.Value);
+                size.Size = txtSize.Value;
+                SizeServices.Size_Insert(size);
+            }
+            txtPrice.Value = txtSize.Value = txtID.Value = null;
+            pnlshow.Visible = true;
+            pnlupdate.Visible = false;
+            bindGrid();
         }
         protected void btnref_click(object sender, EventArgs e)
         {
             bindGrid();
         }
-        protected void btnClear_Click() {
+        protected void btnClear_click(object sender, EventArgs e)
+        {
             txtPrice.Value = txtSize.Value = null;
         }
         protected void btndel_click(object sender, EventArgs e)
         {
-            txtPrice.Value = txtSize.Value = null;
+            foreach (RepeaterItem item in rpPhotoPrice.Items)
+            {
+                CheckBox ck = (CheckBox)item.FindControl("ChkSelect");
+                if (ck.Checked)
+                {
+                    ImageButton lbt = (ImageButton)item.FindControl("cmdDelete");
+                    SizeServices.Size_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                }
+            }
+            bindGrid();
         }
+
+        protected void rpPhotoPrice_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            tblSize size = SizeServices.Size_GetById(int.Parse(e.CommandArgument.ToString()));
+            if (size != null)
+            {
+                if (e.CommandName.Equals("Edit"))
+                {
+                   
+                    txtID.Value = size.SizeID.ToString();
+                    txtPrice.Value = size.Price.ToString();
+                    txtSize.Value = size.Size;
+                    pnlshow.Visible = false;
+                    pnlupdate.Visible = true;
+                }
+                if (e.CommandName.Equals("Delete"))
+                {
+                    SizeServices.Size_Delete(size.SizeID);
+                }
+
+            }
+            bindGrid();
+        }
+
+        
     }
 }

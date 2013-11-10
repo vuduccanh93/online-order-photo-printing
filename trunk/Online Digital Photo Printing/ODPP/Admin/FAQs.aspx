@@ -1,10 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admintrator.Master" AutoEventWireup="true" CodeBehind="FAQs.aspx.cs" Inherits="ODPP.Admin.FAQs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admintrator.Master" AutoEventWireup="true" CodeBehind="FAQs.aspx.cs" Inherits="ODPP.Admin.FAQs"%>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <h3><i class=" fa fa-comment"></i> FAQs Manager</h3>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <form id="Form1" runat="server">
+ <form  id="popup-validation" class="form-horizontal">
+    <form runat="server" class="form-horizontal">
     
+    
+    <asp:Panel ID="pnlshow" runat="server">
     <div class="row">
     <div class="col-lg-12">
         <div class="box">
@@ -33,14 +37,13 @@
             <div class="btn-group">
                 
                 
-                <a  data-toggle="tooltip" class="btn btn-default btn-sm" runat="server" onserverclick="btndel_click" id="btndel">
-                    <i class="glyphicon glyphicon-remove"></i>
-                    Delete
-                </a>
-                <a  data-toggle="tooltip" runat="server" onserverclick="btnref_click" id="btnref" class="btn btn-default btn-sm">
-                    <i class="glyphicon glyphicon-refresh"></i>
-                    Refresh
-                </a>
+              
+                 <asp:Button ID="btnAdd" CssClass="btn btn-default btn-sm" OnClick="btnadd_click" runat="server" Text="Add" />   
+                <asp:Button ID="btnDel" CssClass="btn btn-default btn-sm" OnClick="btndel_click" runat="server" Text="Delete" />
+                <asp:Button ID="btnRef" CssClass="btn btn-default btn-sm" OnClick="btnref_Click" runat="server" Text="Refresh"/>
+               
+                 
+                
                 <a id="vbak" href="javascript:void(0);" onclick="window.history.go(-1);"  data-toggle="tooltip" class="btn btn-default btn-sm">
                     <i class="fa fa-undo"></i>
                     Back
@@ -60,7 +63,7 @@
 <tbody>
 
 
-            <asp:Repeater ID="rpFAQs" runat="server">
+            <asp:Repeater ID="rpFAQs" runat="server" onitemcommand="rpFAQs_ItemCommand1">
                 <ItemTemplate>
                     <tr>
                         <td><asp:CheckBox ID="chkSelect" runat="server" /></td>
@@ -96,8 +99,9 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-    </form>
+    </asp:Panel>
     <%--end data grid--%>
+    <asp:Panel ID="pnlupdate" runat="server" Visible="false">
     <div class="row">
     <div class="col-lg-12">
         <div class="box">
@@ -108,7 +112,7 @@
                     <ul class="nav">
                         <li>
                             <div class="btn-group">
-                                <a class="accordion-toggle btn btn-xs minimize-box" data-toggle="collapse"
+                                <a class="accordion-toggle btn btn-xs minimize-box" id="up" runat="server" data-toggle="collapse"
                                    href="#collapse2">
                                     <i class="fa fa-chevron-up"></i>
                                 </a>
@@ -119,48 +123,75 @@
                 </div>
 
             </header>
+          
             <div id="collapse2" class="body collapse in">
-                 <form class="form-horizontal" id="popup-validation">
-
+                    <div class="btn-toolbar mg-b10 ">
+                        <div class="btn-group">
+                
+                
+                            <a id="A4" href="javascript:void(0);" onclick="window.history.go(-1);"  data-toggle="tooltip" class="btn btn-default btn-sm">
+                                <i class="fa fa-undo"></i>
+                                Back
+                            </a>
+                        </div>
+                        </div>
                     <div class="row">
-                        
+                       <form action="#" >
+                       
+                         
                         <div class="col-lg-9 pd-20">
-                        
                        <div class="form-group">
-                        <label class="control-label col-lg-4" for="txtQuestion">Question</label>
-                        <div class="col-lg-4">
-                            <textarea placeholder="Question" runat="server" type="text" class="validate[required,maxSize[30]] form-control" name="req" id="txtQuestion"></textarea>
-                        </div>
+                        
+                        
+                           <input type="text" id="txtID" runat="server" class="validate[required] form-control" visible="false" />
+                       
                     </div>
-
                     <div class="form-group">
-                        <label class="control-label col-lg-4" for="txtAnswer">Answer</label>
-
-                        <div class=" col-lg-4">
-                            <textarea placeholder="Answer" class="validate[required,,maxSize[30]] form-control" type="text" name="numbe2r" id="txtAnswer" runat="server"></textarea>
-                           
+                       <label class="control-label col-lg-4" for="txtQuestion">Question</label>   
+                        <div class="col-lg-4">
+                            <textarea placeholder="Question" class="validate[required,minSize[5],maxSize[100]] form-control" type="text" id="txtQuestion" name="txtQuestion" runat="server"></textarea>
                         </div>
                     </div>
+                    
+                      <div class="form-group">
+                        <label class="control-label col-lg-4" for="txtAnswer">Answer</label>   
+                         <div class="col-lg-4">                 
+                         <textarea placeholder="Answer" class="validate[required,minSize[5],maxSize[100]] form-control" type="text" name="txtAnswer" id="txtAnswer" runat="server"></textarea>
+                            </div>
+                           
+                       
+                    </div>
+                    
+                    
                     <div class="form-actions no-margin-bottom">
                         <label class="control-label col-lg-5"></label>
-                        <button type="submit" value="Save"  id="btnSave" onclick="btnSave_click" class="btn btn-default"><i class=" fa fa-save"></i>Save</button>
-                        
-                         <button type="reset" value="Clear"  id="btnClear" onclick="btnClear_Click" mutiline class="btn btn-default"><i class=" fa fa-cut">Clear</i></button>
+                            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click"  CssClass="btn btn-default"/>
+                        <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CssClass="btn btn-default" />
+                           
                 
                     </div>
                                                 
                         </div>
-                    </div>
-
-
+                      
+                       </form>
+                       <%-- <div class="alert alert-danger"  id="alert">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                            </div>--%>
                    
+                   
+                     </div>
 
-                    
-                </form>
+                
             </div>
+          
         </div>
     </div>
     <!-- /.col-lg-12 -->
 </div>
+    </asp:Panel>
+    
 <!-- /.row -->
+</form>
+</form>
 </asp:Content>
