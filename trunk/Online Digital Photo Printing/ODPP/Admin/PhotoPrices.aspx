@@ -119,6 +119,11 @@
 
             </header>
             <div id="collapse2" class="body collapse in">
+             <div class="alert alert-success"  id="alert" runat="server" visible="false">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>OK,</strong> 
+        <asp:Label ID="txtalert" runat="server" Text="Label"></asp:Label>
+                            </div>
             <div class="btn-toolbar mg-b10 ">
                         <div class="btn-group">
                 

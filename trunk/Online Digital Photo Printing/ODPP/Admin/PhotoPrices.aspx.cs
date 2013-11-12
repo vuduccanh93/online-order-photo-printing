@@ -42,12 +42,16 @@ namespace ODPP.Admin
                 size.Size = txtSize.Value;
                 
                 SizeServices.Size_Update(size);
+                alert.Visible = true;
+                txtalert.Text = "Update data complete!";
             }
             else
             {
                 size.Price = Int64.Parse(txtPrice.Value);
                 size.Size = txtSize.Value;
                 SizeServices.Size_Insert(size);
+                alert.Visible = true;
+                txtalert.Text = "Insert data complete!";
             }
             txtPrice.Value = txtSize.Value = txtID.Value = null;
             pnlshow.Visible = true;
@@ -64,13 +68,25 @@ namespace ODPP.Admin
         }
         protected void btndel_click(object sender, EventArgs e)
         {
+           
             foreach (RepeaterItem item in rpPhotoPrice.Items)
             {
                 CheckBox ck = (CheckBox)item.FindControl("ChkSelect");
                 if (ck.Checked)
                 {
                     ImageButton lbt = (ImageButton)item.FindControl("cmdDelete");
-                    SizeServices.Size_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                    tblSize size = SizeServices.Size_GetById(int.Parse(lbt.CommandArgument.ToString()));
+                    List<tblOrderDetail> or = OrderDetailsServices.OrderDetail_GetByAll();
+                    foreach (tblOrderDetail items in or)
+                    {
+                        if (items.SizeID != size.SizeID)
+                        {
+                            SizeServices.Size_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                            alert.Visible = true;
+                            txtalert.Text = "Delete susscess!";
+                        }
+                    }
+                   
                 }
             }
             bindGrid();
@@ -92,7 +108,16 @@ namespace ODPP.Admin
                 }
                 if (e.CommandName.Equals("Delete"))
                 {
+                    List<tblOrderDetail> or = OrderDetailsServices.OrderDetail_GetByAll();
+                    foreach (tblOrderDetail item in or)
+                    {
+                        if (item.SizeID == size.SizeID)
+                            return;
+                    }
+                   
                     SizeServices.Size_Delete(size.SizeID);
+                    alert.Visible = true;
+                    txtalert.Text = "Delete susscess!";
                 }
 
             }

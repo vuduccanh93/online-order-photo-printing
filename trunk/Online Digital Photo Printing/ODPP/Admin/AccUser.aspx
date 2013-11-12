@@ -159,7 +159,8 @@
                        <div class="form-group">
                         <label class="control-label col-lg-4" for="txtUserName">UserName</label>
                         <div class="col-lg-4">
-                            <input placeholder="User Name" runat="server"  type="text" class="validate[required] form-control" name="req" id="UserName">
+                            <asp:TextBox placeholder="User Name" CssClass="validate[required] form-control" ID="UserName" runat="server"></asp:TextBox>
+                            
                         </div>
                     </div>
 

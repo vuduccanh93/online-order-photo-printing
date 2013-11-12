@@ -31,6 +31,11 @@
 
             </header>
             <div id="collapse1" class="body collapse in">
+              <div class="alert alert-success"  id="alert" runat="server" visible="false">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>OK,</strong> 
+        <asp:Label ID="txtalert" runat="server" Text="Label"></asp:Label>
+                            </div>
              <div class="btn-toolbar mg-b10 ">
             <div class="btn-group">
                 
@@ -145,13 +150,22 @@
                                     <input placeholder="User Name" runat="server" type="text" class="validate[required] form-control" name="txtID" id="txtID" visible="false">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                         <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                            <img src="assets/img/no-image.jpeg" /></div>
+                                           <%-- <img src="assets/img/no-image.jpeg" runat="server"  id="avt_img"/>--%>
+                                            <asp:Image ID="avt_img" runat="server" src="assets/img/no-image.jpeg" /></div>
                                         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
                                             
                                                 <asp:TextBox ID="txtphoto" runat="server" Visible="false"></asp:TextBox>
                                         </div>
                                         <div>
-                                            <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="photo" id="photo" /></span>
+                                                   
+                                                   
+                                                   
+                                            <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><%--<input type="file" name="avatar" id="avatar" />--%>
+                                              <asp:FileUpload ID="fuAvatar" runat="server" /> 
+                                            </span>
+                                                   
+                                               
+                                                  
                                             <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
                                         </div>
                                     </div>
@@ -163,8 +177,11 @@
                        <div class="form-group">
                         <label class="control-label col-lg-4" for="txtUserName">UserName</label>
                         <div class="col-lg-4">
-                            <input placeholder="User Name"  runat="server" type="text" class="validate[required] form-control" name="txtUserName" id="txtUserName">
+                           
+                              <asp:TextBox placeholder="User Name" ID="txtUserName" CssClass="validate[required] form-control" runat="server"></asp:TextBox>
+                        
                         </div>
+                                               
                     </div>
 
                     <div class="form-group">
@@ -257,7 +274,7 @@
                         <label class="control-label col-lg-4" for="txtbirth">Date Of birth</label>
 
                         <div class=" col-lg-4">
-                             <input type="text" class="form-control" runat="server" value="02-16-2012" id="txtbirth" name="txtbirth">
+                             <input type="text" class="form-control validate[required,custom[date]]" runat="server" value="02-16-2012" id="txtbirth" name="txtbirth">
                              <%--<input placeholder="Date of Birth" class="validate[required,custom[date]] form-control" type="text"
                                    name="date3" id="dp1"/>--%>
                             <span class="help-block">ISO 8601 dates only YYYY-mm-dd</span>

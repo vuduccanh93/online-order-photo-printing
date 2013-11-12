@@ -43,19 +43,22 @@ namespace ODPP.Admin
 
             if (txtID.Value != null && txtID.Value.Trim().Length > 0)
             {
-                ContactService.Contact_GetById(int.Parse(txtID.Value));
+                CT = ContactService.Contact_GetById(int.Parse(txtID.Value));
                 CT.Email = txtemail.Value;
                 CT.Name = txtName.Value;
                 CT.Phone = txtPhone.Value;
                 CT.Message = txtMessage.Value;
                 ContactService.Contact_Update(CT);
+                alert.Visible = true;
+                txtalert.Text = "Update data complete";
             }
             else {
                 CT.Email = txtemail.Value;
                 CT.Name = txtName.Value;
                 CT.Phone = txtPhone.Value;
                 CT.Message = txtMessage.Value;
-                ContactService.Contact_Insert(CT);                
+                ContactService.Contact_Insert(CT); alert.Visible = true;
+                txtalert.Text = "Insert data complete";              
             }
             txtMessage.Value = txtName.Value = txtPhone.Value = txtemail.Value = null;
             pnlshow.Visible = true;
@@ -76,6 +79,8 @@ namespace ODPP.Admin
                 {
                     ImageButton lbt = (ImageButton)item.FindControl("cmdDelete");
                     ContactService.Contact_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                    alert.Visible = true;
+                    txtalert.Text = "Delete susscess";
                 }
             }
             bindGrid();
@@ -95,10 +100,13 @@ namespace ODPP.Admin
                     txtPhone.Value = CT.Phone;
                     pnlshow.Visible = false;
                     pnlupdate.Visible = true;
+                    
                 }
                 if (e.CommandName.Equals("Delete"))
                 {
                     ContactService.Contact_Delete(CT.ContactID);
+                    alert.Visible = true;
+                    txtalert.Text = "Delete susscess";
                 }
 
             }
