@@ -46,10 +46,10 @@
                 <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                      <asp:Panel ID="pnlUser" runat="server">
-                    <div style="padding: 14px;overflow: hidden;width: 333px;"><p>
+                    <div style="padding: 14px;overflow: hidden;width: 333px; background-color:White"><p>
                     <div class="row" style="" >
-  <div class="col-md-5"><asp:Image ID="imgPhoto" runat="server" class="img-thumbnail"></asp:Image></div>
-  <div class="col-md-7" style="padding:0px;">
+  <div class="col-md-5" style="width:140px; float:left"><asp:Image ID="imgPhoto" runat="server" class="img-thumbnail"></asp:Image></div>
+  <div class="col-md-7" style="padding:0px;width:195px; float:left">
    <%ODPP.Client.obj.User obj = (ODPP.Client.obj.User)Session["user"]; %>
   <p style="font-weight:bold;margin-bottom: 0px;"> <%=obj.FirstName+" "+obj.LastName%></p>
     <div style="color:#666"><%=obj.Email%></div>
@@ -68,10 +68,10 @@
 </div>
                         </asp:Panel> 
                       <asp:Panel ID="pnlVisitor" runat="server">
-                    <div style="padding: 14px;overflow: hidden;width: 333px;"><p>
+                    <div style="padding: 14px;overflow: hidden;width: 333px;background-color:White"><p>
                     <div class="row" style="" >
-  <div class="col-md-5"><asp:Image ID="imgPhoto2" class="img-thumbnail " runat="server" ImageUrl="../images/photo.jpg"></asp:Image></div>
-  <div class="col-md-7" style="padding:0px;"><p style="font-weight:bold;margin-bottom: 0px;">Hi Guess!!</p>
+  <div class="col-md-5" style="width:140px; float:left"><asp:Image ID="imgPhoto2" class="img-thumbnail " runat="server" ImageUrl="../images/photo.jpg"></asp:Image></div>
+  <div class="col-md-7" style="padding:0px;width:195px; float:left"><p style="font-weight:bold;margin-bottom: 0px;">Hi Guess!!</p>
     <div style="color:#666">Have a great day!</div>
     <div style="color:#36c"><a href="#modalRegister" data-toggle="modal" >Register</a><span style="margin:0px 10px">-</span>
     <a data-toggle="modal" href="#modalLogin">Login</a>
@@ -100,8 +100,12 @@
                     <label class="control-label">
                         Username</label>
                     <div class="controls">
-                        <asp:TextBox ID="txtuname" runat="server" data-validation="length" data-validation-length="5-20"
-                            data-validation-error-msg="The user name has to be a value between 5-20 characters" />
+ 
+                                <asp:TextBox ID="txtuname" runat="server" data-validation="length" data-validation-length="5-20"
+                                    data-validation-error-msg="The user name has to be a value between 5-20 characters"
+                                    AutoPostBack="False" OnTextChanged="txtuname_TextChanged" />
+                                <asp:Label ID="lblErrorUserName" runat="server" CssClass="error"></asp:Label>
+               
                     </div>
                 </div>
                 <div class="control-group">
@@ -180,7 +184,9 @@
                     <label class="control-label">
                         E-mail</label>
                     <div class="controls ">
-                        <asp:TextBox runat="server" ID="txtREmail" data-validation="email" placeholder="abc@example.com" />
+                        <asp:TextBox runat="server" ID="txtREmail" data-validation="email" placeholder="abc@example.com"
+                            AutoPostBack="True" OnTextChanged="txtREmail_TextChanged" />
+                        <asp:Label ID="lblErrorEmail" runat="server" CssClass="error"></asp:Label>
                     </div>
                 </div>
                 <div class="control-group">
@@ -382,7 +388,9 @@
                     <label class="control-label">
                         E-mail</label>
                     <div class="controls ">
-                        <asp:TextBox runat="server" ID="txtEmail" data-validation="email" placeholder="abc@example.com" />
+                        <asp:TextBox runat="server" ID="txtEmail" data-validation="email" placeholder="abc@example.com"
+                            OnTextChanged="txtEmail_TextChanged" />
+                        <asp:Label ID="lblErrorEmail2" runat="server" CssClass="error"></asp:Label>
                     </div>
                 </div>
                 <div class="control-group">
@@ -406,22 +414,31 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<div class="modal" id="modalInfor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="false">
+<div class="modal fade" id="modalPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    Information</h4>
+                    Recover password</h4>
             </div>
             <p>
+                <form id="Form2" class="form-horizontal test-form" action="../handler/Handler.aspx?f=recover_account"
+                method="post">
                 <div class="modal-body">
-                    <p>
-                        Login failed!!</p>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Your email</label>
+                        <div class="controls">
+                            <input type="text" name="txtRecoverPassword" data-validation="email" placeholder="abc@example.com" />
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         Close</button>
+                    <button type="submit" class="btn btn-primary">
+                        Recover</button>
                 </div>
                 </form>
             </p>

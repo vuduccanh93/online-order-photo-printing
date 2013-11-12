@@ -15,7 +15,7 @@ namespace ODPP.Client.Webs
             {
                 case "notImg":
                     lblInforTitle.Text = "Failed!!";
-                        pnlNotImg.Visible = true;
+                    pnlNotImg.Visible = true;
                     break;
                 case "order_faled":
                     lblInforTitle.Text = "Failed!!";
@@ -44,6 +44,10 @@ namespace ODPP.Client.Webs
                 case "edit_profile_success":
                     lblInforTitle.Text = "Success!!";
                     pnlEditProfile.Visible = true;
+                    break;
+                case "recover_success":
+                    lblInforTitle.Text = "Success!!";
+                    pnlRecoverSuccees.Visible = true;
                     break;
             }
         }

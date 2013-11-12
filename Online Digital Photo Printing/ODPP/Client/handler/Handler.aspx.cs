@@ -13,6 +13,7 @@ using System.Net;
 using ODPP.Client.Webs;
 using ODPP.Client.upload;
 using ODPP.Client.obj;
+using System.Net.Mail;
 
 namespace ODPP.Client.handler
 {
@@ -44,7 +45,7 @@ namespace ODPP.Client.handler
                 case "login":
                     login();
                     string url2 = Request.UrlReferrer.ToString();
-                    if (url2.Contains("Information.aspx")) 
+                    if (url2.Contains("Information.aspx"))
                     {
                         Response.Redirect("../webs/Index.aspx");
                     }
@@ -56,6 +57,37 @@ namespace ODPP.Client.handler
                 case "edit_account":
                     editAccount();
                     break;
+                case "recover_account":
+                    recoverPassword();
+                    break;
+            }
+        }
+        private void recoverPassword()
+        {
+            string mail = Request.Form["txtRecoverPassword"].ToString();
+            tblUser obj = UserServices.User_GetByEmail(mail);
+            if (obj != null)
+            {
+                try
+                {
+                    MailMessage mailMessage = new MailMessage();
+                    mailMessage.To.Add(mail);
+                    mailMessage.From = new MailAddress("binh.bkap.2011@gmail.com");
+                    mailMessage.Subject = "Recover Password";
+                    mailMessage.Body = "Hello world,\n\\This is your account information!\nUser name: "+obj.UserName +"\nPassword: "+obj.Password;
+                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+                    smtpClient.EnableSsl = true;
+                    smtpClient.Credentials = new NetworkCredential("binh.bkap.2011@gmail.com", "binhitbkap1651993");
+                    smtpClient.Send(mailMessage);
+                    Response.Redirect("../webs/Information.aspx?p=recover_success", false);
+                }
+                catch (Exception)
+                {
+                    Response.Redirect("../webs/Information.aspx?p=login_failed");
+                }
+            }
+            else {
+                Response.Redirect("../webs/Information.aspx?p=login_failed");
             }
         }
         private void editAccount()
@@ -85,15 +117,15 @@ namespace ODPP.Client.handler
         {
             if (Services.imgList.Count == 0)
             {
-                Directory.Delete(Session["folder_path"].ToString(),true);
+                Directory.Delete(Session["folder_path"].ToString(), true);
                 Response.Redirect("../webs/Information.aspx?p=notImg");
             }
             tblOrder objOrder = new tblOrder();
             objOrder.Paytype = Request.Form["paytype"].ToString();
-            string credit = null ;
+            string credit = null;
             if (objOrder.Paytype.Equals("credit"))
             {
-                credit= Request.Form["creditNumber"].ToString();
+                credit = Request.Form["creditNumber"].ToString();
                 string pin = Request.Form["pin"].ToString();
                 MyServices.EncryptDecrypt service = new MyServices.EncryptDecrypt();
                 string myEncrypt = service.EnCrypt(credit);
