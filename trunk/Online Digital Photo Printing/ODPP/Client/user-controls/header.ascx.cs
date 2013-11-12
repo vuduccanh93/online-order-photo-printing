@@ -73,8 +73,9 @@ namespace ODPP.Client.Webs
             obj.Password = txtPassword.Text;
             obj.UserName = txtuname.Text;
             obj.Phone = txtRphone.Text;
-            HttpPostedFile post = Request.Files["Avatar"];
+            
             obj.Sex = rdoRFemale.Checked;
+            HttpPostedFile post = Request.Files["Avatar"];
             System.IO.Stream fs = post.InputStream;
             System.IO.BinaryReader br = new System.IO.BinaryReader(fs);
             Byte[] bytes = br.ReadBytes((Int32)fs.Length);
@@ -115,6 +116,47 @@ namespace ODPP.Client.Webs
             Session["user"] = new User(user.Id, obj.FirstName, obj.LastName, obj.Email, obj.DateOfBirth, obj.Address, obj.Phone, obj.UserName, obj.Password, obj.Photo, obj.Sex);
             Response.Redirect("../webs/Information.aspx?p=edit_profile_success", false);
             setData();
+        }
+
+        protected void txtuname_TextChanged(object sender, EventArgs e)
+        {
+            if (UserServices.User_IsExistAccount(txtuname.Text))
+            {
+                btnRegister.Enabled = false;
+                lblErrorUserName.Text = "Username is existed!!";
+            }
+            else {
+                btnRegister.Enabled = true;
+                lblErrorUserName.Text = "";
+            }
+        }
+
+        protected void txtREmail_TextChanged(object sender, EventArgs e)
+        {
+            if (UserServices.User_GetByEmail(txtREmail.Text) != null)
+            {
+                btnRegister.Enabled = false;
+                lblErrorEmail.Text = "email is existed!!";
+            }
+            else
+            {
+                btnRegister.Enabled = true;
+                lblErrorEmail.Text = "";
+            }
+        }
+
+        protected void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+            if (UserServices.User_GetByEmail(txtEmail.Text) != null)
+            {
+                btnViewProfile.Enabled = false;
+                lblErrorEmail2.Text = "email is existed!!";
+            }
+            else
+            {
+                btnViewProfile.Enabled = true;
+                lblErrorEmail2.Text = "";
+            }
         }
     }
 }

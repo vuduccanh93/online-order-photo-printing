@@ -42,7 +42,7 @@
                 </asp:Panel>
                 <asp:Panel ID="pnlLoginFailed" runat="server" Visible="False">
                     <div class="alert alert-danger">
-                        Your account is not found!! <a data-toggle="modal" href="#modalLogin" class="alert-link">Try again</a></div>
+                        Your account is not found!! <a data-toggle="modal" href="#modalLogin" class="alert-link">Try again</a> or <a data-toggle="modal" href="#modalPassword" class="alert-link">Recover password</a></div>
                 </asp:Panel>
                 <asp:Panel ID="pnlOrderFailed" runat="server" Visible="False">
                     <div class="alert alert-danger">
@@ -59,6 +59,10 @@
                 <asp:Panel ID="pnlContact" runat="server" Visible="False">
                     <div class="alert alert-info">
                         Thank you for sending contact to us!! <a  href="Contact.aspx" class="alert-link">Click here to come back.</a></div>
+                </asp:Panel>
+                <asp:Panel ID="pnlRecoverSuccees" runat="server" Visible="False">
+                    <div class="alert alert-info">
+                        Your account information has been sent to your email, please check it!! <a  href="Index.aspx" class="alert-link">Click here to come home page.</a></div>
                 </asp:Panel>
                 <asp:Panel ID="pnlChangePasswordSuccess" runat="server" Visible="False">
                     <div class="alert alert-info">
