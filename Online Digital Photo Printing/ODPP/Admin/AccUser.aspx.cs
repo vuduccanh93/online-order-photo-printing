@@ -52,10 +52,11 @@ namespace ODPP.Admin
             tblUser us = new tblUser();
             if (txtID.Value != null && txtID.Value.Trim().Length > 0)
             {
+               
                 us = UserServices.User_GetById(int.Parse(txtID.Value));
                 us.Address = txtAddress.Value;
                 us.Email=txtEmail.Value ;
-                us.UserName = UserName.Value;
+                us.UserName = UserName.Text;
                 us.Photo = null;
                 us.FirstName= txtFirstName.Value ;
                 us.LastName=txtLastName.Value ;
@@ -67,6 +68,7 @@ namespace ODPP.Admin
             }
             else
             {
+               
                 us.Address = txtAddress.Value;
                 us.Email = txtEmail.Value;
                 us.FirstName = txtFirstName.Value;
@@ -74,7 +76,7 @@ namespace ODPP.Admin
                 us.Password = txtPassword.Value;
                 us.Phone = txtPhone.Value;
                 us.Photo = null;
-                us.UserName = UserName.Value;
+                us.UserName = UserName.Text;
                
                 us.Sex = Boolean.Parse(txtsex.Value);
                 us.DateOfBirth = DateTime.Parse(txtBirth.Value);
@@ -128,14 +130,21 @@ namespace ODPP.Admin
                     txtPassword.Value = us.Password;
                     txtPhone.Value = us.Phone;
                     txtsex.Value = us.Sex.ToString();
-                    UserName.Value = us.UserName;
+                    UserName.Text = us.UserName;
                    
                     txtBirth.Value = us.DateOfBirth.ToString() ;
                     pnlShow.Visible = false;
                     pnlUpdate.Visible = true;
+                    UserName.Enabled = false;
                 }
                 if (e.CommandName.Equals("Delete"))
                 {
+                    List<tblOrder> or = OrderServices.Order_GetByAll();
+                    foreach (tblOrder item in or)
+                    {
+                        if (item.UserID == us.UserID)
+                            return;
+                    }
                     UserServices.User_Delete(us.UserID);
                 }
 

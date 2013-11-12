@@ -62,6 +62,7 @@ namespace ODPP.Admin
             tblAdmin admin = new tblAdmin();
             if (txtID.Value != null && txtID.Value.Trim().Length > 0)
             {
+               
                 admin = AdminServices.Admin_GetById(int.Parse(txtID.Value));
                 admin.Address = txtAddress.Value;
                 admin.AdminRole = dlRole.Value;
@@ -72,10 +73,13 @@ namespace ODPP.Admin
                 admin.Phone = txtPhone.Value;
                 admin.AdminRole = dlRole.Value;
                 admin.FirstName = txtFirstName.Value;
-                admin.UserName = txtUserName.Value;
+                admin.UserName = txtUserName.Text;
                 admin.Photo = null;
+                
                 admin.Sex = Boolean.Parse(txtsex.Value);
                 AdminServices.Admin_Update(admin);
+                alert.Visible = true;
+                txtalert.Text = "Update data complete";
             }
             else
             {
@@ -84,19 +88,21 @@ namespace ODPP.Admin
                 admin.DateOfBirth = DateTime.Parse(txtbirth.Value);
                 admin.Email = txtEmail.Value;
                 admin.FirstName = txtFirstName.Value;
-                admin.UserName = txtUserName.Value;
+                admin.UserName = txtUserName.Text;
                 admin.AdminRole = dlRole.Value;
                 admin.LastName = txtLastName.Value;
                 admin.Password = pass1.Value;
                 admin.Phone = txtPhone.Value;
-                HttpPostedFile post = Request.Files["photo"];
-                System.IO.Stream fs = post.InputStream;
-                System.IO.BinaryReader br = new System.IO.BinaryReader(fs);
-                Byte[] bytes = br.ReadBytes((Int32)fs.Length);
-                admin.Photo = bytes;
+                //HttpPostedFile post = Request.Files["avatar"];
+                //System.IO.Stream fs = post.InputStream;
+                //System.IO.BinaryReader br = new System.IO.BinaryReader(fs);
+                //Byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                admin.Photo = fuAvatar.FileBytes;
                 admin.Sex = Boolean.Parse(txtsex.Value);
 
                 AdminServices.Admin_Insert(admin);
+                alert.Visible = true;
+                txtalert.Text = "Insert data complete";
             }
            
             txtAddress.Value = txtbirth.Value = txtID.Value =txtphoto.Text=txtLastName.Value=txtFirstName.Value=txtEmail.Value=pass1.Value=pass2.Value= null;
@@ -111,8 +117,12 @@ namespace ODPP.Admin
                 CheckBox ck = (CheckBox)item.FindControl("ChkSelect");
                 if (ck.Checked)
                 {
+                    
                     ImageButton lbt = (ImageButton)item.FindControl("cmdDelete");
+                   
                     AdminServices.Admin_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                    alert.Visible = true;
+                    txtalert.Text = "Delete complete";
                 }
             }
             bindGrid();
@@ -130,7 +140,8 @@ namespace ODPP.Admin
             {
                 if (e.CommandName.Equals("Edit"))
                 {
-                    txtUserName.Value = admin.UserName;
+                    txtUserName.Enabled = false;
+                    txtUserName.Text = admin.UserName;
                     pass1.Value = admin.Password;
                     txtID.Value = admin.AdminID.ToString();
                     txtFirstName.Value = admin.FirstName;
@@ -140,14 +151,28 @@ namespace ODPP.Admin
                     txtsex.Value = admin.Sex.ToString();
                     txtAddress.Value = admin.Address;
                     txtEmail.Value = admin.Email;
-                    
+                    if (admin.Photo != null)
+                    {
+                        string base64String = Convert.ToBase64String(admin.Photo, 0, admin.Photo.Length);
+                        avt_img.ImageUrl = "data:image/png;base64," + base64String;
+                    }
                     txtbirth.Value=admin.DateOfBirth.ToString();
                     pnlshow.Visible = false;
                     pnlupdate.Visible = true;
+                   
                 }
                 if (e.CommandName.Equals("Delete"))
                 {
-                    AdminServices.Admin_Delete(admin.AdminID);
+                    List<tblAdmin> ad = AdminServices.Admin_GetByAll();
+                    foreach (tblAdmin item in ad)
+                    {
+                        if (item.UserName == Session["user"] )
+                            return;
+                    }
+                        AdminServices.Admin_Delete(admin.AdminID);
+                        alert.Visible = true;
+                        txtalert.Text = "Delete complete";
+                    
                 }
 
             }
