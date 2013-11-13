@@ -13,6 +13,20 @@ namespace ODPP.Client.Webs
         {
             switch (Request.QueryString["p"])
             {
+                case "regiser_failed_e":
+                    pnlRegisterError.Visible = true;
+                    lblInforTitle.Text = "Failed!!";
+                    lblInforDetails.Text = "Email is existed!";
+                    break;
+                case "regiser_failed_u":
+                    pnlRegisterError.Visible = true;
+                    lblInforTitle.Text = "Failed!!";
+                    lblInforDetails.Text = "Username is existed!";
+                    break;
+                case "edit_failed":
+                    lblInforTitle.Text = "Failed!!";
+                    pnlEditError.Visible = true;
+                    break;
                 case "notImg":
                     lblInforTitle.Text = "Failed!!";
                     pnlNotImg.Visible = true;

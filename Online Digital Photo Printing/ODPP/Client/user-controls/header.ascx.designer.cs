@@ -67,15 +67,6 @@ namespace ODPP.Client.Webs {
         protected global::System.Web.UI.WebControls.TextBox txtuname;
         
         /// <summary>
-        /// lblErrorUserName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorUserName;
-        
-        /// <summary>
         /// txtPassword control.
         /// </summary>
         /// <remarks>
@@ -155,15 +146,6 @@ namespace ODPP.Client.Webs {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtREmail;
-        
-        /// <summary>
-        /// lblErrorEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorEmail;
         
         /// <summary>
         /// btnRegister control.

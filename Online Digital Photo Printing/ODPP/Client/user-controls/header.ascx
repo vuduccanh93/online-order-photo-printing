@@ -100,12 +100,9 @@
                     <label class="control-label">
                         Username</label>
                     <div class="controls">
- 
-                                <asp:TextBox ID="txtuname" runat="server" data-validation="length" data-validation-length="5-20"
-                                    data-validation-error-msg="The user name has to be a value between 5-20 characters"
-                                    AutoPostBack="False" OnTextChanged="txtuname_TextChanged" />
-                                <asp:Label ID="lblErrorUserName" runat="server" CssClass="error"></asp:Label>
-               
+                        <asp:TextBox ID="txtuname" runat="server" data-validation="length" data-validation-length="5-20"
+                            data-validation-error-msg="The user name has to be a value between 5-20 characters" />
+                        <br />
                     </div>
                 </div>
                 <div class="control-group">
@@ -185,8 +182,8 @@
                         E-mail</label>
                     <div class="controls ">
                         <asp:TextBox runat="server" ID="txtREmail" data-validation="email" placeholder="abc@example.com"
-                            AutoPostBack="True" OnTextChanged="txtREmail_TextChanged" />
-                        <asp:Label ID="lblErrorEmail" runat="server" CssClass="error"></asp:Label>
+                           />
+                   
                     </div>
                 </div>
                 <div class="control-group">
@@ -389,7 +386,7 @@
                         E-mail</label>
                     <div class="controls ">
                         <asp:TextBox runat="server" ID="txtEmail" data-validation="email" placeholder="abc@example.com"
-                            OnTextChanged="txtEmail_TextChanged" />
+                             />
                         <asp:Label ID="lblErrorEmail2" runat="server" CssClass="error"></asp:Label>
                     </div>
                 </div>
