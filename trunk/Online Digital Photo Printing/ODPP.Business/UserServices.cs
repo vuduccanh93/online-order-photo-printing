@@ -52,7 +52,7 @@ namespace ODPP.Business
         }
 
 
-        public static bool User_GetByAccount(string username)
+        public static bool User_IsExistAccount(string username)
         {
             using (ODPPEntities ett = new ODPPEntities())
             {
@@ -63,6 +63,16 @@ namespace ODPP.Business
                     return true;
                 }
                 return false;
+            }
+        }
+
+        public static tblUser User_GetByEmail(string mail)
+        {
+            using (ODPPEntities ett = new ODPPEntities())
+            {
+                tblUser obj = new tblUser();
+                obj = ett.tblUsers.FirstOrDefault(e => e.Email == mail);
+                return obj;
             }
         }
 
