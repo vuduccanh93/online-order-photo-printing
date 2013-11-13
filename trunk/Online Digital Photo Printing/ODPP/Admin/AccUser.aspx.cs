@@ -14,11 +14,12 @@ namespace ODPP.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) {
+            if (!IsPostBack)
+            {
                 bindGrid();
             }
         }
-       
+
         public string bindGrid()
         {
 
@@ -52,23 +53,23 @@ namespace ODPP.Admin
             tblUser us = new tblUser();
             if (txtID.Value != null && txtID.Value.Trim().Length > 0)
             {
-               
+
                 us = UserServices.User_GetById(int.Parse(txtID.Value));
                 us.Address = txtAddress.Value;
-                us.Email=txtEmail.Value ;
+                us.Email = txtEmail.Value;
                 us.UserName = UserName.Text;
-                us.Photo = null;
-                us.FirstName= txtFirstName.Value ;
-                us.LastName=txtLastName.Value ;
+                us.Photo = fuUserAvatar.FileBytes;
+                us.FirstName = txtFirstName.Value;
+                us.LastName = txtLastName.Value;
                 us.Password = txtPassword.Value;
-                us.Phone=txtPhone.Value ;
+                us.Phone = txtPhone.Value;
                 us.Sex = Boolean.Parse(txtsex.Value);
                 us.DateOfBirth = DateTime.Parse(txtBirth.Value);
                 UserServices.User_Update(us);
             }
             else
             {
-               
+
                 us.Address = txtAddress.Value;
                 us.Email = txtEmail.Value;
                 us.FirstName = txtFirstName.Value;
@@ -77,13 +78,13 @@ namespace ODPP.Admin
                 us.Phone = txtPhone.Value;
                 us.Photo = null;
                 us.UserName = UserName.Text;
-               
+
                 us.Sex = Boolean.Parse(txtsex.Value);
                 us.DateOfBirth = DateTime.Parse(txtBirth.Value);
                 UserServices.User_Insert(us);
             }
 
-            txtAddress.Value =photo.Value= txtEmail.Value = txtFirstName.Value =txtLastName.Value=txtPassword.Value=txtPhone.Value=txtsex.Value=txtBirth.Value= null;
+            txtAddress.Value = photo.Value = txtEmail.Value = txtFirstName.Value = txtLastName.Value = txtPassword.Value = txtPhone.Value = txtsex.Value = txtBirth.Value = null;
             bindGrid();
             pnlShow.Visible = true;
             pnlUpdate.Visible = false;
@@ -108,10 +109,10 @@ namespace ODPP.Admin
         }
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            txtFirstName.Value = txtLastName.Value = txtPassword.Value = txtPassword2.Value = txtAddress.Value =txtPhone.Value=txtEmail.Value= null;
+            txtFirstName.Value = txtLastName.Value = txtPassword.Value = txtPassword2.Value = txtAddress.Value = txtPhone.Value = txtEmail.Value = null;
         }
 
-      
+
 
         protected void rpUser_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -123,7 +124,7 @@ namespace ODPP.Admin
                     txtID.Value = us.UserID.ToString();
                     txtAddress.Value = us.Address;
                     txtEmail.Value = us.Email;
-                   
+
                     //photo.Value = us.Photo.ToString();
                     txtFirstName.Value = us.FirstName;
                     txtLastName.Value = us.LastName;
@@ -131,8 +132,9 @@ namespace ODPP.Admin
                     txtPhone.Value = us.Phone;
                     txtsex.Value = us.Sex.ToString();
                     UserName.Text = us.UserName;
-                   
-                    txtBirth.Value = us.DateOfBirth.ToString() ;
+                    string base64String = Convert.ToBase64String(us.Photo, 0, us.Photo.Length);
+                    imgPhoto.ImageUrl = "data:image/png;base64," + base64String;
+                    txtBirth.Value = us.DateOfBirth.ToString();
                     pnlShow.Visible = false;
                     pnlUpdate.Visible = true;
                     UserName.Enabled = false;
@@ -152,8 +154,8 @@ namespace ODPP.Admin
             bindGrid();
         }
 
-       
 
-       
+
+
     }
 }
