@@ -74,7 +74,7 @@ namespace ODPP.Admin
                 admin.AdminRole = dlRole.Value;
                 admin.FirstName = txtFirstName.Value;
                 admin.UserName = txtUserName.Text;
-                admin.Photo = null;
+                admin.Photo = fuAdminAvatar.FileBytes;
                 
                 admin.Sex = Boolean.Parse(txtsex.Value);
                 AdminServices.Admin_Update(admin);
@@ -93,11 +93,9 @@ namespace ODPP.Admin
                 admin.LastName = txtLastName.Value;
                 admin.Password = pass1.Value;
                 admin.Phone = txtPhone.Value;
-                //HttpPostedFile post = Request.Files["avatar"];
-                //System.IO.Stream fs = post.InputStream;
-                //System.IO.BinaryReader br = new System.IO.BinaryReader(fs);
-                //Byte[] bytes = br.ReadBytes((Int32)fs.Length);
-                admin.Photo = fuAvatar.FileBytes;
+                Response.Write(Request.Files.Count);
+          
+                admin.Photo = fuAdminAvatar.FileBytes;
                 admin.Sex = Boolean.Parse(txtsex.Value);
 
                 AdminServices.Admin_Insert(admin);
@@ -128,6 +126,8 @@ namespace ODPP.Admin
             bindGrid();
         }
 
+
+
         protected void btnClear_click(object sender, EventArgs e)
         {
             txtFirstName.Value = txtLastName.Value = pass1.Value =pass2.Value =pass1.Value = null;
@@ -154,7 +154,7 @@ namespace ODPP.Admin
                     if (admin.Photo != null)
                     {
                         string base64String = Convert.ToBase64String(admin.Photo, 0, admin.Photo.Length);
-                        avt_img.ImageUrl = "data:image/png;base64," + base64String;
+                        imgAdminPhoto.ImageUrl = "data:image/png;base64," + base64String;
                     }
                     txtbirth.Value=admin.DateOfBirth.ToString();
                     pnlshow.Visible = false;
@@ -178,6 +178,10 @@ namespace ODPP.Admin
             }
             bindGrid();
         }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Write(Request.Files.Count);
 
+        }
     }
 }

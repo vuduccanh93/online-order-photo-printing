@@ -13,13 +13,13 @@ namespace ODPP.Admin {
     public partial class AccUser {
         
         /// <summary>
-        /// Form1 control.
+        /// popup_validation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm popup_validation;
         
         /// <summary>
         /// pnlShow control.
@@ -83,6 +83,24 @@ namespace ODPP.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText photo;
+        
+        /// <summary>
+        /// imgPhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPhoto;
+        
+        /// <summary>
+        /// fuUserAvatar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuUserAvatar;
         
         /// <summary>
         /// txtID control.
