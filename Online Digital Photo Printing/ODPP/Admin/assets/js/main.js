@@ -536,7 +536,7 @@ $('#dimension-switch').bootstrapSwitch('setSizeClass', 'switch-large');
 function formValidation() {
     "use strict";
     /*----------- BEGIN validationEngine CODE -------------------------*/
-    $('#popup-validation').validationEngine();
+    $('#popup_validation').validationEngine();
     /*----------- END validationEngine CODE -------------------------*/
 
     /*----------- BEGIN validate CODE -------------------------*/
@@ -648,7 +648,7 @@ function formWizard() {
     /*----------- BEGIN plupload CODE -------------------------*/
     $("#uploader").pluploadQueue({
         runtimes: 'html5,html4',
-        url: 'form-wysiwyg.html',
+        url: 'form-wysiwyg.aspx',
         max_file_size: '128kb',
         unique_names: true,
         filters: [

@@ -65,13 +65,13 @@ namespace ODPP.Admin
                
                 admin = AdminServices.Admin_GetById(int.Parse(txtID.Value));
                 admin.Address = txtAddress.Value;
-                admin.AdminRole = dlRole.Value;
+                
                 admin.DateOfBirth=DateTime.Parse(txtbirth.Value);
                 admin.Email=txtEmail.Value;
                 admin.LastName = txtLastName.Value;
                 admin.Password = pass1.Value;
                 admin.Phone = txtPhone.Value;
-                admin.AdminRole = dlRole.Value;
+                admin.AdminRole = dlRole.SelectedValue;
                 admin.FirstName = txtFirstName.Value;
                 admin.UserName = txtUserName.Text;
                 admin.Photo = fuAdminAvatar.FileBytes;
@@ -84,22 +84,33 @@ namespace ODPP.Admin
             else
             {
                 admin.Address = txtAddress.Value;
-                admin.AdminRole = dlRole.Value;
+                admin.AdminRole = dlRole.SelectedValue;
                 admin.DateOfBirth = DateTime.Parse(txtbirth.Value);
                 admin.Email = txtEmail.Value;
                 admin.FirstName = txtFirstName.Value;
                 admin.UserName = txtUserName.Text;
-                admin.AdminRole = dlRole.Value;
+                admin.AdminRole = dlRole.SelectedValue;
                 admin.LastName = txtLastName.Value;
                 admin.Password = pass1.Value;
                 admin.Phone = txtPhone.Value;
-                Response.Write(Request.Files.Count);
           
                 admin.Photo = fuAdminAvatar.FileBytes;
                 admin.Sex = Boolean.Parse(txtsex.Value);
-
+                List<tblAdmin> check = AdminServices.Admin_GetByAll();
+                foreach (tblAdmin items in check)
+                {
+                    if (items.UserName.Equals(admin.UserName))
+                    {
+                        txterr.Text = "Your username have in data";
+                        err.Visible = true;
+                        alert.Visible = false;
+                        return;
+                    }
+                }
                 AdminServices.Admin_Insert(admin);
                 alert.Visible = true;
+                err.Visible = false;
+               
                 txtalert.Text = "Insert data complete";
             }
            
@@ -117,10 +128,19 @@ namespace ODPP.Admin
                 {
                     
                     ImageButton lbt = (ImageButton)item.FindControl("cmdDelete");
+
+                    tblAdmin check = AdminServices.Admin_GetById(int.Parse(lbt.CommandArgument.ToString()));
+
+                    if (!check.UserName.Equals((string)Session["user"]))
+                    {
+                        AdminServices.Admin_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                        alert.Visible = true;
+                        txtalert.Text = "Delete complete";
+
+                    }
+                    
                    
-                    AdminServices.Admin_Delete(int.Parse(lbt.CommandArgument.ToString()));
-                    alert.Visible = true;
-                    txtalert.Text = "Delete complete";
+                   
                 }
             }
             bindGrid();
@@ -147,7 +167,7 @@ namespace ODPP.Admin
                     txtFirstName.Value = admin.FirstName;
                     txtLastName.Value = admin.LastName;
                     txtPhone.Value = admin.Phone;
-                    dlRole.Value = admin.AdminRole;
+                    dlRole.SelectedValue = admin.AdminRole;
                     txtsex.Value = admin.Sex.ToString();
                     txtAddress.Value = admin.Address;
                     txtEmail.Value = admin.Email;

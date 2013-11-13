@@ -4,8 +4,8 @@
 <h3><i class=" fa fa-comment"></i> FAQs Manager</h3>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
- <form  id="popup-validation" class="form-horizontal">
-    <form runat="server" class="form-horizontal">
+
+    <form id="popup_validation" runat="server" class="form-horizontal">
     
     
     <asp:Panel ID="pnlshow" runat="server">
@@ -193,5 +193,5 @@
     
 <!-- /.row -->
 </form>
-</form>
+
 </asp:Content>

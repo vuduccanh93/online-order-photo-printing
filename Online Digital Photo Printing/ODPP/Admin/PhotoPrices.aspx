@@ -3,8 +3,8 @@
 <h3><i class=" fa fa-usd"></i>Banks Account Manager</h3>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-   <form  id="popup-validation" class="form-horizontal">
-    <form runat="server" >
+  
+    <form id="popup_validation" class="form-horizontal" runat="server" >
     <asp:Panel ID="pnlshow" runat="server">
     <div class="row">
     <div class="col-lg-12">
@@ -182,5 +182,5 @@
     </asp:Panel>
     
     </form>
-    </form>
+
 </asp:Content>
