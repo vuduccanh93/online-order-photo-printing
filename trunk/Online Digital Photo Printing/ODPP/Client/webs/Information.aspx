@@ -52,6 +52,18 @@
                     <div class="alert alert-danger">
                         Please verify that you have uploaded your photos before perform order.  <a  href="Services.aspx" class="alert-link">Try again</a></div>
                 </asp:Panel>
+                <asp:Panel ID="pnlEditError" runat="server" Visible="False">
+                    <div class="alert alert-danger">
+                        Your email is existed in database, please choose an other email address.  <a data-toggle="modal" href="#modalProfile" class="alert-link">Try again</a></div>
+                </asp:Panel>
+                 <asp:Panel ID="pnlRegisterError" runat="server" Visible="False">
+                    <div class="alert alert-danger">
+                        Register error!!.  <a data-toggle="modal" href="#modalRegister" class="alert-link">Try again</a></div>
+                </asp:Panel>
+                <asp:Panel ID="Panel1" runat="server" Visible="False">
+                    <div class="alert alert-danger">
+                        Please verify that you have uploaded your photos before perform order.  <a  href="Services.aspx" class="alert-link">Try again</a></div>
+                </asp:Panel>
                 <asp:Panel ID="pnlRegisterSuccess" runat="server" Visible="False">
                     <div class="alert alert-success">
                         You register successfully!! <a  data-toggle="modal" href="#modalLogin" class="alert-link">Click here to login.</a></div>

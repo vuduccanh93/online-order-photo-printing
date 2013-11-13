@@ -73,7 +73,14 @@ namespace ODPP.Client.Webs
             obj.Password = txtPassword.Text;
             obj.UserName = txtuname.Text;
             obj.Phone = txtRphone.Text;
-            
+            if (UserServices.User_GetByEmail(txtREmail.Text) != null)
+            {
+                Response.Redirect("../webs/Information.aspx?p=regiser_failed_e", true);
+            }
+            if (UserServices.User_IsExistAccount(txtuname.Text))
+            {
+                Response.Redirect("../webs/Information.aspx?p=regiser_failed_u", true);
+            }
             obj.Sex = rdoRFemale.Checked;
             HttpPostedFile post = Request.Files["Avatar"];
             System.IO.Stream fs = post.InputStream;
@@ -102,6 +109,10 @@ namespace ODPP.Client.Webs
             obj.Address = txtAddress.Text;
             obj.Email = txtEmail.Text;
             obj.Sex = rdoFemale.Checked;
+            if (UserServices.User_GetByEmail(txtEmail.Text) != null)
+            {
+                Response.Redirect("../webs/Information.aspx?p=edit_failed", false);
+            }
             if (fuAvatarEdit.FileName != null)
             {
                 obj.Photo = fuAvatarEdit.FileBytes;
@@ -118,45 +129,6 @@ namespace ODPP.Client.Webs
             setData();
         }
 
-        protected void txtuname_TextChanged(object sender, EventArgs e)
-        {
-            if (UserServices.User_IsExistAccount(txtuname.Text))
-            {
-                btnRegister.Enabled = false;
-                lblErrorUserName.Text = "Username is existed!!";
-            }
-            else {
-                btnRegister.Enabled = true;
-                lblErrorUserName.Text = "";
-            }
-        }
-
-        protected void txtREmail_TextChanged(object sender, EventArgs e)
-        {
-            if (UserServices.User_GetByEmail(txtREmail.Text) != null)
-            {
-                btnRegister.Enabled = false;
-                lblErrorEmail.Text = "email is existed!!";
-            }
-            else
-            {
-                btnRegister.Enabled = true;
-                lblErrorEmail.Text = "";
-            }
-        }
-
-        protected void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-            if (UserServices.User_GetByEmail(txtEmail.Text) != null)
-            {
-                btnViewProfile.Enabled = false;
-                lblErrorEmail2.Text = "email is existed!!";
-            }
-            else
-            {
-                btnViewProfile.Enabled = true;
-                lblErrorEmail2.Text = "";
-            }
-        }
+ 
     }
 }
