@@ -6,8 +6,8 @@
         <i class="fa fa-group"></i>Admin Account Manager</h3>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <%-- <form  id="popup-validation" class="form-horizontal">--%>
-    <form runat="server" class="form-horizontal">
+   <%-- <form id="popup-validation" class="form-horizontal">--%>
+    <form id="popup_validation" runat="server" class="form-horizontal">
     <asp:Panel ID="pnlshow" runat="server">
         <div class="row">
             <div class="col-lg-12">
@@ -147,13 +147,18 @@
 
             </header>
                     <div id="collapse2" class="body collapse in">
+                     <div class="alert alert-danger"  id="err" runat="server" visible="false">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>Error,</strong> 
+        <asp:Label ID="txterr" runat="server" Text="Label"></asp:Label>
+                            </div>
                         <div class="btn-toolbar mg-b10 ">
                             <div class="btn-group">
                                 <a id="A4" href="javascript:void(0);" onclick="window.history.go(-1);" data-toggle="tooltip"
-                                    class="btn btn-default btn-sm"><i class="fa fa-undo"></i>Back </a>
+                                    class="btn btn-default btn-sm"><i class="fa fa-undo"></i> Back </a>
                             </div>
                         </div>
-                        <%--    <form class="form-horizontal" enctype="multipart/form-data" >--%>
+                        <form class="form-horizontal" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group pd-30">
@@ -205,12 +210,15 @@
                                     <label class="control-label col-lg-4" for="txtRole">
                                         Admin Roles</label>
                                     <div class="col-lg-4">
-                                        <select name="dlRole" runat="server" id="dlRole" class="validate[required] form-control">
-                                            <option value="">Choose a Roles</option>
-                                            <option value="AA">Admintrator</option>
-                                            <option value="QT">Admin</option>
-                                            <option value="MN">Manager</option>
-                                        </select>
+                                        
+                                        <br />
+                                        <asp:DropDownList ID="dlRole" runat="server" CssClass="validate[required] form-control">
+                                            <asp:ListItem Value="AA">Admintrator</asp:ListItem>
+                                            <asp:ListItem Value="QT">Admin</asp:ListItem>
+                                            <asp:ListItem Value="MN">Manager</asp:ListItem>
+                                        </asp:DropDownList>
+                                        
+                                       
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -272,6 +280,7 @@
                                     <div class=" col-lg-4">
                                         <input type="text" class="form-control validate[required,custom[date]]" runat="server"
                                             value="02-16-2012" id="txtbirth" name="txtbirth">
+                                           
                                         <%--<input placeholder="Date of Birth" class="validate[required,custom[date]] form-control" type="text"
                                    name="date3" id="dp1"/>--%>
                                         <span class="help-block">ISO 8601 dates only YYYY-mm-dd</span>
@@ -293,28 +302,14 @@
                                 </div>
                             </div>
                         </div>
-                        <%--     </form>--%>
+                        </form>
                     </div>
                 </div>
             </div>
             <!-- /.col-lg-12 -->
         </div>
     </asp:Panel>
-    <asp:ScriptManager ID="ScriptManager" runat="server" />
-    <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
-        <ContentTemplate>
-            <fieldset>
-                <legend>UpdatePanel content</legend>
-                <!-- Other content in the panel. -->
-                <%=DateTime.Now.ToString() %>
-                <br />
-                  <input type="file" name="imagePhoto" id="imagePhoto" runat="server" />
-                    <asp:Image ID="Image1" runat="server" />
-               <asp:Button ID="Button1" Text="Refresh Panel" runat="server" OnClick="Button1_Click" />
-            </fieldset>
-        </ContentTemplate>
-    </asp:UpdatePanel>
     <!-- /.row -->
     </form>
-    <%--</form>--%>
+<%--    </form>--%>
 </asp:Content>
