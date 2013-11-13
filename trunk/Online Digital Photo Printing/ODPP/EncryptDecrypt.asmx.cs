@@ -10,6 +10,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
+
 namespace ODPP
 {
     /// <summary>
@@ -22,21 +23,15 @@ namespace ODPP
     // [System.Web.Script.Services.ScriptService]
     public class EncryptDecrypt : System.Web.Services.WebService
     {
-
         [WebMethod]
-        public string CompareData()
-        {
-            return "Hello World";
-        }
-        [WebMethod]
-        public string EnCrypt(string strEnCrypt, string key)
+        public string EnCrypt(string strEnCrypt)
         {
             try
             {
                 byte[] keyArr;
                 byte[] EnCryptArr = UTF8Encoding.UTF8.GetBytes(strEnCrypt);
                 MD5CryptoServiceProvider MD5Hash = new MD5CryptoServiceProvider();
-                keyArr = MD5Hash.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                keyArr = MD5Hash.ComputeHash(UTF8Encoding.UTF8.GetBytes("bkap"));
                 TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider();
                 tripDes.Key = keyArr;
                 tripDes.Mode = CipherMode.ECB;
@@ -49,14 +44,14 @@ namespace ODPP
             return "";
         }
         [WebMethod]
-        public string DeCrypt(string strDecypt, string key)
+        public string DeCrypt(string strDecypt)
         {
             try
             {
                 byte[] keyArr;
                 byte[] DeCryptArr = Convert.FromBase64String(strDecypt);
                 MD5CryptoServiceProvider MD5Hash = new MD5CryptoServiceProvider();
-                keyArr = MD5Hash.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                keyArr = MD5Hash.ComputeHash(UTF8Encoding.UTF8.GetBytes("bkap"));
                 TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider();
                 tripDes.Key = keyArr;
                 tripDes.Mode = CipherMode.ECB;
