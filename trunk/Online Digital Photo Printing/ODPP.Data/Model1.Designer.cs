@@ -140,6 +140,22 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<tblFAQ> tblFAQs
+        {
+            get
+            {
+                if ((_tblFAQs == null))
+                {
+                    _tblFAQs = base.CreateObjectSet<tblFAQ>("tblFAQs");
+                }
+                return _tblFAQs;
+            }
+        }
+        private ObjectSet<tblFAQ> _tblFAQs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<tblOrder> tblOrders
         {
             get
@@ -184,22 +200,6 @@ namespace ODPP.Data
             }
         }
         private ObjectSet<tblUser> _tblUsers;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<tblFAQ> tblFAQs
-        {
-            get
-            {
-                if ((_tblFAQs == null))
-                {
-                    _tblFAQs = base.CreateObjectSet<tblFAQ>("tblFAQs");
-                }
-                return _tblFAQs;
-            }
-        }
-        private ObjectSet<tblFAQ> _tblFAQs;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -254,6 +254,14 @@ namespace ODPP.Data
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the tblFAQs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotblFAQs(tblFAQ tblFAQ)
+        {
+            base.AddObject("tblFAQs", tblFAQ);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the tblOrders EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTotblOrders(tblOrder tblOrder)
@@ -275,14 +283,6 @@ namespace ODPP.Data
         public void AddTotblUsers(tblUser tblUser)
         {
             base.AddObject("tblUsers", tblUser);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the tblFAQs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTotblFAQs(tblFAQ tblFAQ)
-        {
-            base.AddObject("tblFAQs", tblFAQ);
         }
     
         /// <summary>
@@ -471,23 +471,11 @@ namespace ODPP.Data
         /// <summary>
         /// Create a new tblAccountBank object.
         /// </summary>
-        /// <param name="creditCard">Initial value of the CreditCard property.</param>
-        /// <param name="firstName">Initial value of the FirstName property.</param>
-        /// <param name="lastName">Initial value of the LastName property.</param>
-        /// <param name="dateOfBirth">Initial value of the DateOfBirth property.</param>
-        /// <param name="phone">Initial value of the Phone property.</param>
-        /// <param name="address">Initial value of the Address property.</param>
-        /// <param name="balance">Initial value of the Balance property.</param>
-        public static tblAccountBank CreatetblAccountBank(global::System.Int64 creditCard, global::System.String firstName, global::System.String lastName, global::System.DateTime dateOfBirth, global::System.String phone, global::System.String address, global::System.Double balance)
+        /// <param name="accountID">Initial value of the AccountID property.</param>
+        public static tblAccountBank CreatetblAccountBank(global::System.Int32 accountID)
         {
             tblAccountBank tblAccountBank = new tblAccountBank();
-            tblAccountBank.CreditCard = creditCard;
-            tblAccountBank.FirstName = firstName;
-            tblAccountBank.LastName = lastName;
-            tblAccountBank.DateOfBirth = dateOfBirth;
-            tblAccountBank.Phone = phone;
-            tblAccountBank.Address = address;
-            tblAccountBank.Balance = balance;
+            tblAccountBank.AccountID = accountID;
             return tblAccountBank;
         }
 
@@ -500,171 +488,75 @@ namespace ODPP.Data
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int64 CreditCard
+        public global::System.Int32 AccountID
         {
             get
             {
-                return _CreditCard;
+                return _AccountID;
             }
             set
             {
-                if (_CreditCard != value)
+                if (_AccountID != value)
                 {
-                    OnCreditCardChanging(value);
-                    ReportPropertyChanging("CreditCard");
-                    _CreditCard = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("CreditCard");
-                    OnCreditCardChanged();
+                    OnAccountIDChanging(value);
+                    ReportPropertyChanging("AccountID");
+                    _AccountID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AccountID");
+                    OnAccountIDChanged();
                 }
             }
         }
-        private global::System.Int64 _CreditCard;
-        partial void OnCreditCardChanging(global::System.Int64 value);
-        partial void OnCreditCardChanged();
+        private global::System.Int32 _AccountID;
+        partial void OnAccountIDChanging(global::System.Int32 value);
+        partial void OnAccountIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String FirstName
+        public global::System.String CreditNumber
         {
             get
             {
-                return _FirstName;
+                return _CreditNumber;
             }
             set
             {
-                OnFirstNameChanging(value);
-                ReportPropertyChanging("FirstName");
-                _FirstName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("FirstName");
-                OnFirstNameChanged();
+                OnCreditNumberChanging(value);
+                ReportPropertyChanging("CreditNumber");
+                _CreditNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("CreditNumber");
+                OnCreditNumberChanged();
             }
         }
-        private global::System.String _FirstName;
-        partial void OnFirstNameChanging(global::System.String value);
-        partial void OnFirstNameChanged();
+        private global::System.String _CreditNumber;
+        partial void OnCreditNumberChanging(global::System.String value);
+        partial void OnCreditNumberChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String LastName
+        public global::System.String PIN
         {
             get
             {
-                return _LastName;
+                return _PIN;
             }
             set
             {
-                OnLastNameChanging(value);
-                ReportPropertyChanging("LastName");
-                _LastName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("LastName");
-                OnLastNameChanged();
+                OnPINChanging(value);
+                ReportPropertyChanging("PIN");
+                _PIN = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PIN");
+                OnPINChanged();
             }
         }
-        private global::System.String _LastName;
-        partial void OnLastNameChanging(global::System.String value);
-        partial void OnLastNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime DateOfBirth
-        {
-            get
-            {
-                return _DateOfBirth;
-            }
-            set
-            {
-                OnDateOfBirthChanging(value);
-                ReportPropertyChanging("DateOfBirth");
-                _DateOfBirth = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DateOfBirth");
-                OnDateOfBirthChanged();
-            }
-        }
-        private global::System.DateTime _DateOfBirth;
-        partial void OnDateOfBirthChanging(global::System.DateTime value);
-        partial void OnDateOfBirthChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Phone
-        {
-            get
-            {
-                return _Phone;
-            }
-            set
-            {
-                OnPhoneChanging(value);
-                ReportPropertyChanging("Phone");
-                _Phone = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Phone");
-                OnPhoneChanged();
-            }
-        }
-        private global::System.String _Phone;
-        partial void OnPhoneChanging(global::System.String value);
-        partial void OnPhoneChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Address
-        {
-            get
-            {
-                return _Address;
-            }
-            set
-            {
-                OnAddressChanging(value);
-                ReportPropertyChanging("Address");
-                _Address = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Address");
-                OnAddressChanged();
-            }
-        }
-        private global::System.String _Address;
-        partial void OnAddressChanging(global::System.String value);
-        partial void OnAddressChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Balance
-        {
-            get
-            {
-                return _Balance;
-            }
-            set
-            {
-                OnBalanceChanging(value);
-                ReportPropertyChanging("Balance");
-                _Balance = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Balance");
-                OnBalanceChanged();
-            }
-        }
-        private global::System.Double _Balance;
-        partial void OnBalanceChanging(global::System.Double value);
-        partial void OnBalanceChanged();
+        private global::System.String _PIN;
+        partial void OnPINChanging(global::System.String value);
+        partial void OnPINChanged();
 
         #endregion
 
@@ -980,6 +872,30 @@ namespace ODPP.Data
         private global::System.Boolean _Sex;
         partial void OnSexChanging(global::System.Boolean value);
         partial void OnSexChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
 
         #endregion
 
@@ -1272,7 +1188,6 @@ namespace ODPP.Data
         /// <param name="orderID">Initial value of the OrderID property.</param>
         /// <param name="userID">Initial value of the UserID property.</param>
         /// <param name="dateOfOrder">Initial value of the DateOfOrder property.</param>
-        /// <param name="dateOfAssign">Initial value of the DateOfAssign property.</param>
         /// <param name="totalPrice">Initial value of the TotalPrice property.</param>
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="directoryName">Initial value of the DirectoryName property.</param>
@@ -1281,13 +1196,12 @@ namespace ODPP.Data
         /// <param name="phone">Initial value of the Phone property.</param>
         /// <param name="address">Initial value of the Address property.</param>
         /// <param name="request">Initial value of the Request property.</param>
-        public static tblOrder CreatetblOrder(global::System.Int32 orderID, global::System.Int32 userID, global::System.DateTime dateOfOrder, global::System.DateTime dateOfAssign, global::System.Double totalPrice, global::System.Boolean status, global::System.String directoryName, global::System.String paytype, global::System.String receiver, global::System.String phone, global::System.String address, global::System.String request)
+        public static tblOrder CreatetblOrder(global::System.Int32 orderID, global::System.Int32 userID, global::System.DateTime dateOfOrder, global::System.Double totalPrice, global::System.Boolean status, global::System.String directoryName, global::System.String paytype, global::System.String receiver, global::System.String phone, global::System.String address, global::System.String request)
         {
             tblOrder tblOrder = new tblOrder();
             tblOrder.OrderID = orderID;
             tblOrder.UserID = userID;
             tblOrder.DateOfOrder = dateOfOrder;
-            tblOrder.DateOfAssign = dateOfAssign;
             tblOrder.TotalPrice = totalPrice;
             tblOrder.Status = status;
             tblOrder.DirectoryName = directoryName;
@@ -1381,9 +1295,9 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime DateOfAssign
+        public Nullable<global::System.DateTime> DateOfAssign
         {
             get
             {
@@ -1398,8 +1312,8 @@ namespace ODPP.Data
                 OnDateOfAssignChanged();
             }
         }
-        private global::System.DateTime _DateOfAssign;
-        partial void OnDateOfAssignChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _DateOfAssign;
+        partial void OnDateOfAssignChanging(Nullable<global::System.DateTime> value);
         partial void OnDateOfAssignChanged();
     
         /// <summary>
@@ -1501,30 +1415,6 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int64> CreditCard
-        {
-            get
-            {
-                return _CreditCard;
-            }
-            set
-            {
-                OnCreditCardChanging(value);
-                ReportPropertyChanging("CreditCard");
-                _CreditCard = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreditCard");
-                OnCreditCardChanged();
-            }
-        }
-        private Nullable<global::System.Int64> _CreditCard;
-        partial void OnCreditCardChanging(Nullable<global::System.Int64> value);
-        partial void OnCreditCardChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Receiver
@@ -1617,6 +1507,30 @@ namespace ODPP.Data
         private global::System.String _Request;
         partial void OnRequestChanging(global::System.String value);
         partial void OnRequestChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CreditNumber
+        {
+            get
+            {
+                return _CreditNumber;
+            }
+            set
+            {
+                OnCreditNumberChanging(value);
+                ReportPropertyChanging("CreditNumber");
+                _CreditNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("CreditNumber");
+                OnCreditNumberChanged();
+            }
+        }
+        private global::System.String _CreditNumber;
+        partial void OnCreditNumberChanging(global::System.String value);
+        partial void OnCreditNumberChanged();
 
         #endregion
 
@@ -1704,13 +1618,15 @@ namespace ODPP.Data
         /// <param name="sizeID">Initial value of the SizeID property.</param>
         /// <param name="quantity">Initial value of the Quantity property.</param>
         /// <param name="imageName">Initial value of the ImageName property.</param>
-        public static tblOrderDetail CreatetblOrderDetail(global::System.Int32 orderID, global::System.Int32 sizeID, global::System.Int32 quantity, global::System.String imageName)
+        /// <param name="detailsID">Initial value of the DetailsID property.</param>
+        public static tblOrderDetail CreatetblOrderDetail(global::System.Int32 orderID, global::System.Int32 sizeID, global::System.Int32 quantity, global::System.String imageName, global::System.Int64 detailsID)
         {
             tblOrderDetail tblOrderDetail = new tblOrderDetail();
             tblOrderDetail.OrderID = orderID;
             tblOrderDetail.SizeID = sizeID;
             tblOrderDetail.Quantity = quantity;
             tblOrderDetail.ImageName = imageName;
+            tblOrderDetail.DetailsID = detailsID;
             return tblOrderDetail;
         }
 
@@ -1721,7 +1637,7 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 OrderID
         {
@@ -1731,14 +1647,11 @@ namespace ODPP.Data
             }
             set
             {
-                if (_OrderID != value)
-                {
-                    OnOrderIDChanging(value);
-                    ReportPropertyChanging("OrderID");
-                    _OrderID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("OrderID");
-                    OnOrderIDChanged();
-                }
+                OnOrderIDChanging(value);
+                ReportPropertyChanging("OrderID");
+                _OrderID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrderID");
+                OnOrderIDChanged();
             }
         }
         private global::System.Int32 _OrderID;
@@ -1748,7 +1661,7 @@ namespace ODPP.Data
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 SizeID
         {
@@ -1758,14 +1671,11 @@ namespace ODPP.Data
             }
             set
             {
-                if (_SizeID != value)
-                {
-                    OnSizeIDChanging(value);
-                    ReportPropertyChanging("SizeID");
-                    _SizeID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("SizeID");
-                    OnSizeIDChanged();
-                }
+                OnSizeIDChanging(value);
+                ReportPropertyChanging("SizeID");
+                _SizeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SizeID");
+                OnSizeIDChanged();
             }
         }
         private global::System.Int32 _SizeID;
@@ -1843,6 +1753,33 @@ namespace ODPP.Data
         private global::System.Byte[] _ImageRaw;
         partial void OnImageRawChanging(global::System.Byte[] value);
         partial void OnImageRawChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 DetailsID
+        {
+            get
+            {
+                return _DetailsID;
+            }
+            set
+            {
+                if (_DetailsID != value)
+                {
+                    OnDetailsIDChanging(value);
+                    ReportPropertyChanging("DetailsID");
+                    _DetailsID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("DetailsID");
+                    OnDetailsIDChanged();
+                }
+            }
+        }
+        private global::System.Int64 _DetailsID;
+        partial void OnDetailsIDChanging(global::System.Int64 value);
+        partial void OnDetailsIDChanged();
 
         #endregion
 

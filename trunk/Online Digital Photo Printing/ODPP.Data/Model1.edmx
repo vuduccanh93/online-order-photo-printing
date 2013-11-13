@@ -40,15 +40,11 @@
         </EntityType>
         <EntityType Name="tblAccountBank">
           <Key>
-            <PropertyRef Name="CreditCard" />
+            <PropertyRef Name="AccountID" />
           </Key>
-          <Property Name="CreditCard" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="DateOfBirth" Type="date" Nullable="false" />
-          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Balance" Type="float" Nullable="false" />
+          <Property Name="AccountID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CreditNumber" Type="char" MaxLength="16" />
+          <Property Name="PIN" Type="char" MaxLength="8" />
         </EntityType>
         <EntityType Name="tblAdmin">
           <Key>
@@ -65,6 +61,7 @@
           <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="Sex" Type="bit" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tblContact">
           <Key>
@@ -81,8 +78,8 @@
             <PropertyRef Name="FaqID" />
           </Key>
           <Property Name="FaqID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="Answer" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Answer" Type="nvarchar" Nullable="false" MaxLength="200" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
@@ -91,27 +88,27 @@
           <Property Name="OrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="DateOfOrder" Type="date" Nullable="false" />
-          <Property Name="DateOfAssign" Type="date" Nullable="false" />
+          <Property Name="DateOfAssign" Type="date" />
           <Property Name="TotalPrice" Type="float" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="DirectoryName" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="Paytype" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="CreditCard" Type="bigint" />
           <Property Name="Receiver" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Phone" Type="nchar" Nullable="false" MaxLength="20" />
           <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Request" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="CreditNumber" Type="char" MaxLength="16" />
         </EntityType>
         <EntityType Name="tblOrderDetail">
           <Key>
-            <PropertyRef Name="OrderID" />
-            <PropertyRef Name="SizeID" />
+            <PropertyRef Name="DetailsID" />
           </Key>
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="SizeID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="ImageRaw" Type="varbinary(max)" />
+          <Property Name="DetailsID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="tblSize">
           <Key>
@@ -182,6 +179,7 @@
           <EntitySet Name="tblAccountBanks" EntityType="ProjectIIIModel.tblAccountBank" />
           <EntitySet Name="tblAdmins" EntityType="ProjectIIIModel.tblAdmin" />
           <EntitySet Name="tblContacts" EntityType="ProjectIIIModel.tblContact" />
+          <EntitySet Name="tblFAQs" EntityType="ProjectIIIModel.tblFAQ" />
           <EntitySet Name="tblOrders" EntityType="ProjectIIIModel.tblOrder" />
           <EntitySet Name="tblSizes" EntityType="ProjectIIIModel.tblSize" />
           <EntitySet Name="tblUsers" EntityType="ProjectIIIModel.tblUser" />
@@ -189,7 +187,6 @@
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblOrder" EntitySet="tblOrders" />
           </AssociationSet>
-          <EntitySet Name="tblFAQs" EntityType="ProjectIIIModel.tblFAQ" />
           <EntitySet Name="tblOrderDetails" EntityType="ProjectIIIModel.tblOrderDetail" />
           <AssociationSet Name="FK_tblOrderDetail_tblOrder" Association="ProjectIIIModel.FK_tblOrderDetail_tblOrder">
             <End Role="tblOrder" EntitySet="tblOrders" />
@@ -204,99 +201,104 @@
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tblAccountBank">
           <Key>
-            <PropertyRef Name="CreditCard" />
+            <PropertyRef Name="AccountID" />
           </Key>
-          <Property Name="CreditCard" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Balance" Type="Double" Nullable="false" />
+          <Property Type="Int32" Name="AccountID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CreditNumber" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="PIN" MaxLength="8" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="tblAdmin">
           <Key>
             <PropertyRef Name="AdminID" />
           </Key>
-          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AdminRole" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <Property Type="Int32" Name="AdminID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AdminRole" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="Photo" MaxLength="Max" FixedLength="false" />
+          <Property Type="Boolean" Name="Sex" Nullable="false" />
+          <Property Type="String" Name="Address" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblContact">
           <Key>
             <PropertyRef Name="ContactID" />
           </Key>
-          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ContactID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblFAQ">
+          <Key>
+            <PropertyRef Name="FaqID" />
+          </Key>
+          <Property Type="Int32" Name="FaqID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Question" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Answer" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblOrder">
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="DateOfOrder" Type="DateTime" Nullable="false" />
-          <Property Name="DateOfAssign" Type="DateTime" Nullable="false" />
-          <Property Name="TotalPrice" Type="Double" Nullable="false" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="DirectoryName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="Paytype" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="CreditCard" Type="Int64" />
-          <Property Name="Receiver" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Request" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="OrderID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfOrder" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfAssign" Nullable="true" />
+          <Property Type="Double" Name="TotalPrice" Nullable="false" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <Property Type="String" Name="DirectoryName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Paytype" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Receiver" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Request" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblUser" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblOrder" ToRole="tblUser" />
           <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetail_tblOrder" FromRole="tblOrder" ToRole="tblOrderDetail" />
+          <Property Type="String" Name="CreditNumber" MaxLength="16" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="tblSize">
           <Key>
             <PropertyRef Name="SizeID" />
           </Key>
-          <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Size" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
-          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Type="Int32" Name="SizeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Size" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Double" Name="Price" Nullable="false" />
           <NavigationProperty Name="tblOrderDetails" Relationship="ProjectIIIModel.FK_tblOrderDetail_tblSize" FromRole="tblSize" ToRole="tblOrderDetail" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="Photo" MaxLength="Max" FixedLength="false" />
+          <Property Type="Boolean" Name="Sex" Nullable="false" />
           <NavigationProperty Name="tblOrders" Relationship="ProjectIIIModel.FK_tblOrder_tblUser" FromRole="tblUser" ToRole="tblOrder" />
         </EntityType>
         <Association Name="FK_tblOrder_tblUser">
-          <End Role="tblUser" Type="ProjectIIIModel.tblUser" Multiplicity="1" />
-          <End Role="tblOrder" Type="ProjectIIIModel.tblOrder" Multiplicity="*" />
+          <End Type="ProjectIIIModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="ProjectIIIModel.tblOrder" Role="tblOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblUser">
               <PropertyRef Name="UserID" />
@@ -306,24 +308,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tblFAQ">
-          <Key>
-            <PropertyRef Name="FaqID" />
-          </Key>
-          <Property Type="Int32" Name="FaqID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Question" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Answer" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="tblOrderDetail">
           <Key>
-            <PropertyRef Name="OrderID" />
-            <PropertyRef Name="SizeID" />
+            <PropertyRef Name="DetailsID" />
           </Key>
           <Property Type="Int32" Name="OrderID" Nullable="false" />
           <Property Type="Int32" Name="SizeID" Nullable="false" />
           <Property Type="Int32" Name="Quantity" Nullable="false" />
           <Property Type="String" Name="ImageName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="Binary" Name="ImageRaw" MaxLength="Max" FixedLength="false" />
+          <Property Type="Int64" Name="DetailsID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="tblOrder" Relationship="ProjectIIIModel.FK_tblOrderDetail_tblOrder" FromRole="tblOrderDetail" ToRole="tblOrder" />
           <NavigationProperty Name="tblSize" Relationship="ProjectIIIModel.FK_tblOrderDetail_tblSize" FromRole="tblOrderDetail" ToRole="tblSize" />
         </EntityType>
@@ -360,97 +354,49 @@
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ProjectIIIModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblAccountBanks">
             <EntityTypeMapping TypeName="ProjectIIIModel.tblAccountBank">
               <MappingFragment StoreEntitySet="tblAccountBank">
-                <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="CreditNumber" ColumnName="CreditNumber" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblAdmins">
             <EntityTypeMapping TypeName="ProjectIIIModel.tblAdmin">
               <MappingFragment StoreEntitySet="tblAdmin">
-                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
-                <ScalarProperty Name="AdminRole" ColumnName="AdminRole" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AdminRole" ColumnName="AdminRole" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblContacts">
             <EntityTypeMapping TypeName="ProjectIIIModel.tblContact">
               <MappingFragment StoreEntitySet="tblContact">
-                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblOrders">
-            <EntityTypeMapping TypeName="ProjectIIIModel.tblOrder">
-              <MappingFragment StoreEntitySet="tblOrder">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="DateOfOrder" ColumnName="DateOfOrder" />
-                <ScalarProperty Name="DateOfAssign" ColumnName="DateOfAssign" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="DirectoryName" ColumnName="DirectoryName" />
-                <ScalarProperty Name="Paytype" ColumnName="Paytype" />
-                <ScalarProperty Name="CreditCard" ColumnName="CreditCard" />
-                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Request" ColumnName="Request" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblSizes">
-            <EntityTypeMapping TypeName="ProjectIIIModel.tblSize">
-              <MappingFragment StoreEntitySet="tblSize">
-                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblUsers">
-            <EntityTypeMapping TypeName="ProjectIIIModel.tblUser">
-              <MappingFragment StoreEntitySet="tblUser">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -463,9 +409,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="ProjectIIIModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="CreditNumber" ColumnName="CreditNumber" />
+                <ScalarProperty Name="Request" ColumnName="Request" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+                <ScalarProperty Name="Paytype" ColumnName="Paytype" />
+                <ScalarProperty Name="DirectoryName" ColumnName="DirectoryName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="DateOfAssign" ColumnName="DateOfAssign" />
+                <ScalarProperty Name="DateOfOrder" ColumnName="DateOfOrder" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSizes">
+            <EntityTypeMapping TypeName="ProjectIIIModel.tblSize">
+              <MappingFragment StoreEntitySet="tblSize">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="ProjectIIIModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblOrderDetails">
             <EntityTypeMapping TypeName="ProjectIIIModel.tblOrderDetail">
               <MappingFragment StoreEntitySet="tblOrderDetail">
+                <ScalarProperty Name="DetailsID" ColumnName="DetailsID" />
                 <ScalarProperty Name="ImageRaw" ColumnName="ImageRaw" />
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
@@ -494,34 +486,28 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Model1" ZoomLevel="81">
-        <EntityTypeShape EntityType="ProjectIIIModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" Height="1.9802864583333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblAccountBank" Width="1.5" PointX="7.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
-
-        <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.5186979166666656" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="8.5" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="2.9417936197916674" IsExpanded="true" />
-
-        <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="3.1340950520833335" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblContact" Width="1.5" PointX="5.75" PointY="8.75" Height="1.9802864583333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.9033007812499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="9.375" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="3.3263964843750031" IsExpanded="true" />
-        <AssociationConnector Association="ProjectIIIModel.FK_tblOrder_tblUser" ManuallyRouted="false">
+      <Diagram Name="Model1" ZoomLevel="88">
+        <EntityTypeShape EntityType="ProjectIIIModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" Height="1.9802864583333335" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblAccountBank" Width="1.5" PointX="7.75" PointY="0.75" Height="1.59568359375" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblAdmin" Width="1.5" PointX="7.75" PointY="4.75" Height="3.1340950520833335" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblContact" Width="1.5" PointX="0.75" PointY="8.75" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblFAQ" Width="1.5" PointX="2.75" PointY="8.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblOrder" Width="1.5" PointX="3" PointY="1" Height="3.7109993489583335" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblSize" Width="1.5" PointX="3" PointY="6.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblUser" Width="1.5" PointX="0.75" PointY="1.25" Height="3.3263964843749996" />
+        <AssociationConnector Association="ProjectIIIModel.FK_tblOrder_tblUser" >
           <ConnectorPoint PointX="2.25" PointY="2.9131982421875" />
           <ConnectorPoint PointX="3" PointY="2.9131982421875" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="ProjectIIIModel.tblFAQ" Width="1.5" PointX="0.75" PointY="5.75" Height="1.5956835937500031" />
-        <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.625" PointY="2.5" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="ProjectIIIModel.tblOrderDetail" Width="1.5" PointX="5.25" PointY="2.125" Height="2.5571907552083388" />
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetail_tblOrder" >
-          <ConnectorPoint PointX="4.5" PointY="3.6824446614583337" />
-          <ConnectorPoint PointX="5.625" PointY="3.6824446614583337" />
+          <ConnectorPoint PointX="4.5" PointY="3.4035953776041694" />
+          <ConnectorPoint PointX="5.25" PointY="3.4035953776041694" />
         </AssociationConnector>
         <AssociationConnector Association="ProjectIIIModel.FK_tblOrderDetail_tblSize" >
-          <ConnectorPoint PointX="4.5" PointY="8.59375" />
-          <ConnectorPoint PointX="5.65625" PointY="8.59375" />
-          <ConnectorPoint PointX="5.65625" PointY="4.8648893229166674" />
+          <ConnectorPoint PointX="4.5" PointY="7.8528857421875005" />
+          <ConnectorPoint PointX="5.46875" PointY="7.8528857421875005" />
+          <ConnectorPoint PointX="5.46875" PointY="4.6821907552083388" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
