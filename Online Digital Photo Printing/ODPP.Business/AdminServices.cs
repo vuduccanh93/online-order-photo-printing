@@ -29,7 +29,14 @@ namespace ODPP.Business
                 return obj;
             }
         }
+        public static tblAdmin Admin_GetByAcc(string user, string pwd) {
+            using (ODPPEntities ett = new ODPPEntities())
+            {
 
+                tblAdmin obj = ett.tblAdmins.FirstOrDefault(e => e.UserName == user && e.Password == pwd);
+                return obj;
+            }
+        }
         public static bool Admin_Insert(tblAdmin data)
         {
             using (ODPPEntities ett = new ODPPEntities())
@@ -55,7 +62,8 @@ namespace ODPP.Business
                 obj.Password = data.Password;
                 obj.Phone = data.Phone;
                 obj.Sex = data.Sex;
-
+                obj.Address = data.Address;
+                obj.Photo = data.Photo;
 
 
                 ett.SaveChanges();

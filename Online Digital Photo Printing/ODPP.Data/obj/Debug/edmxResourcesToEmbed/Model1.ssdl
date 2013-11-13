@@ -35,15 +35,11 @@
   </EntityType>
   <EntityType Name="tblAccountBank">
     <Key>
-      <PropertyRef Name="CreditCard" />
+      <PropertyRef Name="AccountID" />
     </Key>
-    <Property Name="CreditCard" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="20" />
-    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="30" />
-    <Property Name="DateOfBirth" Type="date" Nullable="false" />
-    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
-    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
-    <Property Name="Balance" Type="float" Nullable="false" />
+    <Property Name="AccountID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CreditNumber" Type="char" MaxLength="16" />
+    <Property Name="PIN" Type="char" MaxLength="8" />
   </EntityType>
   <EntityType Name="tblAdmin">
     <Key>
@@ -60,6 +56,7 @@
     <Property Name="Password" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="Photo" Type="varbinary(max)" />
     <Property Name="Sex" Type="bit" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tblContact">
     <Key>
@@ -76,8 +73,8 @@
       <PropertyRef Name="FaqID" />
     </Key>
     <Property Name="FaqID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="30" />
-    <Property Name="Answer" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Answer" Type="nvarchar" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="tblOrder">
     <Key>
@@ -86,27 +83,27 @@
     <Property Name="OrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="UserID" Type="int" Nullable="false" />
     <Property Name="DateOfOrder" Type="date" Nullable="false" />
-    <Property Name="DateOfAssign" Type="date" Nullable="false" />
+    <Property Name="DateOfAssign" Type="date" />
     <Property Name="TotalPrice" Type="float" Nullable="false" />
     <Property Name="Status" Type="bit" Nullable="false" />
     <Property Name="DirectoryName" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="Paytype" Type="nvarchar" Nullable="false" MaxLength="20" />
-    <Property Name="CreditCard" Type="bigint" />
     <Property Name="Receiver" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="Phone" Type="nchar" Nullable="false" MaxLength="20" />
     <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Request" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="CreditNumber" Type="char" MaxLength="16" />
   </EntityType>
   <EntityType Name="tblOrderDetail">
     <Key>
-      <PropertyRef Name="OrderID" />
-      <PropertyRef Name="SizeID" />
+      <PropertyRef Name="DetailsID" />
     </Key>
     <Property Name="OrderID" Type="int" Nullable="false" />
     <Property Name="SizeID" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="ImageName" Type="nvarchar" Nullable="false" MaxLength="20" />
     <Property Name="ImageRaw" Type="varbinary(max)" />
+    <Property Name="DetailsID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="tblSize">
     <Key>
