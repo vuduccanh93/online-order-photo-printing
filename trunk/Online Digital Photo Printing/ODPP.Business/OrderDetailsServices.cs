@@ -43,6 +43,17 @@ namespace ODPP.Business
             return true;
         }
 
+
+        public static byte[] OrderDetail_GetImageRawByID(int id)
+        {
+            using (ODPPEntities ett = new ODPPEntities())
+            {
+                tblOrderDetail obj = ett.tblOrderDetails.FirstOrDefault(e => e.DetailsID == id);
+                return obj.ImageRaw;
+            }
+ 
+        }
+
         public static bool OederDetail_Delete(int Id)
         {
             using (ODPPEntities ett = new ODPPEntities())
