@@ -143,6 +143,7 @@ namespace ODPP.Admin
                    
                 }
             }
+            
             bindGrid();
         }
 
@@ -186,7 +187,7 @@ namespace ODPP.Admin
                     List<tblAdmin> ad = AdminServices.Admin_GetByAll();
                     foreach (tblAdmin item in ad)
                     {
-                        if (item.UserName == Session["user"] )
+                        if (item.UserName.Equals((string)Session["user"]) )
                             return;
                     }
                         AdminServices.Admin_Delete(admin.AdminID);

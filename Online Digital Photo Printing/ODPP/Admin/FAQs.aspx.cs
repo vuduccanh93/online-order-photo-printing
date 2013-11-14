@@ -53,12 +53,16 @@ namespace ODPP.Admin
                 fa.Question = txtQuestion.Value;
                 fa.Answer = txtAnswer.Value;
                 FAQServices.User_Update(fa);
+                alert.Visible = true;
+                txtalert.Text = "Update data complete";
             }
             else
             {
                 fa.Question = txtQuestion.Value;
                 fa.Answer = txtAnswer.Value;
                 FAQServices.FAQ_Insert(fa);
+                alert.Visible = true;
+                txtalert.Text = "Insert data suscess";
             }
            
             txtQuestion.Value = txtAnswer.Value=txtID.Value = null;
@@ -93,6 +97,8 @@ namespace ODPP.Admin
                 {
                     ImageButton lbt = (ImageButton)item.FindControl("cmdDelete");
                     FAQServices.FAQ_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                    alert.Visible = true;
+                    txtalert.Text = "Delete complete";
                 }
             }
             bindGrid();
@@ -117,6 +123,8 @@ namespace ODPP.Admin
                 if (e.CommandName.Equals("Delete"))
                 {
                     FAQServices.FAQ_Delete(fa.FaqID);
+                    alert.Visible = true;
+                    txtalert.Text = "Delete complete";
                 }
 
             }

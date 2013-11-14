@@ -38,46 +38,38 @@
                         </div>
                 <form class="form-horizontal" enctype="multipart/form-data" >
                 
-                  <div class="alert alert-success"  id="alert" runat="server" visible="false">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <strong>OK,</strong> Your profile update sussces
-                            </div>
+                 
                             <div style="clear:both"></div>
                     <div class="row" runat="server">
                         <div class="col-lg-3">
                              <div class="form-group pd-30">
-                                
-                                    <input placeholder="User Name" runat="server" type="text" class="validate[required] form-control" name="txtID" id="txtID" visible="false">
+                                    <input placeholder="User Name" runat="server" type="text" class="validate[required] form-control"
+                                        name="txtID" id="txtID" visible="false">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                         <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                           <%-- <img src="assets/img/no-image.jpeg" runat="server"  id="avt_img"/>--%>
-                                            <asp:Image ID="avt_img" runat="server" src="assets/img/no-image.jpeg" /></div>
-                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
-                                            
-                                                <asp:TextBox ID="txtphoto" runat="server" Visible="false"></asp:TextBox>
+                                            <%-- <img src="assets/img/no-image.jpeg" runat="server"  id="avt_img"/>--%>
+                                            <asp:Image ID="imgAdminPhoto" runat="server" /></div>
+                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px;
+                                            max-height: 150px; line-height: 20px;">
+                                            <asp:TextBox ID="txtphoto" runat="server" Visible="false"></asp:TextBox>
                                         </div>
                                         <div>
-                                                   
-                                                   
-                                                   
-                                            <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><%--<input type="file" name="avatar" id="avatar" />--%>
-                                              <asp:FileUpload ID="fuAvatar" runat="server" /> 
-                                            </span>
-                                                   
-                                               
-                                                  
-                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                            <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span
+                                                class="fileupload-exists">Change</span><asp:FileUpload ID="fuAdminAvatar" runat="server" />
+                                            </span><a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">
+                                                Remove</a>
                                         </div>
                                     </div>
-                                
-                            </div>
+                                </div>
                          </div>
                         <div class="col-lg-9 pd-20">
                         
                        <div class="form-group">
                         <label class="control-label col-lg-4" for="txtUserName">UserName</label>
                         <div class="col-lg-4">
-                            <input placeholder="User Name"  runat="server" type="text" class="validate[required] form-control" name="txtUserName" id="txtUserName">
+
+                              <asp:TextBox placeholder="User Name" ID="txtUserName" CssClass="validate[required] form-control" runat="server"></asp:TextBox>
+                            
                         </div>
                     </div>
 

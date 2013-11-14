@@ -13,6 +13,15 @@ namespace ODPP.Admin {
     public partial class AccUser {
         
         /// <summary>
+        /// popup_validation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm popup_validation;
+        
+        /// <summary>
         /// pnlShow control.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,24 @@ namespace ODPP.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlShow;
+        
+        /// <summary>
+        /// alert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alert;
+        
+        /// <summary>
+        /// txtalert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtalert;
         
         /// <summary>
         /// btnAdd control.

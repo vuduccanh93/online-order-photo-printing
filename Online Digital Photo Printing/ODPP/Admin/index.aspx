@@ -20,13 +20,13 @@
 		<span class="percent up"> <i class="fa fa-caret-up"></i> +23%</span>
 	    </div>
 	</li>
-	<li>
+	<%--<li>
 	    <div class="sparkline pie_week"></div>
 	    <div class="stat_text">
 		<strong><asp:Label ID="wekPri" runat="server" Text=""></asp:Label>Week Price</strong>
 		<span class="percent"> 0%</span>
 	    </div>
-	</li>
+	</li>--%>
 	<li>
 	    <div class="sparkline stacked_month"></div>
 	    <div class="stat_text">
@@ -37,5 +37,11 @@
     </ul>
 </div>
 <hr />
+   <div style="min-height:300px;text-align:center">
+        <img src="assets/img/logo2.PNG" />
+       <h1> Welcome to admintrator</h1> 
+       <h3>Online digital photo printing</h3>
+
+   </div>
 </form>
 </asp:Content>

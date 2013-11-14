@@ -22,15 +22,6 @@ namespace ODPP.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlForm popup_validation;
         
         /// <summary>
-        /// alert control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alert;
-        
-        /// <summary>
         /// txtID control.
         /// </summary>
         /// <remarks>
@@ -40,13 +31,13 @@ namespace ODPP.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtID;
         
         /// <summary>
-        /// avt_img control.
+        /// imgAdminPhoto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image avt_img;
+        protected global::System.Web.UI.WebControls.Image imgAdminPhoto;
         
         /// <summary>
         /// txtphoto control.
@@ -58,13 +49,13 @@ namespace ODPP.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtphoto;
         
         /// <summary>
-        /// fuAvatar control.
+        /// fuAdminAvatar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuAvatar;
+        protected global::System.Web.UI.WebControls.FileUpload fuAdminAvatar;
         
         /// <summary>
         /// txtUserName control.
@@ -73,7 +64,7 @@ namespace ODPP.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtUserName;
+        protected global::System.Web.UI.WebControls.TextBox txtUserName;
         
         /// <summary>
         /// pass1 control.

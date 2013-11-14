@@ -39,10 +39,9 @@
             <div class="btn-group">
                 
                 
-                <asp:Button ID="btnAdd" CssClass="btn btn-default btn-sm" OnClick="btnadd_click"
-                                    runat="server" Text="Add" />
-                <asp:Button ID="btnDel" CssClass="btn btn-default btn-sm" OnClick="btndel_click"
-                    runat="server" Text="Delete" />
+                <asp:Button ID="btnUpdate" CssClass="btn btn-default btn-sm" OnClick="btnUpdate_click"
+                                    runat="server" Text="Assigned" />
+               
                 <asp:Button ID="btnRef" CssClass="btn btn-default btn-sm" OnClick="btnref_click"
                     runat="server" Text="Refresh" />
                 <a id="vbak" href="javascript:void(0);" onclick="window.history.go(-1);"  data-toggle="tooltip" class="btn btn-default btn-sm">
@@ -76,19 +75,20 @@
                         <td><%#Eval("DateOfOrder").ToString()%></td>
                         <%--<td><%#Eval("DateOfAssign").ToString()%></td>--%>
                         <td><%#Eval("TotalPrice").ToString()%></td>
-                        <td><%#Eval("Status").ToString()=="False"?"Agin":"Not Adgin"%></td>
+                        <td><%#Eval("Status").ToString() == "False" ? "Not Assigned" : "Assigned"%></td>
                         <td>
-                            <asp:ImageButton ID="cmdEdit" runat="server" 
-                    AlternateText="Sửa" 
-                    CommandArgument='<%#DataBinder.Eval(Container.DataItem,"OrderID")%>' 
-                    CommandName="Edit" CssClass="Edit" ImageUrl="assets/img/edit.png" 
-                    ToolTip="Sửa" />
-                        <asp:ImageButton ID="cmdDelete" runat="server" 
+                           
+                        <asp:ImageButton ID="cmdUp" runat="server" 
                     AlternateText="Xóa" 
                     CommandArgument='<%#DataBinder.Eval(Container.DataItem,"OrderID")%>' 
-                    CommandName="Delete" CssClass="Delete" 
-                    ImageUrl="assets/img/delete.png" 
-                    OnClientClick="javascript:return confirm('Are you want delete?');" ToolTip="Xóa" />
+                    CommandName="Assigned" CssClass="Delete" 
+                    ImageUrl="assets/img/valid.jpg" 
+                    OnClientClick="javascript:return confirm('Assigned photo?');" ToolTip="Assigned" />
+                     <asp:ImageButton ID="cmdEdit" runat="server" 
+                    AlternateText="View" 
+                    CommandArgument='<%#DataBinder.Eval(Container.DataItem,"OrderID")%>' 
+                    CommandName="View" CssClass="Edit" ImageUrl="assets/img/view.png"
+                    ToolTip="View" />
                         </td>
                     </tr>
                 </ItemTemplate>
@@ -113,7 +113,7 @@
         <div class="box">
             <header class="dark">
                 <div class="icons"><i class="fa fa-th-large"></i></div>
-                <h5>Order Photo Update Data</h5>
+                <h5>Order Photo View Data</h5>
                 <div class="toolbar">
                     <ul class="nav">
                         <li>
@@ -130,142 +130,160 @@
 
             </header>
             <div id="collapse2" class="body collapse in">
+            <a id="A1" href="javascript:void(0);" onclick="window.history.go(-1);"  data-toggle="tooltip" class="btn btn-default btn-sm">
+                    <i class="fa fa-undo"></i>
+                    Back
+                </a>
                  <div class="row">
-                     <asp:GridView ID="grvorderdetails" runat="server">
-                     </asp:GridView>
-                            <form>
-                            <div class="col-lg-3">
-                                <div class="form-group pd-30">
-                                    <input type="text" name="photo" id="photo" runat="server" visible="false" />
-                                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                            <asp:Image ID="imgPhoto" runat="server" /></div>
-                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px;
-                                            max-height: 150px; line-height: 20px;">
-                                        </div>
-                                        <div>
-                                            <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span
-                                                class="fileupload-exists">Change</span><asp:FileUpload ID="fuUserAvatar" runat="server" /></span>
-                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-9 pd-20">
-                                <input runat="server" id="txtID" visible="false" name="txtID" type="text" />
+                     
+                            <form class="form-horizontal">
+                            <div class="col-lg-6 pd-10">
                                 <div class="form-group">
                                     <label class="control-label col-lg-4" for="txtUserName">
                                         UserName</label>
                                     <div class="col-lg-4">
-                                        <asp:TextBox placeholder="User Name" CssClass="validate[required] form-control" ID="UserName"
-                                            runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                       
+                                        
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtDateOfOrder">
-                                        DateOfOrder</label>
-                                    <div class=" col-lg-4">
-                                        <input placeholder="Password" class="validate[required] form-control" runat="server"
-                                            type="text" name="txtDateOfOrder" id="txtDateOfOrder" />
+                                    <label class="control-label col-lg-4" for="txtReceiver">
+                                        Receiver</label>
+                                    <div class="col-lg-4">
+                                        <asp:TextBox ID="txtReceiver" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
+                                        
                                     </div>
                                 </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-lg-4" for="txtPhone">
+                                        Phone</label>
+                                    <div class="col-lg-4">
+                                         <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
+                                        
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-lg-4" for="txtAddress">
+                                        Address</label>
+                                    <div class="col-lg-4">
+                                        
+                                        <asp:TextBox  ID="txtAddress" runat="server" CssClass="form-control" 
+                                            Enabled="false" TextMode="MultiLine"></asp:TextBox>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pd-10">
+                                <input runat="server" id="txtID" visible="false" name="txtID" type="text" />
+                                
+                                 
                                 <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtDateOfAssign">
-                                        Date Of Assign</label>
-                                    <div class=" col-lg-4">
-                                        <input placeholder="Confirm Password" class="validate[required] form-control" type="text"
-                                            runat="server" name="txtDateOfAssign" id="txtDateOfAssign" />
+                                    <label class="control-label col-lg-4" for="txtDirectoryName">
+                                        Directory Name</label>
+                                    <div class="col-lg-4">
+                                       
+                                        <asp:TextBox ID="txtDirectoryName" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-lg-4" for="txtRequest">
+                                        Request</label>
+                                    <div class="col-lg-4">
+                                        
+                                        <asp:TextBox ID="txtRequest" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-lg-4" for="txtTotalPrice">
                                         Total Price</label>
                                     <div class="col-lg-4">
-                                        <input placeholder="First Name" runat="server" type="text" class="validate[required,minSize[5],maxSize[50]] form-control"
-                                            name="txtTotalPrice" id="txtTotalPrice">
+                                        
+                                        <asp:TextBox ID="txtTotalPrice" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtDirectoryName">
-                                        DirectoryName</label>
+                                    <label class="control-label col-lg-4" for="txtPaytype">
+                                        Pay type</label>
                                     <div class="col-lg-4">
-                                        <input placeholder="Last Name" runat="server" type="text" class="validate[required,minSize[5],maxSize[50]] form-control"
-                                            name="txtDirectoryName" id="txtDirectoryName">
+                                       
+                                        <asp:TextBox ID="txtPaytype" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-lg-4" for="txtCreditNumber">
+                                        Credit Number</label>
+                                    <div class="col-lg-4">
+                                        
+                                        <asp:TextBox ID="txtCreditNumber" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="control-label col-lg-4" for="txtDateOfOrder">
+                                        Date Order</label>
+                                    <div class="col-lg-4">
+                                        
+                                        <asp:TextBox ID="txtDateOfOrder" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
+                                    </div>
+                                  
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-4" for="txtDateOfAssign">
+                                        Date Assign</label>
+                                    <div class="col-lg-4">
+                                        
+                                        <asp:TextBox ID="txtDateOfAssign" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-lg-4" for="txtStatus">
                                         Status</label>
                                     <div class="col-lg-4">
-                                        <select name="sport2" runat="server" id="txtStatus" multiple class="validate[required] form-control">
-                                            <option value="">Choose a Status</option>
-                                            <option value="True">Assigned</option>
-                                            <option value="False">not Assigned</option>
-                                        </select>
+                                        
+                                        <asp:TextBox ID="txtStatus" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtPaytype">
-                                        E-mail</label>
-                                    <div class=" col-lg-4">
-                                        <input placeholder="Pay type" runat="server" class="validate[required] form-control"
-                                            type="text" name="txtPaytype" id="txtPaytype" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtReceiver">
-                                        Receiver</label>
-                                    <div class=" col-lg-4">
-                                        <div class="input-group">
-                                            <input placeholder="Phone number" runat="server" class="validate[required] form-control"
-                                                type="text" id="txtReceiver" >
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtPhone">
-                                       Phone</label>
-                                    <div class=" col-lg-4">
-                                        <input type="text" class="form-control" runat="server" value="02-16-2012" id="txtPhone"
-                                            name="txtPhone">
-                                        <%--<input placeholder="Date of Birth" class="validate[required,custom[date]] form-control" type="text"
-                                   name="date3" id="dp1"/>--%>
-                                       
-                                    </div>
-                                </div>
-                                 <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtRequest">
-                                        Request</label>
-                                    <div class=" col-lg-4">
-                                        <textarea placeholder="Address" runat="server" class="validate[required,minSize[5],maxSize[100]] form-control"
-                                            type="text" name="txtRequest" id="txtRequest"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtAddress">
-                                        Address</label>
-                                    <div class=" col-lg-4">
-                                        <textarea placeholder="Address" runat="server" class="validate[required,minSize[5],maxSize[100]] form-control"
-                                            type="text" name="txtAddress" id="txtAddress"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-4" for="txtCreditNumber">
-                                        CreditNumber</label>
-                                    <div class=" col-lg-4">
-                                        <textarea placeholder="Address" runat="server" class="validate[required,minSize[5],maxSize[100]] form-control"
-                                            type="text" name="txtCreditNumber" id="txtCreditNumber"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-actions no-margin-bottom">
-                                    <label class="control-label col-lg-5">
-                                    </label>
-                                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_click" CssClass="btn btn-default" />
-                                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CssClass="btn btn-default" />
-                                </div>
+                                
+                                
                             </div>
                             </form>
+                             <table id="Table1" class="table table-bordered table-condensed table-hover table-striped">
+                    <thead>
+<tr>
+
+    <th >Size</th>
+    <th>ImageName</th>
+    <th>ImageRaw</th>
+    <th>Quantity</th>
+</tr>
+</thead>
+<tbody>
+
+
+            <asp:Repeater ID="rpDetail" runat="server">
+                <ItemTemplate>
+                    <tr>
+                       <td><%#getSize(Eval("SizeID").ToString())%></td>
+                       <td><%#Eval("ImageName").ToString()%></td>
+                       <td><%#Eval("ImageRaw").ToString()%></td>
+                       <td><%#Eval("Quantity").ToString()%></td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+     
+
+</tbody>
+                </table>
                         </div>
             </div>
         </div>
