@@ -61,6 +61,7 @@ namespace ODPP.Admin
                 
                 rpDetail.DataSource = ctx.tblOrderDetails.Where(c=>c.OrderID==ID).ToList();
                 rpDetail.DataBind();
+                
             }
         }
         protected void btnref_click(object sender, EventArgs e)
@@ -111,7 +112,7 @@ namespace ODPP.Admin
                         q.ToList();
                         
                     }
-                    txtUserName.Text = or.UserID.ToString();
+                    txtUserName.Text = getUser(or.UserID);
                     order_details(or.OrderID);
                     pnlshow.Visible = false;
                     pnlupload.Visible = true;
@@ -140,6 +141,18 @@ namespace ODPP.Admin
                 return SizeServices.Size_GetById(int.Parse(id)).Size;
             }
             return "";
+        }
+        protected string getUser(int id)
+        {
+            if (id >0)
+            {
+                return UserServices.User_GetById(id).UserName;
+            }
+            return "";
+        }
+        protected int co()
+        {
+            return rpDetail.Items.Count;
         }
     }
 }

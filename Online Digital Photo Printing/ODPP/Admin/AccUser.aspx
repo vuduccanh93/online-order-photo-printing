@@ -138,7 +138,7 @@
                                    href="#collapse2">
                                     <i class="fa fa-chevron-up"></i>
                                 </a>
-                                <button class="btn btn-xs btn-danger close-box"><i class="fa fa-remove"></i></button>
+                               <%-- <button class="btn btn-xs btn-danger close-box"><i class="fa fa-remove"></i></button>--%>
                             </div>
                         </li>
                     </ul>

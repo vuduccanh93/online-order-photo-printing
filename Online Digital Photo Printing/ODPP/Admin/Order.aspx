@@ -257,7 +257,8 @@
                                 
                             </div>
                             </form>
-                             <table id="Table1" class="table table-bordered table-condensed table-hover table-striped">
+                            <div class="pd-10">
+                                 <table id="Table1" class="table table-bordered table-condensed table-hover table-striped" <%if(rpDetail.Items.Count<=0){ %>style="display:none;"<%} %>  width="90%">
                     <thead>
 <tr>
 
@@ -273,9 +274,14 @@
             <asp:Repeater ID="rpDetail" runat="server">
                 <ItemTemplate>
                     <tr>
+                        
                        <td><%#getSize(Eval("SizeID").ToString())%></td>
-                       <td><%#Eval("ImageName").ToString()%></td>
-                       <td><%#Eval("ImageRaw").ToString()%></td>
+                       <td>
+                       <%#Eval("ImageName").ToString()%></td>
+                       <td>
+                       <img src="Handler.ashx?imgdata=<%#DataBinder.Eval(Container.DataItem, "ImageRaw") %>" />
+                      
+                       </td>
                        <td><%#Eval("Quantity").ToString()%></td>
                     </tr>
                 </ItemTemplate>
@@ -284,6 +290,7 @@
 
 </tbody>
                 </table>
+                            </div>
                         </div>
             </div>
         </div>
