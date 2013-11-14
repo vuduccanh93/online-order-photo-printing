@@ -37,8 +37,6 @@ namespace ODPP.Admin
             }
         }
 
-        protected void btnSave_click(object sender, EventArgs e) {
-         
-        }
+       
     }
 }

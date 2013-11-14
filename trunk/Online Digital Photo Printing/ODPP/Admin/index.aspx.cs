@@ -20,7 +20,7 @@ namespace ODPP.Admin
         }
         void loaddata() {
             List<tblOrder> or = OrderServices.Order_GetByAll();
-            double price = 0,wekprice=0;
+            double price = 0;
             foreach (tblOrder items in or)
             {
                 

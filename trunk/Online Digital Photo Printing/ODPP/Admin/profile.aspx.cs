@@ -17,13 +17,18 @@ namespace ODPP.Admin
             if (!IsPostBack) {
                 tblAdmin admin = AdminServices.Admin_GetByAcc((string)Session["user"], (string)Session["pwd"]);
                 if(admin!=null){
-                    txtUserName.Value = admin.UserName;
+                    txtUserName.Enabled = false;
+                    txtUserName.Text = admin.UserName;
                     pass1.Value = admin.Password;
                     txtID.Value = admin.AdminID.ToString();
                     txtFirstName.Value = admin.FirstName;
                     txtLastName.Value = admin.LastName;
                     txtPhone.Value = admin.Phone;
-
+                    if (admin.Photo != null)
+                    {
+                        string base64String = Convert.ToBase64String(admin.Photo, 0, admin.Photo.Length);
+                        imgAdminPhoto.ImageUrl = "data:image/png;base64," + base64String;
+                    }
                     dlRole.Value = admin.AdminRole;
                     txtsex.Value = admin.Sex.ToString();
                     txtAddress.Value = admin.Address;
@@ -51,13 +56,13 @@ namespace ODPP.Admin
              admin.Phone = txtPhone.Value;
              admin.AdminRole = dlRole.Value;
              admin.FirstName = txtFirstName.Value;
-             admin.UserName = txtUserName.Value;
-             admin.Photo = null;
+             admin.UserName = txtUserName.Text;
+             admin.Photo = fuAdminAvatar.FileBytes;
              admin.Sex = Boolean.Parse(txtsex.Value);
              Session["pwd"] = pass1.Value;
-             AdminServices.Admin_Update(admin); 
-             
-                 alert.Visible = true;
+             AdminServices.Admin_Update(admin);
+
+             Response.Redirect("index.aspx");
              
     }
     }

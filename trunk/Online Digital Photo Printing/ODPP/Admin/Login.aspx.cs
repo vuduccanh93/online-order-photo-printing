@@ -23,14 +23,19 @@ namespace ODPP.Admin
         protected void btnlogin_click(object sender, EventArgs e)
         {
             tblAdmin obj = AdminServices.Admin_GetByAcc(txtUser.Value, txtPass.Value);
-            if (obj!= null)
+            if (obj != null)
             {
-                
+
                 Session["user"] = obj.UserName;
                 Session["role"] = obj.AdminRole;
                 Session["pwd"] = obj.Password;
+                txterr.Text = "";
                 Response.Redirect("index.aspx");
-                
+
+            }
+            else {
+                txterr.Text = " Your account or password is not valid";
+                txtUser.Focus();
             }
 
         }

@@ -34,40 +34,42 @@ namespace ODPP.Admin
             }
             return "";
         }
-        protected void btnadd_click(object sender, EventArgs e)
+        protected void btnUpdate_click(object sender, EventArgs e)
         {
-            pnlshow.Visible = false;
-            pnlupload.Visible = true;
+            foreach (RepeaterItem item in rpOrder.Items)
+            {
+                CheckBox ck = (CheckBox)item.FindControl("ChkSelect");
+                if (ck.Checked)
+                {
+
+                    ImageButton lbt = (ImageButton)item.FindControl("cmdEdit");
+
+                    tblOrder or = OrderServices.Order_GetById(int.Parse(lbt.CommandArgument.ToString()));
+                    if (or.Status== false) {
+                        or.Status = true;
+                        OrderServices.Order_Update(or);
+                        alert.Visible = true;
+                        txtalert.Text = "Assigned complete";
+                    }
+                }
+            }
+            BindGrid();
         }
-        public string order_details(int ID) {
+        public void order_details(int ID) {
             using (ODPPEntities ctx = new ODPPEntities())
             {
-                var q = from 
-                         us in ctx.tblOrderDetails where us.OrderID==ID
-                        
-                        select new {us.ImageRaw,us.ImageName,us.SizeID,us.Quantity };
-
-                grvorderdetails.DataSource = q.ToList();
-                grvorderdetails.DataBind();
+                
+                rpDetail.DataSource = ctx.tblOrderDetails.Where(c=>c.OrderID==ID).ToList();
+                rpDetail.DataBind();
             }
-            return "";
         }
         protected void btnref_click(object sender, EventArgs e)
         {
             BindGrid();
         }
-        protected void btndel_click(object sender, EventArgs e)
-        {
-
-        }
-        protected void btnSave_click(object sender, EventArgs e)
-        {
-
-        }
-        protected void btnClear_Click(object sender, EventArgs e)
-        {
-
-        }
+        
+        
+        
         protected void deleteDirectory(string directoryName) {
             string directoryPath = Server.MapPath("images_upload")+"\\"+directoryName;
             Directory.Delete(directoryPath, true);
@@ -75,44 +77,69 @@ namespace ODPP.Admin
         }
         protected void rpOrder_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            tblOrder admin = OrderServices.Order_GetById(int.Parse(e.CommandArgument.ToString()));
-            if (admin != null)
+            tblOrder or = OrderServices.Order_GetById(int.Parse(e.CommandArgument.ToString()));
+            if (or != null)
             {
-                if (e.CommandName.Equals("Edit"))
+                if (e.CommandName.Equals("View"))
                 {
-                    txtAddress.Value = admin.Address;
-                    txtCreditNumber.Value = admin.CreditNumber;
-                    txtDateOfAssign.Value = admin.DateOfAssign.ToString();
-                    txtID.Value = admin.OrderID.ToString();
-                    txtDateOfOrder.Value = admin.DateOfOrder.ToString();
-                    txtDirectoryName.Value = admin.DirectoryName;
-                    txtPhone.Value = admin.Phone;
-                    txtPaytype.Value = admin.Paytype;
-                    txtStatus.Value = admin.Status.ToString();
-                    txtRequest.Value = admin.Request;
-                    txtTotalPrice.Value = admin.TotalPrice.ToString();
+                    txtAddress.Text = or.Address;
+                    txtCreditNumber.Text = or.CreditNumber;
+                    txtDateOfAssign.Text = or.DateOfAssign.ToString();
+                    txtID.Value = or.OrderID.ToString();
+                    txtDateOfOrder.Text = or.DateOfOrder.ToString();
+                    txtDirectoryName.Text = or.DirectoryName;
+                    txtPhone.Text = or.Phone;
+                    txtPaytype.Text = or.Paytype;
+                    if (or.Status == false)
+                    {
+                        txtStatus.Text = "Not Assigned";
+                    }
+                    else
+                    {
+                        txtStatus.Text = " Assigned";
+                    }
+                    txtRequest.Text = or.Request;
+                    txtTotalPrice.Text = or.TotalPrice.ToString();
 
-                    order_details(admin.OrderID);
+                    using (ODPPEntities ctx = new ODPPEntities())
+                    {
+                        var q = from
+                                     us in ctx.tblUsers
+                                where us.UserID == or.UserID
+
+                                select new { us.UserName };
+                        q.ToList();
+                        
+                    }
+                    txtUserName.Text = or.UserID.ToString();
+                    order_details(or.OrderID);
                     pnlshow.Visible = false;
                     pnlupload.Visible = true;
                    
                 }
-                if (e.CommandName.Equals("Delete"))
+                if (e.CommandName.Equals("Assigned"))
                 {
-                    //List<tblOrder> ad = OrderServices.Order_GetByAll();
-                    //foreach (tblOrder item in ad)
-                    //{
-                    //    if (item.UserName == Session["user"])
-                    //        return;
-                    //}
-                    ////OrderServices.Admin_Delete(admin.AdminID);
-                    //alert.Visible = true;
-                    //txtalert.Text = "Delete complete";
+                    
+                    if (or.Status == false)
+                    {
+                        or.Status = true;
+                        OrderServices.Order_Update(or);
+                        alert.Visible = true;
+                        txtalert.Text = "Assigned complete";
+                    }
 
                 }
 
             }
             BindGrid();
+        }
+        protected string getSize(string id)
+        {
+            if (id != null && id.Trim().Length > 0)
+            {
+                return SizeServices.Size_GetById(int.Parse(id)).Size;
+            }
+            return "";
         }
     }
 }

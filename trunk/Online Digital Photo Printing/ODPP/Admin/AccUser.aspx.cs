@@ -66,6 +66,8 @@ namespace ODPP.Admin
                 us.Sex = Boolean.Parse(txtsex.Value);
                 us.DateOfBirth = DateTime.Parse(txtBirth.Value);
                 UserServices.User_Update(us);
+                alert.Visible = true;
+                txtalert.Text = "Update complete";
             }
             else
             {
@@ -81,13 +83,27 @@ namespace ODPP.Admin
 
                 us.Sex = Boolean.Parse(txtsex.Value);
                 us.DateOfBirth = DateTime.Parse(txtBirth.Value);
+                List<tblUser> check = UserServices.User_GetByAll();
+                foreach (tblUser items in check)
+                {
+                    if (items.UserName.Equals(us.UserName))
+                    {
+                        txterr.Text = "Your username have in data";
+                        err.Visible = true;
+                        alert.Visible = false;
+                        return;
+                    }
+                }
                 UserServices.User_Insert(us);
+                alert.Visible = true;
+                txtalert.Text = "Insert data suscess";
             }
 
             txtAddress.Value = photo.Value = txtEmail.Value = txtFirstName.Value = txtLastName.Value = txtPassword.Value = txtPhone.Value = txtsex.Value = txtBirth.Value = null;
             bindGrid();
             pnlShow.Visible = true;
             pnlUpdate.Visible = false;
+            err.Visible = false;
         }
         protected void btndel_click(object sender, EventArgs e)
         {
@@ -97,15 +113,27 @@ namespace ODPP.Admin
                 if (ck.Checked)
                 {
                     ImageButton lbt = (ImageButton)item.FindControl("cmdDelete");
-                    UserServices.User_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                    List<tblOrder> or = OrderServices.Order_GetByAll();
+                    foreach (tblOrder items in or)
+                    {
+                        if (items.UserID != int.Parse(lbt.CommandArgument.ToString()))
+                        {
+                            UserServices.User_Delete(int.Parse(lbt.CommandArgument.ToString()));
+                            alert.Visible = true;
+                            txtalert.Text = "Delete complete";
+                        }
+                    }
+                   
                 }
             }
+            
             bindGrid();
         }
         protected void btnadd_click(object sender, EventArgs e)
         {
             pnlShow.Visible = false;
             pnlUpdate.Visible = true;
+            UserName.Enabled = true;
         }
         protected void btnClear_Click(object sender, EventArgs e)
         {
@@ -132,12 +160,18 @@ namespace ODPP.Admin
                     txtPhone.Value = us.Phone;
                     txtsex.Value = us.Sex.ToString();
                     UserName.Text = us.UserName;
-                    string base64String = Convert.ToBase64String(us.Photo, 0, us.Photo.Length);
-                    imgPhoto.ImageUrl = "data:image/png;base64," + base64String;
+                    if (us.Photo != null)
+                    {
+                        string base64String = Convert.ToBase64String(us.Photo, 0, us.Photo.Length);
+                        imgPhoto.ImageUrl = "data:image/png;base64," + base64String;
+                    }
+                    //string base64String = Convert.ToBase64String(us.Photo, 0, us.Photo.Length);
+                    //imgPhoto.ImageUrl = "data:image/png;base64," + base64String;
                     txtBirth.Value = us.DateOfBirth.ToString();
                     pnlShow.Visible = false;
                     pnlUpdate.Visible = true;
                     UserName.Enabled = false;
+                    alert.Visible = false;
                 }
                 if (e.CommandName.Equals("Delete"))
                 {
@@ -145,9 +179,16 @@ namespace ODPP.Admin
                     foreach (tblOrder item in or)
                     {
                         if (item.UserID == us.UserID)
+                        {
                             return;
+                            
+                        }
+                        if (txtID.Value != null && txtID.Value.Trim().Length>0)
+                        UserServices.User_Delete(int.Parse(txtID.Value));
+                        alert.Visible = true;
+                        txtalert.Text = "Delete complete";
                     }
-                    UserServices.User_Delete(us.UserID);
+                    
                 }
 
             }

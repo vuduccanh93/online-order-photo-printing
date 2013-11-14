@@ -6,8 +6,7 @@
         <i class=" fa fa-user"></i>Users Account Manager</h3>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <form id="id="popup_validation" class="form-horizontal" runat="server">
-   <%-- <form id="Form1" runat="server">--%>
+    <form id="popup_validation" class="form-horizontal" runat="server">
     <asp:Panel ID="pnlShow" runat="server">
         <div class="row">
             <div class="col-lg-12">
@@ -33,6 +32,12 @@
 
             </header>
                     <div id="collapse1" class="body collapse in">
+                    <div class="alert alert-success" id="alert" runat="server" visible="false">
+                            <button type="button" class="close" data-dismiss="alert">
+                                ×</button>
+                            <strong>OK,</strong>
+                            <asp:Label ID="txtalert" runat="server" Text="Label"></asp:Label>
+                        </div>
                         <div class="btn-toolbar mg-b10 ">
                             <div class="btn-group">
                                 <asp:Button ID="btnAdd" CssClass="btn btn-default btn-sm" OnClick="btnadd_click"
@@ -278,6 +283,6 @@
         </div>
     </asp:Panel>
     </form>
- <%--   </form>--%>
+
     <!-- /.row -->
 </asp:Content>

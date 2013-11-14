@@ -34,10 +34,13 @@ m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBef
     </div>
     <div class="tab-content">
         <div id="login" class="tab-pane active">
+            
+           
             <form action="" runat="server" class="form-signin" method="post">
                 <p class="text-muted text-center">
                     Enter your username and password
                 </p>
+                 <asp:Label ID="txterr"  runat="server" ForeColor="Red"></asp:Label>
                 <input type="text" runat="server" id="txtUser" placeholder="Username" class="form-control"/>
                 <input type="password" runat="server" id="txtPass" placeholder="Password" class="form-control"/>
                 <button class="btn btn-lg btn-primary btn-block" onserverclick="btnlogin_click" runat="server" >Sign in</button>
