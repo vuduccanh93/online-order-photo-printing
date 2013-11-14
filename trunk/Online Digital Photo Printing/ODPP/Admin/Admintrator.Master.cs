@@ -20,6 +20,7 @@ namespace ODPP.Admin
             if (!IsPostBack) {
                 user.Text =(string) Session["user"];
                 role.Text = (string)Session["role"];
+                
                 tblAdmin admin = AdminServices.Admin_GetByAcc((string)Session["user"], (string)Session["pwd"]);
                 if (admin != null) {
                    
@@ -28,12 +29,9 @@ namespace ODPP.Admin
                         string base64String = Convert.ToBase64String(admin.Photo, 0, admin.Photo.Length);
                         avt_img.ImageUrl = "data:image/png;base64," + base64String;
                     }
-                   
-                   
-                       
-
 
                 }
+              
             }
         }
 

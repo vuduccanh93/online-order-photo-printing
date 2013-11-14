@@ -593,7 +593,7 @@ function formValidation() {
     });
 
 
-    $('#block-validate').validate({
+    $('#block_validate').validate({
         rules: {
             required2: "required",
             email2: {
