@@ -26,7 +26,7 @@ namespace ODPP.Admin
             {
                 var q = from cg in ctx.tblOrders
                         join us in ctx.tblUsers on cg.UserID equals us.UserID
-                        where cg.DateOfAssign != null
+                       
                         select new { cg.OrderID, us.FirstName, us.LastName, cg.DateOfOrder, cg.TotalPrice, cg.Status };
                
                 rpOrder.DataSource = q.ToList();
