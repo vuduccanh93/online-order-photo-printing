@@ -26,7 +26,7 @@ namespace ODPP.Admin
             if (obj != null)
             {
 
-                Session["user"] = obj.UserName;
+                Session["username"] = obj.UserName;
                 Session["role"] = obj.AdminRole;
                 Session["pwd"] = obj.Password;
                 txterr.Text = "";

@@ -204,7 +204,7 @@
                                     <button class="btn btn-primary pull-right margin-r10 w_auto" type="submit" style="margin-right: 77px;">
                                         Finish
                                     </button>
-                                    <a class="btn btn-primary  pull-right margin-r10" data-toggle="tab" href="#service-one">
+                                    <a class="btn btn-default  pull-right margin-r10" data-toggle="tab" href="#service-one">
                                         Back</a>
                                 </div>
                                 </form>

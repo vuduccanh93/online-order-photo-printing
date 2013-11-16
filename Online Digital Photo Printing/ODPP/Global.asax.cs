@@ -31,6 +31,9 @@ namespace ODPP
         void Session_Start(object sender, EventArgs e)
         {
             // Code that runs when a new session is started
+            //Session["username"] = null;
+            //Session["role"] = null;
+            //Session["pwd"] = null;
 
         }
 

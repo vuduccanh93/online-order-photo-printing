@@ -7,17 +7,20 @@ using System.Web.UI.WebControls;
 using ODPP.Client.upload;
 using System.Collections;
 using System.Net;
+using System.IO;
 namespace ODPP.Client.Webs
 {
     public partial class Services : System.Web.UI.Page
     {
         public static Dictionary<string, ImageObj> imgList = new Dictionary<string, ImageObj>();
         public void Page_Load(object sender, EventArgs e){
+            imgList.Clear();
             Random r = new Random();
             int num = r.Next(0, 1000);
             Session["folder"] = "temp_"+num;
-            string parth = Server.MapPath("/images_upload/");
-            Session["folder_path"] = parth + Session["folder"] + "\\";
+            string path = Server.MapPath("/images_upload/");
+            
+            Session["folder_path"] = path + Session["folder"] + "\\";
             if (Session["user"] == null)
             {
                 pnlOrder.Visible = false;

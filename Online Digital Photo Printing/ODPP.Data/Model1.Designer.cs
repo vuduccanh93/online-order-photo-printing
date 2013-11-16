@@ -43,7 +43,7 @@ namespace ODPP.Data
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
-        }
+            }
     
         /// <summary>
         /// Initialize a new ODPPEntities object.
