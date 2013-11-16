@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Data.EntityModel;
 using System.Data.EntityClient;
 using ODPP.Client.obj;
+using System.IO;
 
 namespace ODPP.Client.Webs
 {
@@ -20,7 +21,15 @@ namespace ODPP.Client.Webs
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            DirectoryInfo di = new DirectoryInfo(Server.MapPath("/images_upload/"));
+
+            foreach (DirectoryInfo item in di.GetDirectories())
+            {
+                if (item.FullName.Contains("temp"))
+                {
+                    item.Delete(true);
+                }
+            }
             if (Session["user"] == null)
             {
                 pnlUser.Visible = false;

@@ -15,7 +15,7 @@ namespace ODPP.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
-                tblAdmin admin = AdminServices.Admin_GetByAcc((string)Session["user"], (string)Session["pwd"]);
+                tblAdmin admin = AdminServices.Admin_GetByAcc((string)Session["username"], (string)Session["pwd"]);
                 if(admin!=null){
                     txtUserName.Enabled = false;
                     txtUserName.Text = admin.UserName;

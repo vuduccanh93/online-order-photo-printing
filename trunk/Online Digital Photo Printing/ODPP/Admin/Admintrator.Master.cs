@@ -18,10 +18,19 @@ namespace ODPP.Admin
             
             datenow.Text = DateTime.Now.ToShortTimeString();
             if (!IsPostBack) {
-                user.Text =(string) Session["user"];
+                user.Text = (string)Session["username"];
                 role.Text = (string)Session["role"];
-                
-                tblAdmin admin = AdminServices.Admin_GetByAcc((string)Session["user"], (string)Session["pwd"]);
+                if (role.Text.ToString().Equals("AA"))
+                {
+                    //pnlAdmin.Visible = true;
+                    //pnlManager.Visible = false;
+                }
+                else {
+                    //pnlAdmin.Visible = false;
+                    //pnlManager.Visible = true;
+                }
+
+                tblAdmin admin = AdminServices.Admin_GetByAcc((string)Session["username"], (string)Session["pwd"]);
                 if (admin != null) {
                    
                     

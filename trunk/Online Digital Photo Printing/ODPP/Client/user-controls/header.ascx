@@ -35,6 +35,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
               <ul class="dropdown-menu">
+
                 <li><a href="Faq.aspx">FAQ</a></li>
                 <li><a href="Pricing.aspx">Pricing Table</a></li>
               </ul>
@@ -181,9 +182,7 @@
                     <label class="control-label">
                         E-mail</label>
                     <div class="controls ">
-                        <asp:TextBox runat="server" ID="txtREmail" data-validation="email" placeholder="abc@example.com"
-                           />
-                   
+                        <asp:TextBox runat="server" ID="txtREmail" data-validation="email" placeholder="abc@example.com" />
                     </div>
                 </div>
                 <div class="control-group">
@@ -385,8 +384,7 @@
                     <label class="control-label">
                         E-mail</label>
                     <div class="controls ">
-                        <asp:TextBox runat="server" ID="txtEmail" data-validation="email" placeholder="abc@example.com"
-                             />
+                        <asp:TextBox runat="server" ID="txtEmail" data-validation="email" placeholder="abc@example.com" />
                         <asp:Label ID="lblErrorEmail2" runat="server" CssClass="error"></asp:Label>
                     </div>
                 </div>

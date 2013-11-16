@@ -213,8 +213,7 @@
                                         
                                         <br />
                                         <asp:DropDownList ID="dlRole" runat="server" CssClass="validate[required] form-control">
-                                            <asp:ListItem Value="AA">Admintrator</asp:ListItem>
-                                            <asp:ListItem Value="QT">Admin</asp:ListItem>
+                                            <asp:ListItem Value="AA">Administrator</asp:ListItem>
                                             <asp:ListItem Value="MN">Manager</asp:ListItem>
                                         </asp:DropDownList>
                                         

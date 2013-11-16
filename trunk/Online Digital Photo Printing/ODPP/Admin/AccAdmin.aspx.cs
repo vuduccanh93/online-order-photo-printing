@@ -131,7 +131,7 @@ namespace ODPP.Admin
 
                     tblAdmin check = AdminServices.Admin_GetById(int.Parse(lbt.CommandArgument.ToString()));
 
-                    if (!check.UserName.Equals((string)Session["user"]))
+                    if (!check.UserName.Equals((string)Session["username"]))
                     {
                         AdminServices.Admin_Delete(int.Parse(lbt.CommandArgument.ToString()));
                         alert.Visible = true;
@@ -187,7 +187,7 @@ namespace ODPP.Admin
                     List<tblAdmin> ad = AdminServices.Admin_GetByAll();
                     foreach (tblAdmin item in ad)
                     {
-                        if (item.UserName.Equals((string)Session["user"]) )
+                        if (item.UserName.Equals((string)Session["username"]))
                             return;
                     }
                         AdminServices.Admin_Delete(admin.AdminID);
